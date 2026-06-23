@@ -18,6 +18,7 @@
   },
   "include": [
     "manifest.config.ts",
+    "version.ts",
     "vite.config.ts",
     "src",
     "tests",

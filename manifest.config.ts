@@ -1,18 +1,12 @@
 import { defineManifest } from '@crxjs/vite-plugin';
 
 import { vintedHostPermissions } from './src/lib/vinted-domains';
+import { resolveVersion } from './version';
 
-// manifest.config.ts runs in Node, not in the browser bundle. We declare
-// process locally so this file stays type-safe without adding @types/node to
-// the project-wide types (which would expose Node globals to browser code).
-declare const process: { env: Record<string, string | undefined> };
-
-// npm_package_version is set automatically by npm when running any npm script.
-// In CI it is overridden via `npm version <tag> --no-git-tag-version` before
-// the build, so no manual version editing is needed.
-const versionName = process.env.npm_package_version ?? '0.0.0';
-// Chrome only accepts numeric dot-separated version strings; strip pre-release.
-const version = versionName.replace(/-.*$/, '');
+// The version is derived from the git tag (via `git describe`) so the tag is
+// the single source of truth for every build path — local and CI alike. No
+// manual edits to package.json or this file are needed; just push a tag.
+const { version, versionName } = resolveVersion();
 
 export default defineManifest({
   manifest_version: 3,
