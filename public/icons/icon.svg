@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" role="img" aria-label="EcoChineur">
+  <rect width="128" height="128" rx="26" fill="#2f6f4f"/>
+  <circle cx="57" cy="54" r="30" fill="none" stroke="#fff9ec" stroke-width="12"/>
+  <path d="M79 78l25 25" stroke="#fff9ec" stroke-width="14" stroke-linecap="round"/>
+  <path d="M51 53c7-17 23-24 43-21-3 20-14 34-35 36-1-9-4-14-8-15z" fill="#b9e28c"/>
+  <path d="M59 61c8-8 17-14 28-20" fill="none" stroke="#2f6f4f" stroke-width="5" stroke-linecap="round"/>
+</svg>

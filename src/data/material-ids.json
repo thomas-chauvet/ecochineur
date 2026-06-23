@@ -1,0 +1,53 @@
+{
+  "db_version": "1.0.0",
+  "natural_materials": [
+    {
+      "id": "linen",
+      "name_fr": "Lin",
+      "name_en": "Linen",
+      "vinted_id": 146
+    },
+    {
+      "id": "cotton",
+      "name_fr": "Coton",
+      "name_en": "Cotton",
+      "vinted_id": 44
+    },
+    {
+      "id": "wool",
+      "name_fr": "Laine",
+      "name_en": "Wool",
+      "vinted_id": 46
+    },
+    {
+      "id": "silk",
+      "name_fr": "Soie",
+      "name_en": "Silk",
+      "vinted_id": 49
+    },
+    {
+      "id": "cashmere",
+      "name_fr": "Cachemire",
+      "name_en": "Cashmere",
+      "vinted_id": 123
+    },
+    {
+      "id": "alpaca",
+      "name_fr": "Alpaga",
+      "name_en": "Alpaca",
+      "vinted_id": 122
+    },
+    {
+      "id": "mohair",
+      "name_fr": "Mohair",
+      "name_en": "Mohair",
+      "vinted_id": 152
+    },
+    {
+      "id": "merino",
+      "name_fr": "Mérinos",
+      "name_en": "Merino",
+      "vinted_id": 121
+    }
+  ]
+}

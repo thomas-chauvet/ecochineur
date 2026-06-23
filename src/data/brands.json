@@ -1,0 +1,39 @@
+{
+  "db_version": "1.0.0",
+  "last_updated": "2026-06-23",
+  "brands": [
+    {
+      "id": "armor-lux",
+      "name": "Armor Lux",
+      "vinted_id": 1427,
+      "category": "france",
+      "eco": true,
+      "certifications": ["OEKO-TEX"],
+      "description_fr": "Marque bretonne reconnue pour ses marinières, sa laine et son coton.",
+      "description_en": "Breton brand known for striped shirts, wool and cotton.",
+      "website": "https://www.armorlux.com"
+    },
+    {
+      "id": "faguo",
+      "name": "Faguo",
+      "vinted_id": 12595,
+      "category": "france",
+      "eco": false,
+      "certifications": ["B Corp"],
+      "description_fr": "Marque française connue pour planter un arbre par article vendu.",
+      "description_en": "French brand known for planting a tree for every item sold.",
+      "website": "https://www.faguo-store.com"
+    },
+    {
+      "id": "veja",
+      "name": "Veja",
+      "vinted_id": 603,
+      "category": "france",
+      "eco": true,
+      "certifications": [],
+      "description_fr": "Sneakers avec coton biologique, caoutchouc d'Amazonie et démarche sociale.",
+      "description_en": "Sneakers using organic cotton, Amazonian rubber and a social approach.",
+      "website": "https://www.veja-store.com"
+    }
+  ]
+}

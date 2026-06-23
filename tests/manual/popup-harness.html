@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>EcoChineur popup harness</title>
+    <script>
+      window.__ecochineur = {
+        createdTabs: [],
+        updatedTabs: [],
+        preferences: {
+          'ecochineur.preferences': {
+            selectedCategories: [],
+            selectedMaterialIds: [],
+            language: 'fr',
+          },
+        },
+      };
+      window.chrome = {
+        storage: {
+          local: {
+            get: async (key) => {
+              if (typeof key === 'string') {
+                return { [key]: window.__ecochineur.preferences[key] };
+              }
+
+              return window.__ecochineur.preferences;
+            },
+            set: async (value) => {
+              Object.assign(window.__ecochineur.preferences, value);
+            },
+          },
+        },
+        tabs: {
+          query: async () => [
+            {
+              id: 1,
+              url: 'https://www.vinted.fr/catalog?search_text=jeans&price_to=30&brand_ids[]=123&material_ids[]=146',
+            },
+          ],
+          update: async (id, value) => {
+            window.__ecochineur.updatedTabs.push({ id, value });
+            document.body.dataset.updatedUrl = value.url;
+          },
+          create: async (value) => {
+            window.__ecochineur.createdTabs.push(value);
+          },
+        },
+      };
+    </script>
+    <script type="module" src="/src/popup/popup.ts"></script>
+  </head>
+  <body>
+    <main class="popup-shell">
+      <header class="topbar">
+        <div class="brand-lockup">
+          <img src="/icons/icon.svg" alt="" class="logo" />
+          <h1 data-i18n="app_name">EcoChineur</h1>
+        </div>
+        <label class="language-switch">
+          <span data-i18n="language_label">Langue</span>
+          <select id="language-select" aria-label="Langue">
+            <option value="fr" data-i18n="fr">FR</option>
+            <option value="en" data-i18n="en">EN</option>
+          </select>
+        </label>
+      </header>
+
+      <section class="panel" aria-labelledby="brand-section-title">
+        <h2 id="brand-section-title" data-i18n="brand_section">
+          Filtrer par marque
+        </h2>
+        <div class="option-list" id="category-options"></div>
+        <button class="link-button" type="button" id="toggle-brands">
+          Voir les marques correspondantes
+        </button>
+        <div class="brand-browser hidden" id="brand-browser">
+          <label class="search-field">
+            <span data-i18n="brand_search_label">Rechercher une marque</span>
+            <input
+              type="search"
+              id="brand-search"
+              autocomplete="off"
+              placeholder="Nom de marque"
+            />
+          </label>
+          <ul class="brand-list" id="brand-list"></ul>
+        </div>
+      </section>
+
+      <section class="panel" aria-labelledby="material-section-title">
+        <h2 id="material-section-title" data-i18n="material_section">
+          Filtrer par matière
+        </h2>
+        <div class="material-grid" id="material-options"></div>
+      </section>
+
+      <section class="actions" aria-live="polite">
+        <p class="notice" data-i18n="preserve_notice">
+          Vos filtres Vinted existants seront conservés et complétés.
+        </p>
+        <button class="primary-button" type="button" id="apply-button" disabled>
+          Appliquer les filtres
+        </button>
+        <button class="link-button subtle" type="button" id="reset-button">
+          Réinitialiser les filtres Vinted
+        </button>
+        <p class="status" id="status-message"></p>
+      </section>
+    </main>
+  </body>
+</html>

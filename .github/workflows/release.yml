@@ -1,0 +1,56 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - 'v*.*.*'
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: actions/setup-node@v6
+        with:
+          node-version: 20
+          cache: npm
+
+      - run: npm ci
+
+      - name: Set version from tag
+        env:
+          TAG: ${{ github.ref_name }}
+        run: npm version "${TAG#v}" --no-git-tag-version
+
+      - name: Detect pre-release
+        id: meta
+        env:
+          TAG: ${{ github.ref_name }}
+        run: |
+          if [[ "$TAG" == *"-rc"* ]]; then
+            echo "prerelease=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "prerelease=false" >> "$GITHUB_OUTPUT"
+          fi
+
+      - run: npm run release:check
+
+      - run: npm audit --audit-level=high
+
+      - name: Package extension
+        env:
+          TAG: ${{ github.ref_name }}
+        run: |
+          mkdir -p release
+          cd dist && zip -r "../release/ecochineur-${TAG}.zip" .
+
+      - uses: softprops/action-gh-release@v3
+        with:
+          files: release/ecochineur-${{ github.ref_name }}.zip
+          generate_release_notes: true
+          prerelease: ${{ steps.meta.outputs.prerelease }}

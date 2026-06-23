@@ -1,0 +1,55 @@
+# EcoChineur
+
+Chrome MV3 extension adding ethical brand/material filters to Vinted. No
+backend, no data collection. Preferences stored in `chrome.storage.local`.
+
+## Stack
+
+TypeScript · Vite · CRXJS · Vitest · ESLint · Prettier · Husky · `just`
+
+## Commands
+
+Prefer `just` over raw npm scripts:
+
+```bash
+just install     # npm install
+just dev         # Vite dev server
+just test        # vitest run
+just lint        # eslint
+just typecheck   # tsc --noEmit
+just build       # tsc + vite build
+just check       # format + lint + typecheck + test + build
+```
+
+## Source layout
+
+```
+src/
+  data/     # brands.json, material-ids.json (bundled, no network)
+  i18n/     # en.json, fr.json
+  lib/      # brand-filter.ts  storage.ts  url-merge.ts  vinted-domains.ts  i18n.ts
+  popup/    # popup.html  popup.ts  popup.css
+  types/    # index.ts
+tests/
+  brand-filter.test.ts
+  url-merge.test.ts
+  manual/popup-harness.html   # browser popup test harness (mocks chrome APIs)
+```
+
+## Constraints
+
+- No network calls from the extension — all data is bundled JSON.
+- No analytics, tracking, or telemetry.
+- `src/data/brands.json` and `src/data/material-ids.json`: entries must have a
+  strictly positive `vinted_id`.
+- URL merging must preserve existing Vinted filters (search, price, sorting,
+  condition, existing brand/material IDs).
+
+## Testing
+
+- Unit: `just test`
+- Manual popup: `just dev` →
+  `http://localhost:5173/tests/manual/popup-harness.html`
+- Final: load `dist/` as unpacked extension in Chrome (`chrome://extensions`,
+  Developer mode)
+- Pre-commit hook runs lint-staged → lint → typecheck → test automatically
