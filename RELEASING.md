@@ -16,6 +16,11 @@ Chrome only accepts numeric dot-separated version strings in the `version`
 field, so any pre-release suffix is stripped there. The full label is preserved
 in `version_name` (visible in `chrome://extensions`).
 
+The version is derived at build time from `git describe --tags` (see
+`version.ts`), so the git tag is the single source of truth for every build path
+— local and CI alike. The `version` field in `package.json` is only a
+non-authoritative placeholder; it is never the source for the built manifest.
+
 ---
 
 ## Prerequisites
@@ -51,11 +56,15 @@ git push origin v1.2.3
 
 The workflow:
 
-1. Sets `package.json` version to `1.2.3` (in CI only, not committed).
+1. Checks out full history and tags so the build can derive the version from the
+   tag via `git describe`.
 2. Runs the full quality gate: format check → lint → typecheck → tests → build.
 3. Runs `npm audit --audit-level=high`.
 4. Zips `dist/` into `release/ecochineur-v1.2.3.zip`.
-5. Creates a GitHub Release with the zip and auto-generated release notes.
+5. Generates release notes for this tag with git-cliff and creates a GitHub
+   Release with the zip attached.
+6. Regenerates the full `CHANGELOG.md` with git-cliff and commits it back to
+   `main` (`chore(release): update changelog … [skip ci]`).
 
 ---
 
@@ -116,16 +125,25 @@ just package
 ```
 
 Runs `release:check`, builds, and zips `dist/` to
-`release/ecochineur-v<package.json version>.zip`. Useful for testing the
+`release/ecochineur-v<git-describe version>.zip`. Useful for testing the
 packaged artifact locally without pushing a tag.
+
+## Regenerate the changelog locally
+
+```bash
+just changelog
+```
+
+Regenerates `CHANGELOG.md` from Conventional Commits with git-cliff. The release
+workflow does this automatically on every tag, so this is mainly for previewing.
 
 ---
 
 ## Troubleshooting
 
-| Symptom                                           | Cause                                                  | Fix                                                                |
-| ------------------------------------------------- | ------------------------------------------------------ | ------------------------------------------------------------------ |
-| Store rejects the zip                             | Manifest `version` not strictly greater than published | Increment the patch/minor/major in the new tag                     |
-| Workflow fails at `npm audit`                     | High-severity vulnerability in a dependency            | Run `npm audit` locally and update the affected package            |
-| `version_name` shows `0.0.0` in the extension     | Build ran outside npm (e.g. `npx vite build` directly) | Always build via `npm run build` so npm sets `npm_package_version` |
-| Smoke test: popup shows error on a Vinted catalog | Missing domain in `host_permissions`                   | Add the domain to `src/lib/vinted-domains.ts`                      |
+| Symptom                                           | Cause                                                                    | Fix                                                                               |
+| ------------------------------------------------- | ------------------------------------------------------------------------ | --------------------------------------------------------------------------------- |
+| Store rejects the zip                             | Manifest `version` not strictly greater than published                   | Increment the patch/minor/major in the new tag                                    |
+| Workflow fails at `npm audit`                     | High-severity vulnerability in a dependency                              | Run `npm audit` locally and update the affected package                           |
+| `version_name` shows `0.0.0` in the extension     | Build ran with no reachable git tag (e.g. shallow clone, detached state) | Ensure tags are fetched (`git fetch --tags`); CI checks out with `fetch-depth: 0` |
+| Smoke test: popup shows error on a Vinted catalog | Missing domain in `host_permissions`                                     | Add the domain to `src/lib/vinted-domains.ts`                                     |

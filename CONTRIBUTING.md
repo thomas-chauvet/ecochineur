@@ -48,6 +48,17 @@ bundled database until their `vinted_id` is verified.
 Edit `src/data/material-ids.json` only after verifying the Vinted ID. Unmapped
 materials must not be bundled.
 
+## Commit Messages
+
+Commits must follow the
+[Conventional Commits](https://www.conventionalcommits.org) format, e.g.
+`feat: add material filter` or `fix(popup): preserve price filter`. A Husky
+`commit-msg` hook runs commitlint locally and CI lints PR commits. The release
+changelog is generated from these messages by
+[git-cliff](https://git-cliff.org), so well-formed commits keep `CHANGELOG.md`
+accurate. Common types: `feat`, `fix`, `docs`, `refactor`, `perf`, `test`,
+`build`, `ci`, `chore`.
+
 ## Language Rules
 
 - Developer documentation must be written in English.

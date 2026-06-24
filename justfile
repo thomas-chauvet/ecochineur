@@ -54,9 +54,12 @@ package:
     #!/usr/bin/env bash
     set -euo pipefail
     npm run release:check
-    version=$(node -p "require('./package.json').version")
+    version=$(git describe --tags --always | sed 's/^v//')
     mkdir -p release
     cd dist && zip -r "../release/ecochineur-v${version}.zip" .
+
+changelog:
+    npx git-cliff -o CHANGELOG.md
 
 serve-docs:
     python3 -m http.server 4174 --bind 127.0.0.1 --directory docs

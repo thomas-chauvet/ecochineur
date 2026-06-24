@@ -1,6 +1,6 @@
 {
   "name": "ecochineur",
-  "version": "0.1.0",
+  "version": "0.0.0",
   "private": true,
   "type": "module",
   "description": "Privacy-by-design Chrome MV3 extension for filtering Vinted without data collection.",
@@ -19,10 +19,14 @@
     "format:check": "prettier --check ."
   },
   "devDependencies": {
+    "@commitlint/cli": "^19.6.1",
+    "@commitlint/config-conventional": "^19.6.0",
     "@crxjs/vite-plugin": "^2.0.0-beta.27",
     "@eslint/js": "^9.29.0",
     "@types/chrome": "^0.0.326",
+    "@types/node": "^22.10.2",
     "eslint": "^9.29.0",
+    "git-cliff": "^2.7.0",
     "husky": "^9.1.7",
     "lint-staged": "^17.0.8",
     "prettier": "^3.5.3",
