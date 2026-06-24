@@ -1,4 +1,25 @@
-# EcoChineur
+<p align="center">
+  <img src="public/icons/icon.svg" alt="EcoChineur logo" width="128" height="128" />
+</p>
+
+<h1 align="center">EcoChineur</h1>
+
+<p align="center">
+  <a href="https://github.com/thomas-chauvet/ecochineur/actions/workflows/ci.yml">
+    <img src="https://github.com/thomas-chauvet/ecochineur/actions/workflows/ci.yml/badge.svg" alt="CI status" />
+  </a>
+  <a href="https://codecov.io/gh/thomas-chauvet/ecochineur">
+    <img src="https://codecov.io/gh/thomas-chauvet/ecochineur/branch/main/graph/badge.svg" alt="Code coverage" />
+  </a>
+  <a href="https://github.com/thomas-chauvet/ecochineur/releases">
+    <img src="https://img.shields.io/github/v/release/thomas-chauvet/ecochineur?include_prereleases&sort=semver" alt="Latest release" />
+  </a>
+  <img src="https://img.shields.io/badge/manifest-v3-blue" alt="Chrome Manifest V3" />
+  <img src="https://img.shields.io/badge/TypeScript-3178c6?logo=typescript&logoColor=white" alt="TypeScript" />
+  <a href="./PRIVACY.md">
+    <img src="https://img.shields.io/badge/privacy-by%20design-2f6f4f" alt="Privacy by design" />
+  </a>
+</p>
 
 EcoChineur is a privacy-by-design Chrome Manifest V3 extension for adding
 ethical brand and material filters to Vinted France searches.
