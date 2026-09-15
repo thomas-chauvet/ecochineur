@@ -4,52 +4,43 @@ export interface MergeInput {
   materialIdsToAdd: number[];
 }
 
-const FILTER_PARAM_KEYS = new Set(['brand_ids[]', 'material_ids[]']);
+type FilterKey = 'brand_ids[]' | 'material_ids[]';
 
-export function mergeFilters(input: MergeInput): string {
-  const url = new URL(input.currentUrl);
-  const finalBrandIds = dedupe([
-    ...url.searchParams.getAll('brand_ids[]'),
-    ...input.brandIdsToAdd.map(String),
-  ]);
-  const finalMaterialIds = dedupe([
-    ...url.searchParams.getAll('material_ids[]'),
-    ...input.materialIdsToAdd.map(String),
-  ]);
-
-  return buildUrlWithFilters(url, finalBrandIds, finalMaterialIds);
-}
-
-export function resetFilters(currentUrl: string): string {
+/** Adds IDs to the Vinted URL, keeping every filter already present. */
+export function mergeFilters({
+  currentUrl,
+  brandIdsToAdd,
+  materialIdsToAdd,
+}: MergeInput): string {
   const url = new URL(currentUrl);
 
-  return buildUrlWithFilters(url, [], []);
+  return withFilters(url, {
+    'brand_ids[]': [
+      ...url.searchParams.getAll('brand_ids[]'),
+      ...brandIdsToAdd.map(String),
+    ],
+    'material_ids[]': [
+      ...url.searchParams.getAll('material_ids[]'),
+      ...materialIdsToAdd.map(String),
+    ],
+  });
 }
 
-function buildUrlWithFilters(
-  sourceUrl: URL,
-  brandIds: string[],
-  materialIds: string[],
-): string {
-  const newUrl = new URL(sourceUrl.origin + sourceUrl.pathname);
+/** Removes brand and material filters only; other params are untouched. */
+export function resetFilters(currentUrl: string): string {
+  return withFilters(new URL(currentUrl), {
+    'brand_ids[]': [],
+    'material_ids[]': [],
+  });
+}
 
-  for (const [key, value] of sourceUrl.searchParams.entries()) {
-    if (!FILTER_PARAM_KEYS.has(key)) {
-      newUrl.searchParams.append(key, value);
+function withFilters(url: URL, filters: Record<FilterKey, string[]>): string {
+  for (const [key, values] of Object.entries(filters)) {
+    url.searchParams.delete(key);
+    for (const value of new Set(values.filter(Boolean))) {
+      url.searchParams.append(key, value);
     }
   }
 
-  for (const id of brandIds) {
-    newUrl.searchParams.append('brand_ids[]', id);
-  }
-
-  for (const id of materialIds) {
-    newUrl.searchParams.append('material_ids[]', id);
-  }
-
-  return newUrl.toString();
-}
-
-function dedupe(values: string[]): string[] {
-  return [...new Set(values.filter(Boolean))];
+  return url.toString();
 }

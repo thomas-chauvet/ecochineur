@@ -5,29 +5,29 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>EcoChineur popup harness</title>
     <script>
+      // Minimal chrome.* mock. Inspect window.__ecochineur in DevTools; the
+      // last navigated URL is also exposed as body[data-updated-url].
+      // Optional URL params preset the stored preferences (used by store/):
+      //   ?lang=en&categories=france,eco&materials=146,46&browse=1
+      const params = new URLSearchParams(location.search);
+      const list = (name) =>
+        (params.get(name) || '').split(',').filter(Boolean);
       window.__ecochineur = {
-        createdTabs: [],
         updatedTabs: [],
-        preferences: {
+        storage: {
           'ecochineur.preferences': {
-            selectedCategories: [],
-            selectedMaterialIds: [],
-            language: 'fr',
+            selectedCategories: list('categories'),
+            selectedMaterialIds: list('materials').map(Number),
+            language: params.get('lang') === 'en' ? 'en' : 'fr',
           },
         },
       };
       window.chrome = {
         storage: {
           local: {
-            get: async (key) => {
-              if (typeof key === 'string') {
-                return { [key]: window.__ecochineur.preferences[key] };
-              }
-
-              return window.__ecochineur.preferences;
-            },
+            get: async (key) => ({ [key]: window.__ecochineur.storage[key] }),
             set: async (value) => {
-              Object.assign(window.__ecochineur.preferences, value);
+              Object.assign(window.__ecochineur.storage, value);
             },
           },
         },
@@ -42,71 +42,26 @@
             window.__ecochineur.updatedTabs.push({ id, value });
             document.body.dataset.updatedUrl = value.url;
           },
-          create: async (value) => {
-            window.__ecochineur.createdTabs.push(value);
-          },
         },
       };
+      window.close = () => console.info('[harness] window.close()');
+      window.confirm = () => true;
     </script>
-    <script type="module" src="/src/popup/popup.ts"></script>
+    <script type="module">
+      // Reuse the real popup markup so this harness never drifts from it.
+      const response = await fetch('/src/popup/popup.html');
+      const popup = new DOMParser().parseFromString(
+        await response.text(),
+        'text/html',
+      );
+      document.body.replaceChildren(...popup.body.childNodes);
+      await import('/src/popup/popup.ts');
+
+      if (new URLSearchParams(location.search).get('browse') === '1') {
+        // popup.ts initializes asynchronously (it awaits storage first).
+        setTimeout(() => document.getElementById('toggle-brands').click(), 200);
+      }
+    </script>
   </head>
-  <body>
-    <main class="popup-shell">
-      <header class="topbar">
-        <div class="brand-lockup">
-          <img src="/icons/icon.svg" alt="" class="logo" />
-          <h1 data-i18n="app_name">EcoChineur</h1>
-        </div>
-        <label class="language-switch">
-          <span data-i18n="language_label">Langue</span>
-          <select id="language-select" aria-label="Langue">
-            <option value="fr" data-i18n="fr">FR</option>
-            <option value="en" data-i18n="en">EN</option>
-          </select>
-        </label>
-      </header>
-
-      <section class="panel" aria-labelledby="brand-section-title">
-        <h2 id="brand-section-title" data-i18n="brand_section">
-          Filtrer par marque
-        </h2>
-        <div class="option-list" id="category-options"></div>
-        <button class="link-button" type="button" id="toggle-brands">
-          Voir les marques correspondantes
-        </button>
-        <div class="brand-browser hidden" id="brand-browser">
-          <label class="search-field">
-            <span data-i18n="brand_search_label">Rechercher une marque</span>
-            <input
-              type="search"
-              id="brand-search"
-              autocomplete="off"
-              placeholder="Nom de marque"
-            />
-          </label>
-          <ul class="brand-list" id="brand-list"></ul>
-        </div>
-      </section>
-
-      <section class="panel" aria-labelledby="material-section-title">
-        <h2 id="material-section-title" data-i18n="material_section">
-          Filtrer par matière
-        </h2>
-        <div class="material-grid" id="material-options"></div>
-      </section>
-
-      <section class="actions" aria-live="polite">
-        <p class="notice" data-i18n="preserve_notice">
-          Vos filtres Vinted existants seront conservés et complétés.
-        </p>
-        <button class="primary-button" type="button" id="apply-button" disabled>
-          Appliquer les filtres
-        </button>
-        <button class="link-button subtle" type="button" id="reset-button">
-          Réinitialiser les filtres Vinted
-        </button>
-        <p class="status" id="status-message"></p>
-      </section>
-    </main>
-  </body>
+  <body></body>
 </html>

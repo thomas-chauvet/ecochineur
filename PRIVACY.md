@@ -1,47 +1,67 @@
 # Privacy Policy
 
-EcoChineur is private by design.
+_Last updated: 2026-09-15_
 
-## No Collection
+EcoChineur is private by design. This policy covers the EcoChineur browser
+extension. The public copy is at <https://ecochineur.chaurel.ch/privacy.html>
+(French: <https://ecochineur.chaurel.ch/fr/privacy.html>).
 
-The extension collects no personal data, no browsing data, no history, no Vinted
-searches, no filters, no identifiers, and no usage statistics.
+## No collection
 
-## No Data Use
+The extension collects no personal data, browsing data, history, Vinted
+searches, filters, identifiers or usage statistics.
 
-EcoChineur does not use user data for analytics, profiling, advertising,
-audience measurement, model training, resale, sharing, or any external
-processing.
+## No data use or sharing
 
-The only information stored is the set of preferences explicitly chosen in the
-popup:
+EcoChineur does not use, sell or transfer user data for any purpose: no
+analytics, profiling, advertising, audience measurement, creditworthiness, model
+training or sharing with third parties.
+
+## What is stored, and where
+
+The only information stored is what you choose in the popup:
 
 - selected brand categories;
 - selected materials;
 - preferred language.
 
-These preferences are stored locally in `chrome.storage.local` on the user's
-device. They do not leave the device.
+These preferences are stored with `chrome.storage.local` on your device. They
+are never sent anywhere. Uninstalling the extension deletes them.
 
-## Local Operation
+## How the extension works
 
-When the user clicks "Apply filters", EcoChineur reads the active tab URL only
-to verify that the page is `www.vinted.fr/catalog` and to locally build a new
-URL that preserves existing filters and adds the selected filters.
+When you open the popup and click **Apply filters** or **Reset**, EcoChineur
+reads the URL of the active tab. It uses the URL only to:
 
-The extension does not store this URL, send it anywhere, or keep any history.
+1. check that the page is a Vinted catalog page
+   (`https://www.vinted.<country>/catalog`);
+2. build, on your device, a new URL that keeps your existing filters and adds
+   (or removes) brand and material filters.
 
-## No External Network
+The tab then navigates to that URL. EcoChineur does not store the URL, send it
+anywhere or keep any history.
 
-EcoChineur makes no extension-owned network calls, has no backend, uses no
-third-party service, and includes no tracking, telemetry, or analytics.
+## No network
 
-The only network navigation is the one triggered by Chrome when the user applies
-filters and the active tab navigates to the modified Vinted URL.
+The extension makes no network requests of its own: no backend, no third-party
+service, no remote code, no tracking, telemetry or analytics. All brand and
+material data is bundled in the extension.
+
+The only navigations are ones you trigger:
+
+- applying or resetting filters reloads the current Vinted tab;
+- the **Suggest a brand** link opens the project's public GitHub issue form in a
+  new tab. Submitting it requires a GitHub account, and GitHub's own privacy
+  policy applies there.
 
 ## Permissions
 
-- `storage`: store preferences locally on the device.
-- `tabs`: read the active tab URL and navigate to the modified Vinted URL after
-  user action.
-- `https://www.vinted.fr/*`: limit extension behavior to Vinted France pages.
+| Permission  | Why                                                                                                     |
+| ----------- | ------------------------------------------------------------------------------------------------------- |
+| `storage`   | Save your preferences locally on your device.                                                           |
+| `activeTab` | Read the active tab URL and update it, only after you open the popup. No access to other tabs or sites. |
+
+## Contact
+
+Questions: open an issue at
+<https://github.com/thomas-chauvet/ecochineur/issues>.

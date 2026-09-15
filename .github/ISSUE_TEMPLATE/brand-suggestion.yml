@@ -1,0 +1,38 @@
+name: Suggest a brand
+description: Propose a brand to add to the EcoChineur database.
+title: 'Brand suggestion: '
+labels: ['data', 'brand-suggestion']
+body:
+  - type: input
+    id: name
+    attributes:
+      label: Brand name
+    validations:
+      required: true
+  - type: input
+    id: vinted_id
+    attributes:
+      label: Vinted brand ID
+      description:
+        Select the brand in a Vinted catalog filter and copy the number after
+        `brand_ids[]=` in the URL. Leave empty if unknown.
+  - type: dropdown
+    id: category
+    attributes:
+      label: Category
+      options:
+        - france — 100% French production
+        - europe — 100% European production outside France
+        - mixed — serious ethical efforts, production not exclusively European
+        - eco — eco-conscious, without a European production anchor
+    validations:
+      required: true
+  - type: textarea
+    id: evidence
+    attributes:
+      label: Why should it be listed?
+      description:
+        Links to production locations, certifications (GOTS, B Corp, Fair
+        Wear…), repair programs or environmental reports.
+    validations:
+      required: true

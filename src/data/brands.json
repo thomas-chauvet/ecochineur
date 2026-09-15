@@ -1,39 +1,127 @@
 {
-  "db_version": "1.0.0",
-  "last_updated": "2026-06-23",
+  "db_version": "1.1.0",
+  "last_updated": "2026-09-15",
   "brands": [
+    {
+      "id": "saint-james",
+      "name": "Saint James",
+      "vinted_id": 2391,
+      "category": "france",
+      "eco": false,
+      "certifications": [],
+      "description_fr": "Tricots et marinières fabriqués dans ses ateliers normands depuis 1889.",
+      "description_en": "Knitwear and Breton shirts made in its Normandy workshops since 1889.",
+      "website": "https://www.saint-james.com"
+    },
+    {
+      "id": "le-minor",
+      "name": "Le Minor",
+      "vinted_id": 35227,
+      "category": "france",
+      "eco": false,
+      "certifications": [],
+      "description_fr": "Marinières et vêtements marins tricotés et confectionnés en Bretagne.",
+      "description_en": "Breton shirts and sailor clothing knitted and sewn in Brittany.",
+      "website": "https://www.leminor.fr"
+    },
+    {
+      "id": "le-slip-francais",
+      "name": "Le Slip Français",
+      "vinted_id": 234958,
+      "category": "france",
+      "eco": false,
+      "certifications": [],
+      "description_fr": "Sous-vêtements et basiques fabriqués en France avec des ateliers partenaires.",
+      "description_en": "Underwear and basics made in France with partner workshops.",
+      "website": "https://www.leslipfrancais.fr"
+    },
+    {
+      "id": "john-smedley",
+      "name": "John Smedley",
+      "vinted_id": 200326,
+      "category": "europe",
+      "eco": false,
+      "certifications": [],
+      "description_fr": "Maille fine en mérinos et coton, tricotée dans sa filature du Derbyshire (Angleterre).",
+      "description_en": "Fine merino and cotton knitwear, made at its mill in Derbyshire, England.",
+      "website": "https://www.johnsmedley.com"
+    },
+    {
+      "id": "birkenstock",
+      "name": "Birkenstock",
+      "vinted_id": 3203,
+      "category": "europe",
+      "eco": false,
+      "certifications": [],
+      "description_fr": "Sandales durables et ressemelables, produites en Allemagne et en Europe.",
+      "description_en": "Long-lasting, resoleable sandals produced in Germany and Europe.",
+      "website": "https://www.birkenstock.com"
+    },
+    {
+      "id": "meindl",
+      "name": "Meindl",
+      "vinted_id": 283168,
+      "category": "europe",
+      "eco": false,
+      "certifications": [],
+      "description_fr": "Chaussures de randonnée en cuir, fabriquées en Bavière et en Europe, ressemelables.",
+      "description_en": "Resoleable leather hiking boots made in Bavaria and elsewhere in Europe.",
+      "website": "https://www.meindl.de"
+    },
     {
       "id": "armor-lux",
       "name": "Armor Lux",
       "vinted_id": 1427,
-      "category": "france",
-      "eco": true,
+      "category": "mixed",
+      "eco": false,
       "certifications": ["OEKO-TEX"],
-      "description_fr": "Marque bretonne reconnue pour ses marinières, sa laine et son coton.",
-      "description_en": "Breton brand known for striped shirts, wool and cotton.",
+      "description_fr": "Marque bretonne de marinières et de maille, avec une partie de sa production à Quimper.",
+      "description_en": "Breton brand of striped shirts and knitwear, with part of its production in Quimper.",
       "website": "https://www.armorlux.com"
     },
     {
       "id": "faguo",
       "name": "Faguo",
       "vinted_id": 12595,
-      "category": "france",
-      "eco": false,
+      "category": "mixed",
+      "eco": true,
       "certifications": ["B Corp"],
-      "description_fr": "Marque française connue pour planter un arbre par article vendu.",
-      "description_en": "French brand known for planting a tree for every item sold.",
+      "description_fr": "Marque française engagée dans la compensation carbone et les matières recyclées.",
+      "description_en": "French brand committed to carbon offsetting and recycled materials.",
       "website": "https://www.faguo-store.com"
+    },
+    {
+      "id": "nudie-jeans",
+      "name": "Nudie Jeans",
+      "vinted_id": 95256,
+      "category": "mixed",
+      "eco": true,
+      "certifications": ["Fair Wear"],
+      "description_fr": "Jeans en coton biologique, réparations gratuites à vie et reprise des jeans usagés.",
+      "description_en": "Organic cotton jeans, free repairs for life and take-back of worn jeans.",
+      "website": "https://www.nudiejeans.com"
     },
     {
       "id": "veja",
       "name": "Veja",
       "vinted_id": 603,
-      "category": "france",
+      "category": "eco",
       "eco": true,
       "certifications": [],
-      "description_fr": "Sneakers avec coton biologique, caoutchouc d'Amazonie et démarche sociale.",
-      "description_en": "Sneakers using organic cotton, Amazonian rubber and a social approach.",
+      "description_fr": "Baskets en coton biologique et caoutchouc d'Amazonie, fabriquées au Brésil.",
+      "description_en": "Sneakers in organic cotton and Amazonian rubber, made in Brazil.",
       "website": "https://www.veja-store.com"
+    },
+    {
+      "id": "patagonia",
+      "name": "Patagonia",
+      "vinted_id": 90804,
+      "category": "eco",
+      "eco": true,
+      "certifications": ["B Corp", "Fair Trade Certified"],
+      "description_fr": "Vêtements outdoor en matières recyclées ou biologiques, avec un programme de réparation.",
+      "description_en": "Outdoor clothing in recycled or organic materials, with a repair program.",
+      "website": "https://www.patagonia.com"
     }
   ]
 }

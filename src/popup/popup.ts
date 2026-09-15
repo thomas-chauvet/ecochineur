@@ -1,77 +1,43 @@
-import brandsDatabase from '../data/brands.json';
-import materialsDatabase from '../data/material-ids.json';
+import { brands, materials } from '../data';
 import {
   countByCategory,
   getMatchingBrandIds,
   getMatchingBrands,
 } from '../lib/brand-filter';
-import { createTranslator, resolveLanguage } from '../lib/i18n';
 import {
-  DEFAULT_PREFERENCES,
-  loadPreferences,
-  savePreferences,
-} from '../lib/storage';
-import { VINTED_HOSTNAMES } from '../lib/vinted-domains';
+  createTranslator,
+  resolveLanguage,
+  type MessageKey,
+  type Translator,
+} from '../lib/i18n';
+import { loadPreferences, savePreferences } from '../lib/storage';
 import { mergeFilters, resetFilters } from '../lib/url-merge';
-import type {
-  Brand,
-  BrandCategory,
-  NaturalMaterial,
-  UISelection,
-  UserPreferences,
+import { isVintedCatalogUrl } from '../lib/vinted-domains';
+import {
+  BRAND_CATEGORIES,
+  type Brand,
+  type BrandCategory,
+  type Language,
+  type UserPreferences,
 } from '../types';
 
 import './popup.css';
 
-const SUGGEST_FORM_URL = 'https://docs.google.com/forms/d/e/TODO/viewform';
+const CATEGORY_ICONS: Record<BrandCategory, string> = {
+  france: '🇫🇷',
+  europe: '🇪🇺',
+  mixed: '🌍',
+  eco: '♻️',
+};
 
-const CATEGORIES: Array<{
-  id: UISelection;
-  icon: string;
-  labelKey:
-    | 'category_france'
-    | 'category_europe'
-    | 'category_mixed'
-    | 'category_eco';
-  tooltipKey:
-    | 'tooltip_france'
-    | 'tooltip_europe'
-    | 'tooltip_mixed'
-    | 'tooltip_eco';
-}> = [
-  {
-    id: 'france',
-    icon: '🇫🇷',
-    labelKey: 'category_france',
-    tooltipKey: 'tooltip_france',
-  },
-  {
-    id: 'europe',
-    icon: '🇪🇺',
-    labelKey: 'category_europe',
-    tooltipKey: 'tooltip_europe',
-  },
-  {
-    id: 'mixed',
-    icon: '🌍',
-    labelKey: 'category_mixed',
-    tooltipKey: 'tooltip_mixed',
-  },
-  {
-    id: 'eco',
-    icon: '♻️',
-    labelKey: 'category_eco',
-    tooltipKey: 'tooltip_eco',
-  },
-];
-
-const brands = brandsDatabase.brands as Brand[];
-const materials = materialsDatabase.natural_materials as NaturalMaterial[];
 const counts = countByCategory(brands);
+const knownMaterialIds = new Set(
+  materials.map((material) => material.vinted_id),
+);
 
-let preferences: UserPreferences = { ...DEFAULT_PREFERENCES };
-let language = resolveLanguage(navigator.language);
-let t = createTranslator(language);
+let preferences: UserPreferences;
+let language: Language;
+let t: Translator;
 let brandsVisible = false;
 
 const categoryOptions = byId('category-options');
@@ -84,30 +50,20 @@ const brandBrowser = byId('brand-browser');
 const brandSearch = byId<HTMLInputElement>('brand-search');
 const brandList = byId<HTMLUListElement>('brand-list');
 const statusMessage = byId('status-message');
-const suggestButton = byId<HTMLButtonElement>('suggest-button');
 
 void init();
 
 async function init(): Promise<void> {
   preferences = await loadPreferences();
-  language = resolveLanguage(preferences.language ?? navigator.language);
-  t = createTranslator(language);
-  languageSelect.value = language;
+  setLanguage(resolveLanguage(preferences.language ?? navigator.language));
 
   languageSelect.addEventListener('change', () => {
-    language = resolveLanguage(languageSelect.value);
-    t = createTranslator(language);
-    preferences.language = language;
-    void persist();
+    setLanguage(resolveLanguage(languageSelect.value));
+    updatePreferences({ language });
     render();
   });
-
   applyButton.addEventListener('click', () => void applyFilters());
   resetButton.addEventListener('click', () => void resetVintedFilters());
-  suggestButton.addEventListener(
-    'click',
-    () => void chrome.tabs.create({ url: SUGGEST_FORM_URL }),
-  );
   toggleBrandsButton.addEventListener('click', () => {
     brandsVisible = !brandsVisible;
     renderBrandBrowser();
@@ -117,78 +73,97 @@ async function init(): Promise<void> {
   render();
 }
 
+function setLanguage(next: Language): void {
+  language = next;
+  t = createTranslator(next);
+  languageSelect.value = next;
+  document.documentElement.lang = next;
+}
+
+function updatePreferences(patch: Partial<UserPreferences>): void {
+  preferences = { ...preferences, ...patch };
+  void savePreferences(preferences);
+  applyButton.disabled =
+    preferences.selectedCategories.length === 0 &&
+    preferences.selectedMaterialIds.length === 0;
+}
+
+// Rendering
+
 function render(): void {
-  document.documentElement.lang = language;
-  renderStaticLabels();
+  document.querySelectorAll<HTMLElement>('[data-i18n]').forEach((element) => {
+    element.textContent = t(element.dataset.i18n as MessageKey);
+  });
+  brandSearch.placeholder = t('brand_search_placeholder');
+  languageSelect.setAttribute('aria-label', t('language_label'));
+
   renderCategoryOptions();
   renderMaterialOptions();
   renderBrandBrowser();
-  updateApplyButton();
-}
-
-function renderStaticLabels(): void {
-  document.querySelectorAll<HTMLElement>('[data-i18n]').forEach((element) => {
-    const key = element.dataset.i18n;
-    if (key) {
-      element.textContent = t(key as Parameters<typeof t>[0]);
-    }
-  });
-
-  brandSearch.placeholder = t('brand_search_placeholder');
-  languageSelect.setAttribute('aria-label', t('language_label'));
-  applyButton.textContent = t('apply_filters');
-  resetButton.textContent = t('reset_filters');
+  updatePreferences({});
 }
 
 function renderCategoryOptions(): void {
   categoryOptions.replaceChildren(
-    ...CATEGORIES.map((category) => {
-      const checked = preferences.selectedCategories.includes(category.id);
-      const row = document.createElement('label');
-      row.className = 'check-row';
-      row.innerHTML = `
-        <input type="checkbox" value="${category.id}" ${checked ? 'checked' : ''} />
-        <span class="label">${category.icon} ${t(category.labelKey)}</span>
-        <span class="counter">(${counts[category.id]})</span>
-        <span class="info" title="${t(category.tooltipKey)}">i</span>
-      `;
-      row.querySelector('input')?.addEventListener('change', (event) => {
-        const input = event.currentTarget as HTMLInputElement;
-        updateSelectedCategories(category.id, input.checked);
-      });
+    ...BRAND_CATEGORIES.map((category) => {
+      const checked = preferences.selectedCategories.includes(category);
 
-      return row;
+      return checkRow({
+        label: `${CATEGORY_ICONS[category]} ${t(`category_${category}`)}`,
+        checked,
+        // An empty category would only produce an error; keep it uncheckable
+        // unless a stored preference already selected it.
+        disabled: counts[category] === 0 && !checked,
+        extra: [
+          h('span', {
+            className: 'counter',
+            textContent: `(${counts[category]})`,
+          }),
+          h('span', {
+            className: 'info',
+            title: t(`tooltip_${category}`),
+            textContent: 'i',
+          }),
+        ],
+        onChange: (isChecked) => {
+          updatePreferences({
+            selectedCategories: toggle(
+              preferences.selectedCategories,
+              category,
+              isChecked,
+            ),
+          });
+          renderBrandList();
+        },
+      });
     }),
   );
 }
 
 function renderMaterialOptions(): void {
   materialOptions.replaceChildren(
-    ...materials.map((material) => {
-      const checked = preferences.selectedMaterialIds.includes(
-        material.vinted_id,
-      );
-      const row = document.createElement('label');
-      row.className = 'check-row';
-      row.innerHTML = `
-        <input type="checkbox" value="${material.vinted_id}" ${checked ? 'checked' : ''} />
-        <span class="label">${materialName(material)}</span>
-      `;
-      row.querySelector('input')?.addEventListener('change', (event) => {
-        const input = event.currentTarget as HTMLInputElement;
-        updateSelectedMaterials(Number(input.value), input.checked);
-      });
-
-      return row;
-    }),
+    ...materials.map((material) =>
+      checkRow({
+        label: language === 'en' ? material.name_en : material.name_fr,
+        checked: preferences.selectedMaterialIds.includes(material.vinted_id),
+        onChange: (isChecked) =>
+          updatePreferences({
+            selectedMaterialIds: toggle(
+              preferences.selectedMaterialIds,
+              material.vinted_id,
+              isChecked,
+            ),
+          }),
+      }),
+    ),
   );
 }
 
 function renderBrandBrowser(): void {
-  toggleBrandsButton.textContent = brandsVisible
-    ? t('hide_brands')
-    : t('show_brands');
-  brandBrowser.classList.toggle('hidden', !brandsVisible);
+  toggleBrandsButton.textContent = t(
+    brandsVisible ? 'hide_brands' : 'show_brands',
+  );
+  brandBrowser.hidden = !brandsVisible;
   renderBrandList();
 }
 
@@ -198,156 +173,142 @@ function renderBrandList(): void {
   }
 
   const selected = preferences.selectedCategories;
-  const sourceBrands =
-    selected.length > 0 ? getMatchingBrands(brands, selected) : brands;
   const search = brandSearch.value.trim().toLowerCase();
-  const visibleBrands = sourceBrands.filter((brand) =>
-    brand.name.toLowerCase().includes(search),
-  );
-
-  if (visibleBrands.length === 0) {
-    const item = document.createElement('li');
-    item.className = 'brand-card';
-    item.textContent = t('no_matching_brands');
-    brandList.replaceChildren(item);
-    return;
-  }
+  const visibleBrands = (
+    selected.length > 0 ? getMatchingBrands(brands, selected) : brands
+  ).filter((brand) => brand.name.toLowerCase().includes(search));
 
   brandList.replaceChildren(
-    ...visibleBrands.map((brand) => {
-      const item = document.createElement('li');
-      item.className = 'brand-card';
-      const description =
-        language === 'en' ? brand.description_en : brand.description_fr;
-      const badges = [
-        `<span class="badge">${categoryLabel(brand.category)}</span>`,
-        brand.eco ? `<span class="badge">${t('eco_badge')}</span>` : '',
-      ].join('');
-
-      item.innerHTML = `
-        <div class="brand-card-header">
-          <span class="brand-name">${brand.name}</span>
-          <span class="badges">${badges}</span>
-        </div>
-        <p class="brand-description">${description}</p>
-      `;
-
-      return item;
-    }),
+    ...(visibleBrands.length > 0
+      ? visibleBrands.map(brandCard)
+      : [
+          h('li', {
+            className: 'brand-card',
+            textContent: t('no_matching_brands'),
+          }),
+        ]),
   );
 }
 
+function brandCard(brand: Brand): HTMLLIElement {
+  const badges = [t(`category_${brand.category}`)];
+  if (brand.eco) {
+    badges.push(t('eco_badge'));
+  }
+
+  return h('li', { className: 'brand-card' }, [
+    h('div', { className: 'brand-card-header' }, [
+      h('span', { className: 'brand-name', textContent: brand.name }),
+      h(
+        'span',
+        { className: 'badges' },
+        badges.map((badge) =>
+          h('span', { className: 'badge', textContent: badge }),
+        ),
+      ),
+    ]),
+    h('p', {
+      className: 'brand-description',
+      textContent:
+        language === 'en' ? brand.description_en : brand.description_fr,
+    }),
+  ]);
+}
+
+// Actions
+
 async function applyFilters(): Promise<void> {
-  const tab = await getActiveTab();
-  if (!tab.id || !isVintedCatalogUrl(tab.url)) {
+  const tab = await getCatalogTab();
+  if (!tab) {
     showMessage(t('error_not_on_catalog'));
     return;
   }
 
   const brandIds = getMatchingBrandIds(brands, preferences.selectedCategories);
-  const materialIds = preferences.selectedMaterialIds.filter((id) => id > 0);
-
-  if (preferences.selectedCategories.length === 0 && materialIds.length === 0) {
-    showMessage(t('error_no_selection'));
-    return;
-  }
+  // Ignore stored IDs of materials that were removed from the database.
+  const materialIds = preferences.selectedMaterialIds.filter((id) =>
+    knownMaterialIds.has(id),
+  );
 
   if (brandIds.length === 0 && materialIds.length === 0) {
-    showMessage(t('error_no_valid_ids'));
+    showMessage(t('error_no_brands'));
     return;
   }
 
-  const newUrl = mergeFilters({
-    currentUrl: tab.url,
-    brandIdsToAdd: brandIds,
-    materialIdsToAdd: materialIds,
+  await chrome.tabs.update(tab.id, {
+    url: mergeFilters({
+      currentUrl: tab.url,
+      brandIdsToAdd: brandIds,
+      materialIdsToAdd: materialIds,
+    }),
   });
-
-  await chrome.tabs.update(tab.id, { url: newUrl });
   window.close();
 }
 
+/** Unchecks every option and, on a catalog page, removes the URL filters. */
 async function resetVintedFilters(): Promise<void> {
-  const tab = await getActiveTab();
-  if (!tab.id || !isVintedCatalogUrl(tab.url)) {
-    showMessage(t('error_not_on_catalog'));
-    return;
-  }
-
   if (!window.confirm(t('reset_confirm'))) {
     return;
   }
 
-  await chrome.tabs.update(tab.id, { url: resetFilters(tab.url) });
+  updatePreferences({ selectedCategories: [], selectedMaterialIds: [] });
+  renderCategoryOptions();
+  renderMaterialOptions();
+  renderBrandList();
+
+  const tab = await getCatalogTab();
+  if (tab) {
+    await chrome.tabs.update(tab.id, { url: resetFilters(tab.url) });
+  }
   showMessage(t('filters_reset'));
 }
 
-function updateSelectedCategories(
-  category: UISelection,
-  checked: boolean,
-): void {
-  preferences.selectedCategories = checked
-    ? [...new Set([...preferences.selectedCategories, category])]
-    : preferences.selectedCategories.filter((value) => value !== category);
-
-  void persist();
-  updateApplyButton();
-  renderBrandList();
-}
-
-function updateSelectedMaterials(materialId: number, checked: boolean): void {
-  preferences.selectedMaterialIds = checked
-    ? [...new Set([...preferences.selectedMaterialIds, materialId])]
-    : preferences.selectedMaterialIds.filter((value) => value !== materialId);
-
-  void persist();
-  updateApplyButton();
-}
-
-function updateApplyButton(): void {
-  applyButton.disabled =
-    preferences.selectedCategories.length === 0 &&
-    preferences.selectedMaterialIds.length === 0;
-}
-
-async function persist(): Promise<void> {
-  await savePreferences(preferences);
-}
-
-async function getActiveTab(): Promise<chrome.tabs.Tab> {
+async function getCatalogTab(): Promise<{ id: number; url: string } | null> {
   const [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
-  return tab;
+
+  return tab?.id !== undefined && isVintedCatalogUrl(tab.url)
+    ? { id: tab.id, url: tab.url }
+    : null;
 }
 
-function isVintedCatalogUrl(url: string | undefined): url is string {
-  if (!url) {
-    return false;
-  }
+// DOM helpers
 
-  try {
-    const parsed = new URL(url);
-    return (
-      VINTED_HOSTNAMES.has(parsed.hostname) &&
-      parsed.pathname.startsWith('/catalog')
-    );
-  } catch {
-    return false;
-  }
+function checkRow(options: {
+  label: string;
+  checked: boolean;
+  disabled?: boolean;
+  extra?: Node[];
+  onChange: (checked: boolean) => void;
+}): HTMLLabelElement {
+  const input = h('input', {
+    type: 'checkbox',
+    checked: options.checked,
+    disabled: options.disabled ?? false,
+  });
+  input.addEventListener('change', () => options.onChange(input.checked));
+
+  return h('label', { className: 'check-row' }, [
+    input,
+    h('span', { className: 'label', textContent: options.label }),
+    ...(options.extra ?? []),
+  ]);
 }
 
-function materialName(material: NaturalMaterial): string {
-  return language === 'en' ? material.name_en : material.name_fr;
+/** Creates an element; text goes through `textContent`, never `innerHTML`. */
+function h<K extends keyof HTMLElementTagNameMap>(
+  tag: K,
+  props: Partial<HTMLElementTagNameMap[K]> = {},
+  children: Node[] = [],
+): HTMLElementTagNameMap[K] {
+  const element = Object.assign(document.createElement(tag), props);
+  element.append(...children);
+  return element;
 }
 
-function categoryLabel(category: BrandCategory): string {
-  const keyByCategory: Record<BrandCategory, Parameters<typeof t>[0]> = {
-    france: 'category_france',
-    europe: 'category_europe',
-    mixed: 'category_mixed',
-    eco: 'category_eco',
-  };
-
-  return t(keyByCategory[category]);
+function toggle<T>(values: T[], value: T, checked: boolean): T[] {
+  return checked
+    ? [...new Set([...values, value])]
+    : values.filter((item) => item !== value);
 }
 
 function showMessage(message: string): void {

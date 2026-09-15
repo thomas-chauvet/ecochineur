@@ -6,7 +6,7 @@
     <title>Privacy Policy - EcoChineur</title>
     <meta
       name="description"
-      content="EcoChineur privacy policy: no data collection and no user-data use."
+      content="EcoChineur privacy policy: no data collection, no data use, no data sharing."
     />
     <link rel="icon" href="assets/icon.svg" />
     <link rel="stylesheet" href="styles.css" />
@@ -44,11 +44,12 @@
     <main>
       <section class="section">
         <div class="section-inner">
-          <p class="eyebrow">Privacy Policy</p>
+          <p class="eyebrow">Privacy Policy - last updated 2026-09-15</p>
           <h1>Private by design</h1>
           <p class="section-lead">
-            EcoChineur collects no personal data, browsing data, history, Vinted
-            searches, filters, identifiers, or usage statistics.
+            The EcoChineur browser extension collects no personal data, browsing
+            data, history, Vinted searches, filters, identifiers or usage
+            statistics.
           </p>
         </div>
       </section>
@@ -57,27 +58,29 @@
         <div class="section-inner">
           <div class="grid">
             <article class="card">
-              <h3>No data use</h3>
+              <h3>No data use or sharing</h3>
               <p>
-                EcoChineur does not use user data for analytics, profiling,
-                advertising, audience measurement, model training, resale,
-                sharing, or external processing.
+                EcoChineur does not use, sell or transfer user data for any
+                purpose: no analytics, profiling, advertising, audience
+                measurement, creditworthiness, model training or sharing with
+                third parties.
               </p>
             </article>
             <article class="card">
               <h3>Local storage only</h3>
               <p>
-                The only stored information is the set of preferences explicitly
-                chosen in the popup: categories, materials, and language. These
-                stay in `chrome.storage.local`.
+                The only stored information is what you choose in the popup:
+                brand categories, materials and language. It stays in
+                <code>chrome.storage.local</code> on your device and is deleted
+                when you uninstall the extension.
               </p>
             </article>
             <article class="card">
-              <h3>No external network</h3>
+              <h3>No network</h3>
               <p>
-                The extension makes no extension-owned network calls, has no
-                backend, uses no third-party service, and includes no tracking,
-                telemetry, or analytics.
+                The extension makes no network requests of its own, has no
+                backend, loads no remote code and includes no tracking,
+                telemetry or analytics.
               </p>
             </article>
           </div>
@@ -86,13 +89,49 @@
 
       <section class="section">
         <div class="section-inner">
-          <h2>Local operation</h2>
+          <h2>How the extension works</h2>
           <p class="section-lead">
-            When the user clicks "Apply filters", EcoChineur reads the active
-            tab URL only to verify that the page is `www.vinted.fr/catalog` and
-            to locally build a new URL that preserves existing filters and adds
-            selected filters. The extension does not store that URL, send it
-            anywhere, or keep any history.
+            When you open the popup and click "Apply filters" or "Reset",
+            EcoChineur reads the active tab URL only to check that it is a
+            Vinted catalog page and to build, on your device, a new URL that
+            keeps your existing filters. The tab then navigates to that URL. The
+            URL is never stored or sent anywhere.
+          </p>
+          <p class="section-lead">
+            The "Suggest a brand" link opens the project's public GitHub issue
+            form in a new tab. Submitting it requires a GitHub account, and
+            GitHub's privacy policy applies there.
+          </p>
+        </div>
+      </section>
+
+      <section class="section alt">
+        <div class="section-inner">
+          <h2>Permissions</h2>
+          <div class="grid">
+            <article class="card">
+              <h3><code>storage</code></h3>
+              <p>Save your preferences locally on your device.</p>
+            </article>
+            <article class="card">
+              <h3><code>activeTab</code></h3>
+              <p>
+                Read and update the active tab URL, only after you open the
+                popup. No access to other tabs or sites.
+              </p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="section-inner">
+          <h2>Contact</h2>
+          <p class="section-lead">
+            Questions:
+            <a href="https://github.com/thomas-chauvet/ecochineur/issues"
+              >open an issue on GitHub</a
+            >.
           </p>
         </div>
       </section>
@@ -100,7 +139,7 @@
 
     <footer class="site-footer">
       <div class="footer-inner">
-        <span>EcoChineur - no data collection, no user-data use</span>
+        <span>EcoChineur - not affiliated with Vinted</span>
         <div class="footer-links">
           <a href="index.html">Home</a>
           <a href="https://github.com/thomas-chauvet/ecochineur">GitHub</a>

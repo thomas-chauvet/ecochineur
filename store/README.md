@@ -1,0 +1,31 @@
+# Chrome Web Store assets
+
+Generated from the real popup (through the manual harness) so they stay in sync
+with the UI. They contain no Vinted logo or branding.
+
+| File                        | Size     | Store slot                 |
+| --------------------------- | -------- | -------------------------- |
+| `screenshot-en-filters.png` | 1280×800 | Screenshot 1 (English)     |
+| `screenshot-en-brands.png`  | 1280×800 | Screenshot 2 (English)     |
+| `screenshot-fr-filters.png` | 1280×800 | Screenshot 1 (French)      |
+| `screenshot-fr-brands.png`  | 1280×800 | Screenshot 2 (French)      |
+| `promo-tile-en.png`         | 440×280  | Small promo tile (English) |
+| `promo-tile-fr.png`         | 440×280  | Small promo tile (French)  |
+
+## Regenerate
+
+1. `just dev`
+2. Open these pages in a browser window whose viewport is exactly the asset
+   size, and take a viewport screenshot:
+   - `http://localhost:5173/store/screenshot.html?lang=en&scene=filters`
+   - `http://localhost:5173/store/screenshot.html?lang=en&scene=brands`
+   - `http://localhost:5173/store/screenshot.html?lang=fr&scene=filters`
+   - `http://localhost:5173/store/screenshot.html?lang=fr&scene=brands`
+   - `http://localhost:5173/store/promo-tile.html?lang=en`
+   - `http://localhost:5173/store/promo-tile.html?lang=fr`
+
+In Chrome DevTools: toggle the device toolbar, set a responsive size of 1280×800
+(or 440×280), then **⋮ → Capture screenshot**.
+
+The popup state in the screenshots comes from harness URL parameters, see
+`tests/manual/popup-harness.html`: `lang`, `categories`, `materials`, `browse`.

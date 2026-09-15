@@ -1,24 +1,15 @@
-import type { UISelection, UserPreferences } from '../types';
+import {
+  BRAND_CATEGORIES,
+  type BrandCategory,
+  type UserPreferences,
+} from '../types';
 
 const STORAGE_KEY = 'ecochineur.preferences';
 
-export const DEFAULT_PREFERENCES: UserPreferences = {
-  selectedCategories: [],
-  selectedMaterialIds: [],
-  language: null,
-};
-
 export async function loadPreferences(): Promise<UserPreferences> {
   const result = await chrome.storage.local.get(STORAGE_KEY);
-  const stored = result[STORAGE_KEY] as Partial<UserPreferences> | undefined;
 
-  return {
-    ...DEFAULT_PREFERENCES,
-    ...stored,
-    selectedCategories: normalizeCategories(stored?.selectedCategories),
-    selectedMaterialIds: normalizeMaterialIds(stored?.selectedMaterialIds),
-    language: normalizeLanguage(stored?.language),
-  };
+  return normalizePreferences(result[STORAGE_KEY]);
 }
 
 export async function savePreferences(
@@ -27,32 +18,28 @@ export async function savePreferences(
   await chrome.storage.local.set({ [STORAGE_KEY]: preferences });
 }
 
-function normalizeCategories(categories: unknown[] | undefined): UISelection[] {
-  const valid = new Set<UISelection>(['france', 'europe', 'mixed', 'eco']);
-  const migrated = (categories ?? []).map((category) =>
-    category === 'mixte' ? 'mixed' : category,
-  );
+/** Stored values may come from an older extension version: validate all. */
+export function normalizePreferences(stored: unknown): UserPreferences {
+  const value = (stored ?? {}) as Record<keyof UserPreferences, unknown>;
 
-  return [...new Set(migrated.filter(isValidCategory))];
-
-  function isValidCategory(category: unknown): category is UISelection {
-    return typeof category === 'string' && valid.has(category as UISelection);
-  }
+  return {
+    selectedCategories: unique(value.selectedCategories).filter(isCategory),
+    selectedMaterialIds: unique(value.selectedMaterialIds).filter(isPositiveId),
+    language:
+      value.language === 'fr' || value.language === 'en'
+        ? value.language
+        : null,
+  };
 }
 
-function normalizeMaterialIds(materialIds: unknown[] | undefined): number[] {
-  return [
-    ...new Set(
-      (materialIds ?? []).filter(
-        (materialId): materialId is number =>
-          typeof materialId === 'number' && materialId > 0,
-      ),
-    ),
-  ];
+function unique(value: unknown): unknown[] {
+  return Array.isArray(value) ? [...new Set(value)] : [];
 }
 
-function normalizeLanguage(
-  language: UserPreferences['language'] | undefined,
-): UserPreferences['language'] {
-  return language === 'fr' || language === 'en' ? language : null;
+function isCategory(value: unknown): value is BrandCategory {
+  return BRAND_CATEGORIES.includes(value as BrandCategory);
+}
+
+function isPositiveId(value: unknown): value is number {
+  return Number.isInteger(value) && (value as number) > 0;
 }

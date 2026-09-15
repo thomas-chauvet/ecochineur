@@ -1,21 +1,20 @@
-export type BrandCategory = 'france' | 'europe' | 'mixed' | 'eco';
+export const BRAND_CATEGORIES = ['france', 'europe', 'mixed', 'eco'] as const;
+
+export type BrandCategory = (typeof BRAND_CATEGORIES)[number];
+
+export type Language = 'fr' | 'en';
 
 export interface Brand {
   id: string;
   name: string;
   vinted_id: number;
   category: BrandCategory;
+  /** Cumulative tag: an eco brand also matches the `eco` filter. */
   eco: boolean;
   certifications: string[];
   description_fr: string;
   description_en: string;
   website: string;
-}
-
-export interface BrandsDatabase {
-  db_version: string;
-  last_updated: string;
-  brands: Brand[];
 }
 
 export interface NaturalMaterial {
@@ -25,15 +24,8 @@ export interface NaturalMaterial {
   vinted_id: number;
 }
 
-export interface MaterialsDatabase {
-  db_version: string;
-  natural_materials: NaturalMaterial[];
-}
-
-export type UISelection = BrandCategory;
-
 export interface UserPreferences {
-  selectedCategories: UISelection[];
+  selectedCategories: BrandCategory[];
   selectedMaterialIds: number[];
-  language: 'fr' | 'en' | null;
+  language: Language | null;
 }

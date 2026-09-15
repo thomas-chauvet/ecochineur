@@ -11,11 +11,14 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v4
-
-      - uses: actions/setup-node@v4
+      - uses: actions/checkout@v7
         with:
-          node-version: 20
+          # Tags are needed so version.ts can derive the version from git.
+          fetch-depth: 0
+
+      - uses: actions/setup-node@v7
+        with:
+          node-version-file: .nvmrc
           cache: npm
 
       - run: npm ci
@@ -23,8 +26,6 @@ jobs:
       - run: npm run format:check
 
       - run: npm run lint
-
-      - run: npm run typecheck
 
       - run: npm run test:coverage
 
@@ -37,14 +38,37 @@ jobs:
         env:
           CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
 
+      # Includes `tsc --noEmit`.
       - run: npm run build
+
+      - run: npm audit --audit-level=high
+
+  e2e:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-node@v7
+        with:
+          node-version-file: .nvmrc
+          cache: npm
+
+      - run: npm ci
+
+      - run: npx playwright install --with-deps chromium
+
+      # Builds dist/ and drives the extension in headless Chromium.
+      - run: npm run test:e2e
 
   commitlint:
     runs-on: ubuntu-latest
     if: github.event_name == 'pull_request'
 
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
         with:
           # Full history so the action can lint the whole PR commit range.
           fetch-depth: 0

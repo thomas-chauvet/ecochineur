@@ -21,215 +21,156 @@
   </a>
 </p>
 
-EcoChineur is a privacy-by-design Chrome Manifest V3 extension for adding
-ethical brand and material filters to Vinted France searches.
+EcoChineur is a privacy-by-design Chrome (Manifest V3) extension that adds
+ethical brand and natural material filters to Vinted searches.
 
-The extension collects no data, uses no user data, does not scrape Vinted, and
-has no backend. The popup reads local preferences, computes the `brand_ids[]`
-and `material_ids[]` to add, merges them with the current Vinted URL, and
-navigates the active tab to that new URL.
+It has no backend and collects no data. When you click **Apply filters**, the
+popup works out which `brand_ids[]` and `material_ids[]` to add and merges them
+into the current Vinted URL. Your existing filters stay as they are. Then it
+reloads the tab with the new URL.
+
+> Status: pre-release (`0.0.x`), not yet on the Chrome Web Store. See
+> [ROADMAP.md](./ROADMAP.md).
 
 ## Features
 
-- Brand filters by category: French, European, mixed, and eco-conscious.
-- Natural material filters independent from brand filters.
-- Conservative URL merging: search, price, sorting, condition, existing brands,
-  and existing materials are preserved.
-- Local-only preferences through `chrome.storage.local`.
-- Fully translated popup UI in French and English.
-- Browseable brand list with search, badges, and descriptions.
-- Reset action for `brand_ids[]` and `material_ids[]`.
-- No tracking, analytics, backend, telemetry, or extension-owned network calls.
+- Brand filters by category: French, European, mixed, eco-conscious. `eco` is
+  cumulative, so an eco-friendly French brand shows up under both.
+- Natural material filters (linen, cotton, wool, silk, cashmere, alpaca, mohair,
+  merino), usable with or without brand filters.
+- Conservative URL merge: search text, price, sort order, condition, category
+  path and the brands/materials you already picked are all kept.
+- Reset action that unchecks every option and removes only `brand_ids[]` and
+  `material_ids[]` from the current URL.
+- **Suggest a brand** link to a GitHub issue form (requires a GitHub account for
+  now).
+- Searchable list of the listed brands, with badges and descriptions.
+- French and English UI (French for French browsers, English otherwise).
+- Works on all 26 Vinted country domains, on `/catalog` pages.
+- Minimal permissions: `storage` and `activeTab` only, so no install-time
+  warning.
+- No tracking, analytics, telemetry, backend, or network calls made by the
+  extension itself. See [PRIVACY.md](./PRIVACY.md).
 
-## Stack
+## Install
 
-- Vite
-- CRXJS
-- TypeScript
-- Vanilla HTML/CSS/TS
-- Vitest
-- ESLint
-- Prettier
-- just
+### From source (developer mode)
 
-## Installation
-
-```bash
-npm install
-npm run build
-```
-
-Then load `dist/` in Chrome from `chrome://extensions` with Developer mode
-enabled and "Load unpacked".
-
-## Common Commands
-
-This repository includes a `justfile` so contributors do not need to remember
-every npm command.
-
-Install `just` from <https://github.com/casey/just>, then run:
+Requires Node.js ≥ 22.22 (`.nvmrc` pins 24) and optionally
+[`just`](https://github.com/casey/just).
 
 ```bash
-just
-just install
-just dev
-just test
-just lint
-just build
-just check
-just package
+just install   # npm install
+just build     # npm run build
 ```
 
-The equivalent npm commands still work:
-
-```bash
-npm run dev
-npm test
-npm run lint
-npm run build
-```
-
-## Pre-commit Hooks
-
-The repository uses Husky and lint-staged for pre-commit quality checks.
-
-On commit, the hook runs:
-
-1. `npm run lint-staged` to format staged files with Prettier.
-2. `npm run lint` for ESLint.
-3. `npm run typecheck` for TypeScript.
-4. `npm test` for the Vitest suite.
-
-Husky is installed by the `prepare` script after `npm install`. If hooks are
-missing locally, run:
-
-```bash
-npm run prepare
-```
+Then open `chrome://extensions`, enable **Developer mode**, click **Load
+unpacked** and select the `dist/` directory.
 
 ## Usage
 
-1. Open any Vinted country catalog (e.g. `https://www.vinted.fr/catalog`) and
-   run a search.
-2. Open the EcoChineur popup.
-3. Select one or more brand categories, one or more materials, or both.
-4. Click "Apply filters".
+1. Open any Vinted catalog page, e.g. `https://www.vinted.fr/catalog`, and run a
+   search.
+2. Click the EcoChineur toolbar icon.
+3. Tick brand categories, materials, or both.
+4. Click **Apply filters**.
 
-EcoChineur adds its filters to the Vinted filters already present. It does not
-remove search, price, sorting, condition, brand, or material filters selected
-manually. The reset link removes only `brand_ids[]` and `material_ids[]` from
-the current URL.
+## Development
 
-## Privacy and Transparency
+| Command          | What it does                                           |
+| ---------------- | ------------------------------------------------------ |
+| `just dev`       | Vite dev server (popup harness, see below)             |
+| `just test`      | Unit tests (Vitest)                                    |
+| `just lint`      | ESLint                                                 |
+| `just typecheck` | `tsc --noEmit`                                         |
+| `just format`    | Prettier                                               |
+| `just build`     | Typecheck + production build into `dist/`              |
+| `just check`     | Format check + lint + tests + build (the CI gate)      |
+| `just package`   | `check`, then zip `dist/` into `release/`              |
+| `just coverage`  | Unit tests with coverage report                        |
+| `just e2e`       | Smoke test of the built extension in headless Chromium |
+| `just release X` | Check, tag `vX` and push (see [RELEASING](#releasing)) |
+| `just changelog` | Preview `CHANGELOG.md` (git-cliff)                     |
 
-- No data is collected.
-- No user data is used for analytics, advertising, profiling, audience
-  measurement, model training, sharing, or resale.
-- The extension only runs on Vinted catalog pages across all supported country
-  domains (`/catalog` path).
-- Preferences stay in `chrome.storage.local`.
-- No tracking, analytics, backend, telemetry, or extension-owned network calls.
-- Works on all 26 Vinted country domains (vinted.fr, vinted.de, vinted.co.uk,
-  vinted.com, and more).
-- Bundled JSON databases contain only brands and materials with verified Vinted
-  IDs.
+Every `just` recipe wraps an npm script, so `npm run <script>` works too.
 
-## Local Popup Testing
+A Husky pre-commit hook runs lint-staged (Prettier), then ESLint, typecheck and
+tests.
 
-Run the Vite dev server:
+### Popup harness
 
-```bash
-just dev
+`just dev`, then open <http://localhost:5173/tests/manual/popup-harness.html>.
+The harness mocks `chrome.storage` and `chrome.tabs`, loads the real
+`src/popup/popup.html` markup and runs `src/popup/popup.ts`. The URL that
+"Apply" would open is available as `document.body.dataset.updatedUrl`.
+
+Final validation must still be done with `dist/` loaded in Chrome (see the smoke
+test in [RELEASING.md](./RELEASING.md#manual-smoke-test)). Run `just build`
+first: while `just dev` runs, CRXJS rewrites `dist/` into a dev loader that only
+works with the dev server running.
+
+## Architecture
+
+```
+popup.html ─▶ popup.ts ──┬─▶ data/index.ts       typed brands + materials (bundled JSON)
+   (UI)     (rendering,  ├─▶ lib/brand-filter.ts  category → brands → Vinted IDs
+             events)     ├─▶ lib/url-merge.ts     merge / reset brand_ids[] & material_ids[]
+                         ├─▶ lib/vinted-domains.ts is this a Vinted catalog URL?
+                         ├─▶ lib/storage.ts       chrome.storage.local + validation
+                         └─▶ lib/i18n.ts          fr/en dictionaries
 ```
 
-Open `http://localhost:5173/tests/manual/popup-harness.html`. This page loads
-the real `src/popup/popup.ts` module and mocks `chrome.storage.local` and
-`chrome.tabs` with a test Vinted URL.
+- The popup is the only entry point: no content script, no service worker.
+- Everything under `src/lib` is pure (except the `chrome.storage` wrapper) and
+  unit tested. `popup.ts` only handles DOM and Chrome API glue.
+- `tests/data.test.ts` checks the bundled JSON against the database rules
+  (positive unique `vinted_id`, valid category, bilingual descriptions…).
+- `manifest.config.ts` builds the manifest. CRXJS turns it into
+  `dist/manifest.json`, taking the version from the latest git tag
+  (`version.ts`).
 
-If `src/popup/popup.html` markup changes, keep `tests/manual/popup-harness.html`
-in sync.
+### Layout
 
-The final pre-release test must still be done in Chrome with the built `dist/`
-directory loaded as an unpacked extension.
-
-## GitHub Pages
-
-The public plugin frontpage lives in `docs/`:
-
-- `docs/index.html`: frontpage.
-- `docs/privacy.html`: public privacy policy.
-- `docs/assets/icon.svg`: logo used by the page.
-
-To enable it on GitHub:
-
-1. Open the repository settings.
-2. Go to "Pages".
-3. Choose "Deploy from a branch".
-4. Branch: `main`.
-5. Folder: `/docs`.
-
-Expected URL after activation: `https://thomas-chauvet.github.io/ecochineur/`.
-
-## Release Checks
-
-```bash
-just release-check
+```
+src/
+  data/        brands.json, material-ids.json, index.ts (typed exports)
+  i18n/        en.json, fr.json
+  lib/         brand-filter, i18n, storage, url-merge, vinted-domains
+  popup/       popup.html, popup.ts, popup.css
+  types/       shared types and BRAND_CATEGORIES
+tests/         unit tests + manual/popup-harness.html
+public/icons/  extension icons (copied as-is into dist/)
+docs/          GitHub Pages site (landing page + privacy policy)
+.github/       CI, release and Pages workflows, brand suggestion issue form
 ```
 
-Or without `just`:
+## Documentation
+
+- [CONTRIBUTING.md](./CONTRIBUTING.md): dev workflow, adding brands and
+  materials, conventions.
+- [RELEASING.md](./RELEASING.md): versioning, GitHub releases, Chrome Web Store
+  submission and listing copy.
+- [ROADMAP.md](./ROADMAP.md): what's left before publishing, and missing
+  features.
+- [PRIVACY.md](./PRIVACY.md): privacy policy (also published at
+  <https://ecochineur.chaurel.ch/privacy.html>).
+- [src/data/SOURCES.md](./src/data/SOURCES.md): why each brand is listed and
+  what still needs checking.
+- [CHANGELOG.md](./CHANGELOG.md): generated from Conventional Commits.
+
+Website: <https://ecochineur.chaurel.ch> (French: `/fr/`).
+
+## Releasing
+
+Commits follow Conventional Commits. The git tag sets the version:
 
 ```bash
-npm test
-npm run lint
-npm run format:check
-npm run build
-npm audit
+just release 0.1.0    # or 0.1.0-rc.1
 ```
 
-The Chrome-loadable build is `dist/`. Dev release notes are in `RELEASE.md`; dev
-listing metadata is in `STORE_LISTING_DEV.md`.
+Details in [RELEASING.md](./RELEASING.md).
 
-Manual Chrome checks:
+## License
 
-- Open the popup on a Vinted catalog page.
-- Verify the error outside a Vinted catalog page.
-- Apply at least one material filter.
-- Apply at least one brand category.
-- Verify existing Vinted filters are preserved.
-- Reset brand/material filters.
-- Switch FR/EN.
-
-## Referenced Data
-
-`src/data/brands.json` and `src/data/material-ids.json` must only contain
-entries with a strictly positive `vinted_id`. Keep unmapped brands or materials
-out of bundled JSON until their ID is verified.
-
-Mapped brand IDs from the public `0AlphaZero0/Vinted-data` dataset
-(`DATA/brand.json`):
-
-- Armor-Lux: `1427`
-- FAGUO: `12595`
-- Veja: `603`
-
-Mapped material IDs from a manual Vinted search:
-
-- Alpaca: `122`
-- Cashmere: `123`
-- Cotton: `44`
-- Linen: `146`
-- Merino: `121`
-- Mohair: `152`
-- Silk: `49`
-- Wool: `46`
-
-Manual Vinted validation checklist:
-
-- Verify Vinted accepts encoded `brand_ids%5B%5D` parameters.
-- Test one URL with brands and materials together.
-- Test preservation of an existing `brand_ids[]`.
-- Test 30, 50, then 80 IDs to assess practical URL length limits.
-
-## Privacy
-
-See [PRIVACY.md](./PRIVACY.md).
+[GPL-3.0](./LICENSE). EcoChineur is an independent project, not affiliated with
+Vinted.

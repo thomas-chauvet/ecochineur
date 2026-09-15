@@ -6,7 +6,7 @@
     <title>Politique de confidentialité - EcoChineur</title>
     <meta
       name="description"
-      content="Politique de confidentialité d'EcoChineur : aucune collecte de données et aucun usage des données utilisateur."
+      content="Politique de confidentialité d'EcoChineur : aucune collecte, aucun usage et aucun partage de données."
     />
     <link rel="icon" href="../assets/icon.svg" />
     <link rel="stylesheet" href="../styles.css" />
@@ -44,11 +44,13 @@
     <main>
       <section class="section">
         <div class="section-inner">
-          <p class="eyebrow">Politique de confidentialité</p>
+          <p class="eyebrow">
+            Politique de confidentialité - mise à jour le 15/09/2026
+          </p>
           <h1>Privée par conception</h1>
           <p class="section-lead">
-            EcoChineur ne collecte aucune donnée personnelle, donnée de
-            navigation, historique, recherche Vinted, filtre, identifiant ou
+            L'extension EcoChineur ne collecte aucune donnée personnelle, donnée
+            de navigation, historique, recherche Vinted, filtre, identifiant ou
             statistique d'utilisation.
           </p>
         </div>
@@ -58,28 +60,29 @@
         <div class="section-inner">
           <div class="grid">
             <article class="card">
-              <h3>Aucun usage des données</h3>
+              <h3>Aucun usage ni partage</h3>
               <p>
-                EcoChineur n'utilise aucune donnée utilisateur à des fins
-                d'analyse, de profilage, de publicité, de mesure d'audience,
-                d'entraînement de modèles, de revente, de partage ou de
-                traitement externe.
+                EcoChineur n'utilise, ne vend et ne transfère aucune donnée
+                utilisateur : ni analyse, ni profilage, ni publicité, ni mesure
+                d'audience, ni évaluation de solvabilité, ni entraînement de
+                modèles, ni partage avec des tiers.
               </p>
             </article>
             <article class="card">
               <h3>Stockage local uniquement</h3>
               <p>
-                La seule information stockée est l'ensemble des préférences
-                explicitement choisies dans le popup : catégories, matières et
-                langue. Elles restent dans `chrome.storage.local`.
+                Seuls vos choix dans le popup sont stockés : catégories de
+                marques, matières et langue. Ils restent dans
+                <code>chrome.storage.local</code> sur votre appareil et sont
+                supprimés à la désinstallation.
               </p>
             </article>
             <article class="card">
-              <h3>Aucun réseau externe</h3>
+              <h3>Aucun réseau</h3>
               <p>
-                L'extension n'effectue aucun appel réseau qui lui soit propre,
-                n'a pas de backend, n'utilise aucun service tiers, et n'inclut
-                ni pistage, ni télémétrie, ni analyse.
+                L'extension n'effectue aucune requête réseau qui lui soit
+                propre, n'a pas de serveur, ne charge aucun code distant et
+                n'inclut ni pistage, ni télémétrie, ni statistiques.
               </p>
             </article>
           </div>
@@ -88,14 +91,50 @@
 
       <section class="section">
         <div class="section-inner">
-          <h2>Fonctionnement local</h2>
+          <h2>Fonctionnement</h2>
           <p class="section-lead">
-            Lorsque l'utilisateur clique sur "Appliquer les filtres", EcoChineur
-            lit l'URL de l'onglet actif uniquement pour vérifier que la page est
-            `www.vinted.fr/catalog` et pour construire localement une nouvelle
-            URL qui préserve les filtres existants et ajoute les filtres
-            sélectionnés. L'extension ne stocke pas cette URL, ne l'envoie nulle
-            part, et ne conserve aucun historique.
+            Lorsque vous ouvrez le popup et cliquez sur « Appliquer les filtres
+            » ou « Réinitialiser », EcoChineur lit l'URL de l'onglet actif
+            uniquement pour vérifier qu'il s'agit d'une page catalogue Vinted et
+            pour construire, sur votre appareil, une nouvelle URL qui conserve
+            vos filtres existants. L'onglet navigue ensuite vers cette URL. Elle
+            n'est jamais stockée ni envoyée.
+          </p>
+          <p class="section-lead">
+            Le lien « Suggérer une marque » ouvre le formulaire public d'issues
+            GitHub du projet dans un nouvel onglet. L'envoi nécessite un compte
+            GitHub, et la politique de confidentialité de GitHub s'y applique.
+          </p>
+        </div>
+      </section>
+
+      <section class="section alt">
+        <div class="section-inner">
+          <h2>Permissions</h2>
+          <div class="grid">
+            <article class="card">
+              <h3><code>storage</code></h3>
+              <p>Enregistrer vos préférences localement sur votre appareil.</p>
+            </article>
+            <article class="card">
+              <h3><code>activeTab</code></h3>
+              <p>
+                Lire et modifier l'URL de l'onglet actif, uniquement après
+                ouverture du popup. Aucun accès aux autres onglets ou sites.
+              </p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="section-inner">
+          <h2>Contact</h2>
+          <p class="section-lead">
+            Questions :
+            <a href="https://github.com/thomas-chauvet/ecochineur/issues"
+              >ouvrez une issue sur GitHub</a
+            >.
           </p>
         </div>
       </section>
@@ -103,10 +142,7 @@
 
     <footer class="site-footer">
       <div class="footer-inner">
-        <span
-          >EcoChineur - aucune collecte de données, aucun usage des données
-          utilisateur</span
-        >
+        <span>EcoChineur - sans lien avec Vinted</span>
         <div class="footer-links">
           <a href="index.html">Accueil</a>
           <a href="https://github.com/thomas-chauvet/ecochineur">GitHub</a>

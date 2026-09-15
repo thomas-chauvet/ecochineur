@@ -6,12 +6,12 @@
     <title>EcoChineur - Privacy-first ethical Vinted filter</title>
     <meta
       name="description"
-      content="EcoChineur is a privacy-by-design Chrome extension for filtering Vinted by ethical brands and materials, with no data collection and no data use."
+      content="EcoChineur is a privacy-by-design Chrome extension for filtering Vinted by ethical brands and natural materials, with no data collection."
     />
     <meta property="og:title" content="EcoChineur" />
     <meta
       property="og:description"
-      content="Filter Vinted by ethical brands and materials. No data collection. No user-data use."
+      content="Filter Vinted by ethical brands and natural materials. No data collection."
     />
     <meta property="og:type" content="website" />
     <link rel="icon" href="assets/icon.svg" />
@@ -50,11 +50,11 @@
       <section class="hero">
         <div class="hero-inner">
           <div class="hero-content">
-            <p class="eyebrow">Chrome MV3 extension - dev release</p>
+            <p class="eyebrow">Chrome extension - coming soon</p>
             <h1>EcoChineur</h1>
             <p class="hero-copy">
-              Filter Vinted by more responsible brands and materials, without
-              data collection, tracking, a backend, or user-data use.
+              Filter Vinted by more responsible brands and natural materials,
+              without data collection, tracking or a backend.
             </p>
             <div class="hero-actions">
               <a
@@ -64,7 +64,7 @@
                 View source code
               </a>
               <a class="button secondary" href="#installation">
-                Install the dev build
+                Install from source
               </a>
             </div>
           </div>
@@ -73,41 +73,42 @@
 
       <aside class="status-strip" aria-label="Release status">
         <div class="section-inner">
-          <span>Dev release 0.1.0-dev.1</span>
+          <span>Pre-release</span>
           <span>No data collection</span>
-          <span>Local preferences only</span>
+          <span>All 26 Vinted countries</span>
         </div>
       </aside>
 
       <section class="section" id="how-it-works">
         <div class="section-inner">
-          <h2>A simple filter that respects existing Vinted choices</h2>
+          <h2>A simple filter that respects your Vinted search</h2>
           <p class="section-lead">
-            EcoChineur adds selected filters to the active Vinted URL while
-            preserving existing filters: search text, price, sort order,
-            condition, brands, and materials.
+            EcoChineur adds the filters you choose to the Vinted search you are
+            viewing. Your search text, price, sort order, condition and the
+            brands and materials you already picked stay as they are.
           </p>
-
           <div class="grid">
             <article class="card">
-              <h3>Referenced brands</h3>
+              <h3>Curated brands</h3>
               <p>
-                Brands are bundled only when their Vinted identifier is
-                verified. The dev release includes Armor Lux, Faguo, and Veja.
+                French, European, mixed and eco-conscious brands. A brand is
+                listed only with a documented reason and a verified Vinted
+                identifier.
               </p>
             </article>
             <article class="card">
               <h3>Natural materials</h3>
               <p>
-                Select linen, cotton, wool, silk, cashmere, alpaca, mohair, or
-                merino to enrich a Vinted search.
+                Linen, cotton, wool, silk, cashmere, alpaca, mohair or merino,
+                with or without brand filters.
               </p>
             </article>
             <article class="card">
               <h3>Conservative merge</h3>
               <p>
-                `brand_ids[]` and `material_ids[]` are added without removing
-                IDs that are already present.
+                <code>brand_ids[]</code> and <code>material_ids[]</code> are
+                added without removing anything already selected. Reset unchecks
+                your choices and removes only those two filters.
               </p>
             </article>
           </div>
@@ -118,29 +119,29 @@
         <div class="section-inner">
           <h2>Private by design</h2>
           <p class="section-lead">
-            EcoChineur collects no data and uses no user data for analytics,
-            advertising, profiling, audience measurement, model training,
-            sharing, or resale.
+            EcoChineur collects no data and does not use, sell or share user
+            data for any purpose.
           </p>
           <div class="grid">
             <article class="card">
               <h3>No backend</h3>
               <p>
-                The extension has no server and makes no extension-owned network
-                calls.
+                No server, no remote code, and no network calls made by the
+                extension itself. All data is bundled.
               </p>
             </article>
             <article class="card">
-              <h3>No telemetry</h3>
+              <h3>Minimal permissions</h3>
               <p>
-                No analytics, tracking, pixels, beacons, or usage measurement.
+                Only <code>storage</code> and <code>activeTab</code>: the
+                extension sees the current tab only after you click its icon.
               </p>
             </article>
             <article class="card">
               <h3>Local preferences</h3>
               <p>
-                Checked options and language preference stay in
-                `chrome.storage.local` on the user's device.
+                Your choices and language stay in
+                <code>chrome.storage.local</code> on your device.
               </p>
             </article>
           </div>
@@ -149,17 +150,29 @@
 
       <section class="section alt" id="data">
         <div class="section-inner">
-          <h2>Data referenced in the dev release</h2>
+          <h2>Referenced data</h2>
           <p class="section-lead">
-            The bundled database is intentionally small: only entries with
-            verified Vinted IDs are published.
+            The database grows through reviewed contributions.
+            <a
+              href="https://github.com/thomas-chauvet/ecochineur/issues/new?template=brand-suggestion.yml"
+              >Suggest a brand</a
+            >
+            (GitHub account required).
           </p>
           <div class="data-list">
             <section>
               <h3>Brands</h3>
               <div class="pill-list">
                 <span class="pill">Armor Lux</span>
+                <span class="pill">Birkenstock</span>
                 <span class="pill">Faguo</span>
+                <span class="pill">John Smedley</span>
+                <span class="pill">Le Minor</span>
+                <span class="pill">Le Slip Français</span>
+                <span class="pill">Meindl</span>
+                <span class="pill">Nudie Jeans</span>
+                <span class="pill">Patagonia</span>
+                <span class="pill">Saint James</span>
                 <span class="pill">Veja</span>
               </div>
             </section>
@@ -182,17 +195,25 @@
 
       <section class="section" id="installation">
         <div class="section-inner">
-          <h2>Install the dev build</h2>
+          <h2>Install from source</h2>
           <p class="section-lead">
-            The current version is intended for local testing from the GitHub
-            repository.
+            Until the Chrome Web Store release, you can build the extension
+            yourself (Node.js 22.22 or later).
           </p>
           <ol class="steps">
-            <li>Download or clone the GitHub repository.</li>
-            <li>Run `npm install`, then `npm run build`.</li>
-            <li>Open `chrome://extensions` and enable Developer mode.</li>
-            <li>Click "Load unpacked" and select the `dist/` directory.</li>
-            <li>Open `https://www.vinted.fr/catalog`, then open EcoChineur.</li>
+            <li>Clone the GitHub repository.</li>
+            <li>
+              Run <code>npm install</code>, then <code>npm run build</code>.
+            </li>
+            <li>
+              Open <code>chrome://extensions</code> and enable Developer mode.
+            </li>
+            <li>
+              Click "Load unpacked" and select the <code>dist/</code> directory.
+            </li>
+            <li>
+              Open a Vinted catalog search, then click the EcoChineur icon.
+            </li>
           </ol>
         </div>
       </section>
@@ -200,7 +221,7 @@
 
     <footer class="site-footer">
       <div class="footer-inner">
-        <span>EcoChineur - privacy-by-design extension</span>
+        <span>EcoChineur - not affiliated with Vinted</span>
         <div class="footer-links">
           <a href="privacy.html">Privacy</a>
           <a href="https://github.com/thomas-chauvet/ecochineur">GitHub</a>
