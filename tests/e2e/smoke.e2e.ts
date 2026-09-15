@@ -541,7 +541,12 @@ async function main(): Promise<void> {
       `--user-data-dir=${userDataDir}`,
       'about:blank',
     ],
-    { stdio: ['ignore', 'ignore', 'inherit', 'pipe', 'pipe'] },
+    // Chromium's stderr is ignored: on CI it is flooded with harmless D-Bus
+    // errors. Results are reported through `check`.
+    { stdio: ['ignore', 'ignore', 'ignore', 'pipe', 'pipe'] },
+  );
+  const exited = new Promise((resolveExit) =>
+    browser.once('exit', resolveExit),
   );
   const cdp = connect(
     browser.stdio[3] as Writable,
@@ -557,8 +562,15 @@ async function main(): Promise<void> {
       error instanceof Error ? error.stack : String(error),
     );
   } finally {
+    // Chromium keeps writing to its profile while shutting down: wait for the
+    // process to exit before deleting it, and never fail the run on cleanup.
     browser.kill();
-    rmSync(userDataDir, { recursive: true, force: true });
+    await Promise.race([exited, sleep(5_000)]);
+    try {
+      rmSync(userDataDir, { recursive: true, force: true, maxRetries: 5 });
+    } catch (error) {
+      console.warn(`Could not remove ${userDataDir}: ${String(error)}`);
+    }
   }
 
   const passed = results.filter(Boolean).length;
