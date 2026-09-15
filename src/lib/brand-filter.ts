@@ -1,42 +1,43 @@
-import type { Brand, UISelection } from '../types';
+import { BRAND_CATEGORIES, type Brand, type BrandCategory } from '../types';
 
-export function getMatchingBrandIds(
-  brands: Brand[],
-  selected: UISelection[],
-): number[] {
-  const ids = brands
-    .filter((brand) => matchesSelection(brand, selected))
-    .map((brand) => brand.vinted_id)
-    .filter((id) => id > 0);
-
-  return [...new Set(ids)];
-}
-
-export function countByCategory(brands: Brand[]): Record<UISelection, number> {
-  return {
-    france: brands.filter((brand) => brand.category === 'france').length,
-    europe: brands.filter((brand) => brand.category === 'europe').length,
-    mixed: brands.filter((brand) => brand.category === 'mixed').length,
-    eco: brands.filter((brand) => brand.category === 'eco' || brand.eco).length,
-  };
+/**
+ * Origin categories (`france`, `europe`, `mixed`) match on `brand.category`.
+ * `eco` is cumulative: it matches `category: 'eco'` and any brand with
+ * `eco: true`, whatever its origin.
+ */
+export function brandMatches(brand: Brand, category: BrandCategory): boolean {
+  return category === 'eco'
+    ? brand.category === 'eco' || brand.eco
+    : brand.category === category;
 }
 
 export function getMatchingBrands(
   brands: Brand[],
-  selected: UISelection[],
+  selected: BrandCategory[],
 ): Brand[] {
-  return brands.filter((brand) => matchesSelection(brand, selected));
+  return brands.filter((brand) =>
+    selected.some((category) => brandMatches(brand, category)),
+  );
 }
 
-function matchesSelection(brand: Brand, selected: UISelection[]): boolean {
-  const originCategories = selected.filter(
-    (category): category is Exclude<UISelection, 'eco'> => category !== 'eco',
-  );
-  const ecoSelected = selected.includes('eco');
-  const originMatch =
-    brand.category !== 'eco' && originCategories.includes(brand.category);
-  const ecoMatch =
-    ecoSelected && (brand.category === 'eco' || brand.eco === true);
+export function getMatchingBrandIds(
+  brands: Brand[],
+  selected: BrandCategory[],
+): number[] {
+  return [
+    ...new Set(
+      getMatchingBrands(brands, selected).map((brand) => brand.vinted_id),
+    ),
+  ];
+}
 
-  return originMatch || ecoMatch;
+export function countByCategory(
+  brands: Brand[],
+): Record<BrandCategory, number> {
+  return Object.fromEntries(
+    BRAND_CATEGORIES.map((category) => [
+      category,
+      brands.filter((brand) => brandMatches(brand, category)).length,
+    ]),
+  ) as Record<BrandCategory, number>;
 }

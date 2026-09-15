@@ -8,12 +8,12 @@
     </title>
     <meta
       name="description"
-      content="EcoChineur est une extension Chrome privacy-by-design pour filtrer Vinted par marques et matières éthiques, sans collecte de données et sans usage des données."
+      content="EcoChineur est une extension Chrome respectueuse de la vie privée pour filtrer Vinted par marques éthiques et matières naturelles, sans collecte de données."
     />
     <meta property="og:title" content="EcoChineur" />
     <meta
       property="og:description"
-      content="Filtrez Vinted par marques et matières plus responsables. Aucune collecte de données. Aucun usage des données utilisateur."
+      content="Filtrez Vinted par marques éthiques et matières naturelles. Aucune collecte de données."
     />
     <meta property="og:type" content="website" />
     <link rel="icon" href="../assets/icon.svg" />
@@ -52,14 +52,12 @@
       <section class="hero">
         <div class="hero-inner">
           <div class="hero-content">
-            <p class="eyebrow">
-              Extension Chrome MV3 - version de développement
-            </p>
+            <p class="eyebrow">Extension Chrome - bientôt disponible</p>
             <h1>EcoChineur</h1>
             <p class="hero-copy">
-              Filtrez Vinted par marques et matières plus responsables, sans
-              collecte de données, sans pistage, sans backend, ni usage des
-              données utilisateur.
+              Filtrez Vinted par marques plus responsables et matières
+              naturelles, sans collecte de données, sans pistage et sans
+              serveur.
             </p>
             <div class="hero-actions">
               <a
@@ -69,7 +67,7 @@
                 Voir le code source
               </a>
               <a class="button secondary" href="#installation">
-                Installer la version de développement
+                Installer depuis les sources
               </a>
             </div>
           </div>
@@ -78,42 +76,42 @@
 
       <aside class="status-strip" aria-label="Statut de la version">
         <div class="section-inner">
-          <span>Version de développement 0.1.0-dev.1</span>
+          <span>Pré-version</span>
           <span>Aucune collecte de données</span>
-          <span>Préférences stockées localement uniquement</span>
+          <span>Les 26 pays Vinted</span>
         </div>
       </aside>
 
       <section class="section" id="how-it-works">
         <div class="section-inner">
-          <h2>Un filtre simple qui respecte les choix existants sur Vinted</h2>
+          <h2>Un filtre simple qui respecte votre recherche Vinted</h2>
           <p class="section-lead">
-            EcoChineur ajoute les filtres sélectionnés à l'URL Vinted active
-            tout en préservant les filtres existants : recherche, prix, tri,
-            état, marques et matières.
+            EcoChineur ajoute les filtres choisis à la recherche Vinted
+            affichée. Le texte recherché, le prix, le tri, l'état et les marques
+            et matières déjà choisies sont conservés.
           </p>
-
           <div class="grid">
             <article class="card">
-              <h3>Marques référencées</h3>
+              <h3>Marques sélectionnées</h3>
               <p>
-                Les marques ne sont intégrées que lorsque leur identifiant
-                Vinted est vérifié. La version de développement inclut Armor
-                Lux, Faguo et Veja.
+                Marques françaises, européennes, mixtes et éco-responsables.
+                Chaque marque est référencée avec une justification documentée
+                et un identifiant Vinted vérifié.
               </p>
             </article>
             <article class="card">
               <h3>Matières naturelles</h3>
               <p>
-                Sélectionnez lin, coton, laine, soie, cachemire, alpaga, mohair
-                ou mérinos pour enrichir une recherche Vinted.
+                Lin, coton, laine, soie, cachemire, alpaga, mohair ou mérinos,
+                avec ou sans filtre de marque.
               </p>
             </article>
             <article class="card">
-              <h3>Fusion conservative</h3>
+              <h3>Fusion prudente</h3>
               <p>
-                `brand_ids[]` et `material_ids[]` sont ajoutés sans supprimer
-                les identifiants déjà présents.
+                <code>brand_ids[]</code> et <code>material_ids[]</code> sont
+                ajoutés sans rien retirer. La réinitialisation décoche vos choix
+                et ne retire que ces deux filtres.
               </p>
             </article>
           </div>
@@ -124,31 +122,30 @@
         <div class="section-inner">
           <h2>Privée par conception</h2>
           <p class="section-lead">
-            EcoChineur ne collecte aucune donnée et n'utilise aucune donnée
-            utilisateur à des fins d'analyse, de publicité, de profilage, de
-            mesure d'audience, d'entraînement de modèles, de partage ou de
-            revente.
+            EcoChineur ne collecte aucune donnée et n'utilise, ne vend ni ne
+            partage aucune donnée utilisateur.
           </p>
           <div class="grid">
             <article class="card">
-              <h3>Aucun backend</h3>
+              <h3>Aucun serveur</h3>
               <p>
-                L'extension n'a pas de serveur et n'effectue aucun appel réseau
-                qui lui soit propre.
+                Pas de backend, pas de code distant, aucune requête réseau
+                propre à l'extension. Toutes les données sont intégrées.
               </p>
             </article>
             <article class="card">
-              <h3>Aucune télémétrie</h3>
+              <h3>Permissions minimales</h3>
               <p>
-                Aucune analyse, aucun pistage, aucun pixel, aucun beacon, ni
-                mesure d'utilisation.
+                Seulement <code>storage</code> et <code>activeTab</code> :
+                l'extension ne voit l'onglet actif qu'après un clic sur son
+                icône.
               </p>
             </article>
             <article class="card">
               <h3>Préférences locales</h3>
               <p>
-                Les options cochées et la préférence de langue restent dans
-                `chrome.storage.local` sur l'appareil de l'utilisateur.
+                Vos choix et votre langue restent dans
+                <code>chrome.storage.local</code> sur votre appareil.
               </p>
             </article>
           </div>
@@ -157,17 +154,29 @@
 
       <section class="section alt" id="data">
         <div class="section-inner">
-          <h2>Données référencées dans la version de développement</h2>
+          <h2>Données référencées</h2>
           <p class="section-lead">
-            La base de données intégrée est volontairement réduite : seules les
-            entrées avec un identifiant Vinted vérifié sont publiées.
+            La base s'enrichit par contributions relues.
+            <a
+              href="https://github.com/thomas-chauvet/ecochineur/issues/new?template=brand-suggestion.yml"
+              >Suggérer une marque</a
+            >
+            (compte GitHub nécessaire).
           </p>
           <div class="data-list">
             <section>
               <h3>Marques</h3>
               <div class="pill-list">
                 <span class="pill">Armor Lux</span>
+                <span class="pill">Birkenstock</span>
                 <span class="pill">Faguo</span>
+                <span class="pill">John Smedley</span>
+                <span class="pill">Le Minor</span>
+                <span class="pill">Le Slip Français</span>
+                <span class="pill">Meindl</span>
+                <span class="pill">Nudie Jeans</span>
+                <span class="pill">Patagonia</span>
+                <span class="pill">Saint James</span>
                 <span class="pill">Veja</span>
               </div>
             </section>
@@ -177,11 +186,11 @@
                 <span class="pill">Alpaga</span>
                 <span class="pill">Cachemire</span>
                 <span class="pill">Coton</span>
+                <span class="pill">Laine</span>
                 <span class="pill">Lin</span>
                 <span class="pill">Mérinos</span>
                 <span class="pill">Mohair</span>
                 <span class="pill">Soie</span>
-                <span class="pill">Laine</span>
               </div>
             </section>
           </div>
@@ -190,23 +199,28 @@
 
       <section class="section" id="installation">
         <div class="section-inner">
-          <h2>Installer la version de développement</h2>
+          <h2>Installer depuis les sources</h2>
           <p class="section-lead">
-            La version actuelle est destinée à des tests locaux depuis le dépôt
-            GitHub.
+            En attendant la publication sur le Chrome Web Store, vous pouvez
+            construire l'extension vous-même (Node.js 22.22 ou plus récent).
           </p>
           <ol class="steps">
-            <li>Téléchargez ou clonez le dépôt GitHub.</li>
-            <li>Exécutez `npm install`, puis `npm run build`.</li>
+            <li>Clonez le dépôt GitHub.</li>
             <li>
-              Ouvrez `chrome://extensions` et activez le mode développeur.
+              Exécutez <code>npm install</code>, puis
+              <code>npm run build</code>.
             </li>
             <li>
-              Cliquez sur "Charger l'extension non empaquetée" et sélectionnez
-              le dossier `dist/`.
+              Ouvrez <code>chrome://extensions</code> et activez le mode
+              développeur.
             </li>
             <li>
-              Ouvrez `https://www.vinted.fr/catalog`, puis ouvrez EcoChineur.
+              Cliquez sur « Charger l'extension non empaquetée » et sélectionnez
+              le dossier <code>dist/</code>.
+            </li>
+            <li>
+              Ouvrez une recherche du catalogue Vinted, puis cliquez sur l'icône
+              EcoChineur.
             </li>
           </ol>
         </div>
@@ -215,7 +229,7 @@
 
     <footer class="site-footer">
       <div class="footer-inner">
-        <span>EcoChineur - extension privacy-by-design</span>
+        <span>EcoChineur - sans lien avec Vinted - GPL-3.0</span>
         <div class="footer-links">
           <a href="privacy.html">Confidentialité</a>
           <a href="https://github.com/thomas-chauvet/ecochineur">GitHub</a>

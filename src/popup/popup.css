@@ -152,8 +152,14 @@ footer {
   color: #1d6f58;
   cursor: pointer;
   margin-top: 12px;
+  display: inline-block;
   padding: 0;
   text-align: left;
+  text-decoration: none;
+}
+
+.check-row:has(input:disabled) {
+  opacity: 0.55;
 }
 
 .link-button:hover {
@@ -163,15 +169,10 @@ footer {
 
 .subtle {
   color: #66746a;
-  display: inline-block;
 }
 
 .brand-browser {
   margin-top: 12px;
-}
-
-.hidden {
-  display: none;
 }
 
 .search-field {
@@ -261,6 +262,12 @@ footer {
 .primary-button:disabled {
   background: #aeb8af;
   cursor: not-allowed;
+}
+
+.hint {
+  color: #6d7a70;
+  font-size: 12px;
+  margin-top: 4px;
 }
 
 .status {

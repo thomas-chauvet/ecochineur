@@ -15,9 +15,9 @@
         </div>
         <label class="language-switch">
           <span data-i18n="language_label">Langue</span>
-          <select id="language-select" aria-label="Langue">
-            <option value="fr" data-i18n="fr">FR</option>
-            <option value="en" data-i18n="en">EN</option>
+          <select id="language-select">
+            <option value="fr">FR</option>
+            <option value="en">EN</option>
           </select>
         </label>
       </header>
@@ -27,18 +27,11 @@
           Filtrer par marque
         </h2>
         <div class="option-list" id="category-options"></div>
-        <button class="link-button" type="button" id="toggle-brands">
-          Voir les marques correspondantes
-        </button>
-        <div class="brand-browser hidden" id="brand-browser">
+        <button class="link-button" type="button" id="toggle-brands"></button>
+        <div class="brand-browser" id="brand-browser" hidden>
           <label class="search-field">
             <span data-i18n="brand_search_label">Rechercher une marque</span>
-            <input
-              type="search"
-              id="brand-search"
-              autocomplete="off"
-              placeholder="Nom de marque"
-            />
+            <input type="search" id="brand-search" autocomplete="off" />
           </label>
           <ul class="brand-list" id="brand-list"></ul>
         </div>
@@ -55,24 +48,39 @@
         <p class="notice" data-i18n="preserve_notice">
           Vos filtres Vinted existants seront conservés et complétés.
         </p>
-        <button class="primary-button" type="button" id="apply-button" disabled>
+        <button
+          class="primary-button"
+          type="button"
+          id="apply-button"
+          data-i18n="apply_filters"
+          disabled
+        >
           Appliquer les filtres
         </button>
-        <button class="link-button subtle" type="button" id="reset-button">
+        <button
+          class="link-button subtle"
+          type="button"
+          id="reset-button"
+          data-i18n="reset_filters"
+        >
           Réinitialiser les filtres Vinted
         </button>
         <p class="status" id="status-message"></p>
       </section>
 
       <footer>
-        <button
+        <a
           class="link-button"
-          type="button"
-          id="suggest-button"
+          href="https://github.com/thomas-chauvet/ecochineur/issues/new?template=brand-suggestion.yml"
+          target="_blank"
+          rel="noopener noreferrer"
           data-i18n="suggest_brand"
         >
           Suggérer une marque
-        </button>
+        </a>
+        <p class="hint" data-i18n="suggest_brand_hint">
+          Nécessite un compte GitHub.
+        </p>
       </footer>
     </main>
   </body>

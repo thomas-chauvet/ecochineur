@@ -1,19 +1,21 @@
 import en from '../i18n/en.json';
 import fr from '../i18n/fr.json';
+import type { Language } from '../types';
 
-type Language = 'fr' | 'en';
-type Messages = typeof fr;
+export type MessageKey = keyof typeof fr;
+export type Translator = (key: MessageKey) => string;
 
-const dictionaries: Record<Language, Messages> = { fr, en };
+// Typing both dictionaries against the French keys makes a missing English key
+// a compile error.
+const dictionaries: Record<Language, Record<MessageKey, string>> = { fr, en };
 
+/** French for French locales, English for every other Vinted market. */
 export function resolveLanguage(language: string | null | undefined): Language {
-  return language?.toLowerCase().startsWith('en') ? 'en' : 'fr';
+  return language?.toLowerCase().startsWith('fr') ? 'fr' : 'en';
 }
 
-export function createTranslator(language: Language) {
+export function createTranslator(language: Language): Translator {
   const dictionary = dictionaries[language];
 
-  return function t(key: keyof Messages): string {
-    return dictionary[key] ?? key;
-  };
+  return (key) => dictionary[key] ?? key;
 }

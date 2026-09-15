@@ -1,7 +1,6 @@
 import { defineManifest } from '@crxjs/vite-plugin';
 
-import { vintedHostPermissions } from './src/lib/vinted-domains';
-import { resolveVersion } from './version';
+import { resolveVersion } from './version.ts';
 
 // The version is derived from the git tag (via `git describe`) so the tag is
 // the single source of truth for every build path — local and CI alike. No
@@ -10,14 +9,14 @@ const { version, versionName } = resolveVersion();
 
 export default defineManifest({
   manifest_version: 3,
-  name: 'EcoChineur Dev',
-  short_name: 'EcoChineur',
+  name: 'EcoChineur',
   version,
   version_name: versionName,
   description:
-    'Private dev build: filter Vinted without data collection or data use.',
+    'Filter Vinted searches by ethical brands and natural materials. No data collection, no tracking.',
+  // activeTab exposes the current tab URL only after the user opens the popup,
+  // so no host permissions (and no install-time warning) are required.
   permissions: ['storage', 'activeTab'],
-  host_permissions: vintedHostPermissions(),
   action: {
     default_popup: 'src/popup/popup.html',
     default_icon: {

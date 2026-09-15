@@ -32,6 +32,17 @@ export const VINTED_HOSTNAMES: ReadonlySet<string> = new Set([
   'www.vinted.com',
 ]);
 
-export function vintedHostPermissions(): string[] {
-  return [...VINTED_HOSTNAMES].map((host) => `https://${host}/*`);
+/** True for `/catalog` and `/catalog/<category>` pages on a Vinted domain. */
+export function isVintedCatalogUrl(url: string | undefined): url is string {
+  if (!url || !URL.canParse(url)) {
+    return false;
+  }
+
+  const { protocol, hostname, pathname } = new URL(url);
+
+  return (
+    protocol === 'https:' &&
+    VINTED_HOSTNAMES.has(hostname) &&
+    (pathname === '/catalog' || pathname.startsWith('/catalog/'))
+  );
 }

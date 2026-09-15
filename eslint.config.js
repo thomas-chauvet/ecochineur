@@ -1,19 +1,9 @@
 import js from '@eslint/js';
+import { defineConfig, globalIgnores } from 'eslint/config';
 import tseslint from 'typescript-eslint';
 
-export default tseslint.config(
+export default defineConfig(
+  globalIgnores(['dist', 'release', 'output']),
   js.configs.recommended,
-  ...tseslint.configs.recommended,
-  {
-    ignores: ['dist', 'node_modules'],
-  },
-  {
-    files: ['**/*.ts'],
-    languageOptions: {
-      parserOptions: {
-        projectService: true,
-        tsconfigRootDir: import.meta.dirname,
-      },
-    },
-  },
+  tseslint.configs.recommended,
 );

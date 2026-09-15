@@ -17,15 +17,13 @@
   "brand_search_placeholder": "Nom de marque",
   "apply_filters": "Appliquer les filtres",
   "preserve_notice": "Vos filtres Vinted existants seront conservés et complétés.",
-  "reset_filters": "Réinitialiser les filtres Vinted",
-  "reset_confirm": "Retirer tous les filtres marques et matières de l'URL Vinted actuelle ?",
+  "reset_filters": "Réinitialiser les filtres",
+  "reset_confirm": "Décocher toutes les marques et matières, et les retirer de la recherche Vinted actuelle ?",
   "error_not_on_catalog": "Lancez d'abord une recherche sur Vinted, puis activez les filtres.",
-  "error_no_selection": "Aucun filtre sélectionné.",
-  "error_no_valid_ids": "Les filtres sélectionnés n'ont pas encore d'IDs Vinted renseignés.",
-  "filters_reset": "Filtres marques et matières retirés.",
+  "error_no_brands": "Les catégories sélectionnées ne contiennent encore aucune marque.",
+  "filters_reset": "Filtres marques et matières réinitialisés.",
   "no_matching_brands": "Aucune marque correspondante.",
   "eco_badge": "Éco",
   "suggest_brand": "Suggérer une marque",
-  "fr": "FR",
-  "en": "EN"
+  "suggest_brand_hint": "Nécessite un compte GitHub."
 }
