@@ -57,17 +57,19 @@ To test the packaged zip without releasing: `just package` writes
   `thomas-chauvet.github.io.`;
 - English pages are at the root, French pages in `docs/fr/`.
 
-Status as of 2026-09-15: DNS resolves and pages are served, but GitHub had not
-issued the HTTPS certificate yet, so **Enforce HTTPS** could not be enabled.
-Once the certificate exists, turn it on in **Settings → Pages**, or run:
+HTTPS is live since 2026-09-15: Let's Encrypt certificate for
+`ecochineur.chaurel.ch`, **Enforce HTTPS** on, and `http://` redirects to
+`https://`. `chaurel.ch` is a verified domain on the GitHub profile (`TXT`
+record at Infomaniak), which stops anyone else from claiming a `chaurel.ch`
+subdomain on GitHub Pages.
+
+If the certificate ever goes missing (for example after a DNS change), remove
+the custom domain in **Settings → Pages** and add it back: that is what starts a
+new certificate request. Re-enable enforcement there, or with:
 
 ```bash
 gh api -X PUT repos/thomas-chauvet/ecochineur/pages -F https_enforced=true
 ```
-
-Recommended hardening: verify `chaurel.ch` in your GitHub profile (**Settings →
-Pages → Add a domain**, `TXT` record at Infomaniak). This prevents anyone else
-from taking over a `chaurel.ch` subdomain on GitHub Pages.
 
 The store privacy policy URL is `https://ecochineur.chaurel.ch/privacy.html`.
 

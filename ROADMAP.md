@@ -18,29 +18,25 @@ Done:
 - [x] Store listing copy (EN + FR), permission justifications and privacy
       answers in [RELEASING.md](./RELEASING.md).
 - [x] Store assets: see [store/](./store/README.md).
+- [x] Brand list reviewed by the maintainer (2026-09-22): Thinking MU and
+      Picture Organic Clothing dropped, leaving 11 brands.
+- [x] Smoke test on the production build (2026-09-15, Chromium 153 driven over
+      CDP, toolbar click simulated with `Extensions.triggerAction`): no host
+      permissions; the Vinted URL is readable only after the click; Apply and
+      Reset work in the real action popup on vinted.fr and on a vinted.de
+      category page; selections persist; FR/EN switch; no network requests. Now
+      automated as `tests/e2e/smoke.e2e.ts` (`just e2e`).
+- [x] HTTPS on `ecochineur.chaurel.ch` (2026-09-15): Let's Encrypt certificate,
+      **Enforce HTTPS** on, `chaurel.ch` verified on the GitHub profile.
+- [x] Work merged into `main` (PR #2).
+- [x] Chrome Web Store developer account created (2026-09-22).
 
-Remaining (only you can do these):
+Remaining:
 
-- [ ] **Review the brand list** in [src/data/SOURCES.md](./src/data/SOURCES.md).
-      Check the "To check before release" column, and remove or re-categorize
-      anything you are not comfortable defending publicly.
-- [x] **Smoke test on the production build** (2026-09-15, Chromium 153 driven
-      over CDP, toolbar click simulated with `Extensions.triggerAction`): no
-      host permissions; the Vinted URL is readable only after the click; Apply
-      and Reset work in the real action popup on vinted.fr and on a vinted.de
-      category page; selections persist; FR/EN switch; no network requests. Not
-      automated: searching the brand list and the "Suggest a brand" link.
-- [ ] **Enforce HTTPS** on `ecochineur.chaurel.ch` once GitHub has issued the
-      certificate (it had not yet on 2026-09-15), and verify `chaurel.ch` in
-      your GitHub Pages settings. See
-      [RELEASING.md](./RELEASING.md#website-and-privacy-policy).
-- [ ] **Merge this work into `main`.** It lives on branch
-      `chore/review-refresh`, rebased on the July commits (git-tag versioning,
-      commitlint, git-cliff, French site).
-- [ ] **Register the Chrome Web Store developer account** (one-time fee).
 - [ ] **Release and submit**: `just release 0.1.0`, download the zip from the
       GitHub Release, upload it in the Developer Console with the listing copy
-      and the `store/` assets.
+      and the `store/` assets. See
+      [RELEASING.md](./RELEASING.md#chrome-web-store-first-submission).
 
 Nice to have for launch:
 
