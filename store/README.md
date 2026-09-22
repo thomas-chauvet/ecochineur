@@ -13,6 +13,11 @@ branding.
 | `screenshot-fr-brands.png`  | 1280×800 | Screenshot 2 (French)           |
 | `promo-tile-en.png`         | 440×280  | Small promo tile (English)      |
 | `promo-tile-fr.png`         | 440×280  | Small promo tile (French)       |
+| `marquee-en.png`            | 1400×560 | Marquee tile (English)          |
+| `marquee-fr.png`            | 1400×560 | Marquee tile (French)           |
+
+The marquee tile ("Image promotionnelle en haut de la page") is optional: the
+Developer Console asks for it mainly to make the listing eligible for featuring.
 
 The store icon is the extension logo at 96×96 centred on a transparent 128×128
 canvas, which is the padding the Developer Console expects. The icons shipped
@@ -45,6 +50,10 @@ Screenshots and promo tiles:
    - `http://localhost:5173/store/screenshot.html?lang=fr&scene=brands`
    - `http://localhost:5173/store/promo-tile.html?lang=en`
    - `http://localhost:5173/store/promo-tile.html?lang=fr`
+   - `http://localhost:5173/store/marquee.html?lang=en` (1400×560)
+   - `http://localhost:5173/store/marquee.html?lang=fr` (1400×560)
+
+Run `just build` afterwards: the dev server rewrites `dist/` into a dev loader.
 
 In Chrome DevTools: toggle the device toolbar, set a responsive size of 1280×800
 (or 440×280), then **⋮ → Capture screenshot**.
