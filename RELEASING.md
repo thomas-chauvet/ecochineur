@@ -190,6 +190,41 @@ search the user is viewing.
 not used for purposes unrelated to the single purpose, and not used for
 creditworthiness or lending.
 
+### Réponses en français
+
+Paste these when the Developer Console is in French. Browser automation cannot
+help here: Chrome forbids extensions from scripting `chrome.google.com`, so the
+console has to be filled by hand.
+
+**Objectif unique** :
+
+> Ajouter des filtres de marques éthiques et de matières naturelles à la
+> recherche Vinted que l'utilisateur consulte.
+
+**Justification pour `storage`** :
+
+> Enregistre localement les catégories de marques, les matières et la langue
+> choisies par l'utilisateur, afin de les conserver d'une ouverture du popup à
+> l'autre. Aucune donnée n'est synchronisée ni transmise à un serveur.
+
+**Justification pour `activeTab`** :
+
+> Lorsque l'utilisateur ouvre le popup et clique sur « Appliquer les filtres »
+> ou « Réinitialiser », l'extension lit l'URL de l'onglet actif pour vérifier
+> qu'il s'agit d'une page catalogue Vinted, puis redirige ce même onglet vers la
+> même URL en ajoutant ou retirant les paramètres de filtres de marques et de
+> matières. Aucun autre onglet ni site n'est consulté.
+
+**Code distant** : choisir « Non, je n'utilise pas de code distant », puis :
+
+> Tout le code JavaScript est inclus dans le package de l'extension. Aucun
+> script n'est chargé depuis un serveur distant.
+
+**Utilisation des données** : ne cocher aucun type de données, puis cocher les
+trois cases de certification (pas de vente ni de transfert à des tiers, pas
+d'usage étranger à l'objectif unique, pas d'usage pour la solvabilité ou le
+crédit).
+
 ## Manual smoke test
 
 `just e2e` automates every item below except the install prompt. It loads the
