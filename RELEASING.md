@@ -109,6 +109,10 @@ update the justifications and the privacy policies at the same time.
 
 **Name**: EcoChineur
 
+Don't enumerate materials, categories or brands in the descriptions. v0.2.0 was
+rejected for keyword spam ("Yellow Argon") over the list of eight materials in
+the French description. Name one or two examples in a sentence instead.
+
 **Short description** (≤ 132 chars, same as the manifest):
 
 > Filter Vinted searches by ethical brands and natural materials. No data
@@ -119,12 +123,11 @@ update the justifications and the privacy policies at the same time.
 > EcoChineur helps you find second-hand clothes from more responsible brands and
 > in natural materials on Vinted.
 >
-> Open a Vinted search, click the EcoChineur icon, choose categories (French
-> brands, Origine France Garantie, European brands, French-European brands,
-> eco-conscious brands) and/or materials (linen, cotton, wool, silk, cashmere,
-> alpaca, mohair, merino), then click "Apply filters". EcoChineur adds the
-> matching Vinted filters to your current search. Your search text, price, sort
-> order, condition and the brands you already picked stay as they are.
+> Open a Vinted search, click the EcoChineur icon, pick the kinds of brands you
+> want (made in France, in Europe, or with an eco commitment) and natural
+> materials such as linen or wool, then click "Apply filters". EcoChineur adds
+> the matching Vinted filters to your current search. Your search text, price,
+> sort order, condition and the brands you already picked stay as they are.
 >
 > Private by design:
 >
@@ -149,13 +152,12 @@ update the justifications and the privacy policies at the same time.
 > EcoChineur vous aide à trouver sur Vinted des vêtements de seconde main de
 > marques plus responsables et en matières naturelles.
 >
-> Ouvrez une recherche Vinted, cliquez sur l'icône EcoChineur, choisissez des
-> catégories (marques françaises, Origine France Garantie, marques européennes,
-> marques franco-européennes, marques éco-responsables) et/ou des matières (lin,
-> coton, laine, soie, cachemire, alpaga, mohair, mérinos), puis cliquez sur «
-> Appliquer les filtres ». EcoChineur ajoute les filtres Vinted correspondants à
-> votre recherche. Le texte recherché, le prix, le tri, l'état et les marques
-> déjà choisies sont conservés.
+> Ouvrez une recherche Vinted, cliquez sur l'icône EcoChineur, choisissez le
+> type de marques voulu (fabriquées en France, en Europe, ou engagées pour
+> l'environnement) et des matières naturelles comme le lin ou la laine, puis
+> cliquez sur « Appliquer les filtres ». EcoChineur ajoute les filtres Vinted
+> correspondants à votre recherche. Le texte recherché, le prix, le tri, l'état
+> et les marques déjà choisies sont conservés.
 >
 > Privée par conception :
 >
