@@ -11,6 +11,7 @@ import {
   type Translator,
 } from '../lib/i18n';
 import { loadPreferences, savePreferences } from '../lib/storage';
+import { buildSuggestionUrl, SUGGEST_PAGE } from '../lib/suggestion-url';
 import { mergeFilters, resetFilters } from '../lib/url-merge';
 import { isVintedCatalogUrl } from '../lib/vinted-domains';
 import {
@@ -35,6 +36,7 @@ const counts = countByCategory(brands);
 const knownMaterialIds = new Set(
   materials.map((material) => material.vinted_id),
 );
+const knownBrandIds = new Set(brands.map((brand) => brand.vinted_id));
 
 let preferences: UserPreferences;
 let language: Language;
@@ -51,6 +53,7 @@ const brandBrowser = byId('brand-browser');
 const brandSearch = byId<HTMLInputElement>('brand-search');
 const brandList = byId<HTMLUListElement>('brand-list');
 const statusMessage = byId('status-message');
+const suggestLink = byId<HTMLAnchorElement>('suggest-link');
 
 void init();
 
@@ -70,6 +73,10 @@ async function init(): Promise<void> {
     renderBrandBrowser();
   });
   brandSearch.addEventListener('input', renderBrandList);
+  suggestLink.addEventListener('click', (event) => {
+    event.preventDefault();
+    void openSuggestionPage();
+  });
 
   render();
 }
@@ -97,6 +104,8 @@ function render(): void {
   });
   brandSearch.placeholder = t('brand_search_placeholder');
   languageSelect.setAttribute('aria-label', t('language_label'));
+  // Plain fallback for middle-click; a normal click adds the prefill.
+  suggestLink.href = SUGGEST_PAGE[language];
 
   renderCategoryOptions();
   renderMaterialOptions();
@@ -262,6 +271,18 @@ async function resetVintedFilters(): Promise<void> {
     await chrome.tabs.update(tab.id, { url: resetFilters(tab.url) });
   }
   showMessage(t('filters_reset'));
+}
+
+/**
+ * Reads the tab URL only on click, and forwards nothing but the brand IDs
+ * EcoChineur does not list yet (see PRIVACY.md).
+ */
+async function openSuggestionPage(): Promise<void> {
+  const tab = await getCatalogTab();
+  await chrome.tabs.create({
+    url: buildSuggestionUrl({ language, catalogUrl: tab?.url, knownBrandIds }),
+  });
+  window.close();
 }
 
 async function getCatalogTab(): Promise<{ id: number; url: string } | null> {

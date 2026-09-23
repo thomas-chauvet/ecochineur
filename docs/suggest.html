@@ -1,0 +1,180 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Suggest a brand - EcoChineur</title>
+    <meta
+      name="description"
+      content="Suggest a brand for EcoChineur, the ethical brand filter for Vinted. No account needed."
+    />
+    <link rel="icon" href="assets/icon.svg" />
+    <link rel="stylesheet" href="styles.css" />
+    <link
+      rel="alternate"
+      hreflang="en"
+      href="https://ecochineur.chaurel.ch/suggest.html"
+    />
+    <link
+      rel="alternate"
+      hreflang="fr"
+      href="https://ecochineur.chaurel.ch/fr/suggest.html"
+    />
+    <link
+      rel="alternate"
+      hreflang="x-default"
+      href="https://ecochineur.chaurel.ch/suggest.html"
+    />
+  </head>
+  <body>
+    <header class="site-header">
+      <nav class="nav" aria-label="Main navigation">
+        <a class="brand" href="index.html">
+          <img src="assets/icon.svg" alt="" />
+          <span>EcoChineur</span>
+        </a>
+        <div class="nav-links">
+          <a href="index.html">Home</a>
+          <a href="https://github.com/thomas-chauvet/ecochineur">GitHub</a>
+          <a id="language-link" href="fr/suggest.html" lang="fr" hreflang="fr"
+            >FR</a
+          >
+        </div>
+      </nav>
+    </header>
+
+    <main>
+      <section class="section">
+        <div class="section-inner">
+          <p class="eyebrow">Suggest a brand</p>
+          <h1>Know a brand that belongs here?</h1>
+          <p class="section-lead">
+            No account needed. A maintainer checks every suggestion and records
+            the evidence before a brand joins the list.
+          </p>
+          <div class="grid">
+            <article class="card">
+              <h3>1. Vinted must know it</h3>
+              <p>
+                EcoChineur filters with Vinted's own brand IDs, so the brand has
+                to appear in the <strong>Brand</strong> filter of a Vinted
+                search. If you opened this page from the extension while
+                filtering on that brand, its ID is already filled in.
+              </p>
+            </article>
+            <article class="card">
+              <h3>2. Pick the closest category</h3>
+              <ul>
+                <li>
+                  Made in France (with or without Origine France Garantie)
+                </li>
+                <li>Made in Europe, outside France</li>
+                <li>France plus other European countries only</li>
+                <li>Eco-conscious, produced anywhere</li>
+              </ul>
+            </article>
+            <article class="card">
+              <h3>3. Link the evidence</h3>
+              <p>
+                Production sites, certifications (GOTS, B Corp, Fair Wear…),
+                repair programs or environmental reports. Claims we cannot check
+                are not listed.
+              </p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="section alt">
+        <div class="section-inner">
+          <div class="form-embed" id="form-embed" hidden>
+            <iframe
+              id="suggest-form"
+              title="Brand suggestion form"
+              loading="lazy"
+              width="100%"
+              height="700"
+            ></iframe>
+          </div>
+          <p class="section-lead" id="form-fallback">
+            The form is not available right now.
+            <a
+              href="https://github.com/thomas-chauvet/ecochineur/issues/new?template=brand-suggestion.yml"
+              >Suggest the brand on GitHub instead</a
+            >
+            (GitHub account required).
+          </p>
+          <p class="form-note">
+            The form is hosted by
+            <a href="https://tally.so/help/privacy-policy">Tally</a> (Belgium).
+            It only receives what you type, plus the Vinted brand ID and domain
+            shown in the form. Prefer GitHub?
+            <a
+              href="https://github.com/thomas-chauvet/ecochineur/issues/new?template=brand-suggestion.yml"
+              >Open an issue</a
+            >.
+          </p>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="footer-inner">
+        <span>EcoChineur - not affiliated with Vinted</span>
+        <div class="footer-links">
+          <a href="index.html">Home</a>
+          <a href="privacy.html">Privacy</a>
+          <a href="https://github.com/thomas-chauvet/ecochineur">GitHub</a>
+        </div>
+      </div>
+    </footer>
+
+    <script>
+      // Tally form ID (CONTRIBUTING.md, "Suggestion form").
+      const TALLY_FORM_ID = 'lbQdgV';
+      // Must match src/lib/suggestion-url.ts: the popup builds these params.
+      const params = new URLSearchParams(location.search);
+      const ids = params.get('vinted_ids') ?? '';
+      const host = params.get('vinted_host') ?? '';
+      const prefill = new URLSearchParams();
+      if (/^\d{1,12}(,\d{1,12}){0,4}$/.test(ids)) {
+        prefill.set('vinted_ids', ids);
+        if (/^www\.vinted\.[a-z]{2,3}(\.[a-z]{2})?$/.test(host)) {
+          prefill.set('vinted_host', host);
+        }
+      }
+      // Tally's embed.js forwards the page's own query string to the form, so
+      // drop anything that failed validation from the address bar first.
+      const query = prefill.size ? `?${prefill}` : '';
+      history.replaceState(null, '', location.pathname + query);
+      // Keep the prefill when switching language.
+      document.getElementById('language-link').search = query;
+      const forwarded = new URLSearchParams({
+        alignLeft: '1',
+        hideTitle: '1',
+        transparentBackground: '1',
+        dynamicHeight: '1',
+      });
+
+      // Without a valid form ID the page falls back to the GitHub issue form.
+      if (/^[A-Za-z0-9]+$/.test(TALLY_FORM_ID)) {
+        document.getElementById('suggest-form').dataset.tallySrc =
+          `https://tally.so/embed/${TALLY_FORM_ID}?${forwarded}`;
+        document.getElementById('form-embed').hidden = false;
+        document.getElementById('form-fallback').hidden = true;
+        const embed = document.createElement('script');
+        embed.src = 'https://tally.so/widgets/embed.js';
+        embed.onload = () => window.Tally?.loadEmbeds();
+        // Without Tally's script the form still loads, just at a fixed height.
+        embed.onerror = () => {
+          const frame = document.getElementById('suggest-form');
+          // embed.js is what forwards the prefill; add it by hand here.
+          frame.src = prefill.size
+            ? `${frame.dataset.tallySrc}&${prefill}`
+            : frame.dataset.tallySrc;
+        };
+        document.body.append(embed);
+      }
+    </script>
+  </body>
+</html>

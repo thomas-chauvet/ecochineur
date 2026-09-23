@@ -39,11 +39,11 @@ Published. Everything below is for later versions.
 
 Nice to have for launch:
 
-- [ ] **Brand suggestions without a GitHub account:** today the popup links to a
-      GitHub issue form, and says an account is required. Options that keep the
-      "no backend" promise: a `mailto:` link to an address on `chaurel.ch`, or a
-      static form hosted outside the extension (the popup would still only open
-      a link).
+- [x] **Brand suggestions without a GitHub account:** the popup opens
+      `ecochineur.chaurel.ch/[fr/]suggest.html`, which embeds a Tally form, and
+      prefills the Vinted IDs of filtered brands EcoChineur doesn't list. The
+      extension still only opens a link. Tally forms: FR `LZlWVz`, EN `lbQdgV`
+      (CONTRIBUTING.md, "Suggestion form").
 - [ ] More brands, especially `france` and `europe`. Candidates are listed in
       `src/data/SOURCES.md`.
 - [ ] Check that material IDs match on other Vinted domains (`vinted.de`,

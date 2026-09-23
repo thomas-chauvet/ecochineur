@@ -36,7 +36,7 @@ Node version comes from `.nvmrc` (24; minimum 22.22).
 src/
   data/     # brands.json, material-ids.json, index.ts (typed exports), SOURCES.md (why each brand is listed)
   i18n/     # en.json, fr.json
-  lib/      # brand-filter.ts  i18n.ts  storage.ts  url-merge.ts  vinted-domains.ts
+  lib/      # brand-filter.ts  i18n.ts  storage.ts  suggestion-url.ts  url-merge.ts  vinted-domains.ts
   popup/    # popup.html  popup.ts  popup.css (DOM + chrome API glue only)
   types/    # index.ts (types + BRAND_CATEGORIES)
 tests/
@@ -73,6 +73,9 @@ docs/           # GitHub Pages site, EN + docs/fr/, served at ecochineur.chaurel
   PRIVACY.md, docs/privacy.html, docs/fr/privacy.html and RELEASING.md.
 - The popup only acts on `https://www.vinted.*/catalog[/…]`
   (`vinted-domains.ts`).
+- "Suggest a brand" opens `docs/[fr/]suggest.html` (Tally form embed) and
+  forwards only unlisted `brand_ids[]` + the Vinted host. Forwarding anything
+  more from the tab URL is a privacy change (same docs as a permission change).
 - Build DOM with the `h()` helper + `textContent`, never `innerHTML`.
 - `fr.json` defines the i18n keys, and `en.json` is type-checked against it.
 - Code, comments and docs are in English; French only in UI strings, brand

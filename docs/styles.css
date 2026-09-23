@@ -225,6 +225,32 @@ h1 {
   padding-left: 20px;
 }
 
+.form-embed {
+  background: #ffffff;
+  border: 1px solid #ddd8ca;
+  border-radius: 8px;
+  max-width: 780px;
+  padding: 16px 22px;
+}
+
+.form-embed[hidden] {
+  display: none;
+}
+
+.form-embed iframe {
+  border: 0;
+  display: block;
+  min-height: 400px;
+}
+
+.form-note {
+  color: #526157;
+  font-size: 14px;
+  line-height: 1.55;
+  margin: 16px 0 0;
+  max-width: 780px;
+}
+
 .data-list {
   display: grid;
   gap: 24px;

@@ -14,6 +14,7 @@
         (params.get(name) || '').split(',').filter(Boolean);
       window.__ecochineur = {
         updatedTabs: [],
+        createdTabs: [],
         storage: {
           'ecochineur.preferences': {
             selectedCategories: list('categories'),
@@ -41,6 +42,10 @@
           update: async (id, value) => {
             window.__ecochineur.updatedTabs.push({ id, value });
             document.body.dataset.updatedUrl = value.url;
+          },
+          create: async (value) => {
+            window.__ecochineur.createdTabs.push(value);
+            document.body.dataset.createdUrl = value.url;
           },
         },
       };

@@ -57,10 +57,45 @@ The brand database is curated on purpose. A brand needs a documented reason to
 be listed: local production, responsible materials, recognized certifications, a
 repair program, or a documented environmental approach.
 
-Brand suggestions from users arrive through the **Suggest a brand** GitHub issue
-form (`.github/ISSUE_TEMPLATE/brand-suggestion.yml`), which the popup links to.
-For now this requires a GitHub account (the popup says so). A suggestion channel
-that doesn't need an account is on the [roadmap](./ROADMAP.md).
+### Where suggestions come from
+
+- **Users (no account):** the popup's **Suggest a brand** link opens
+  `docs/suggest.html` (or `docs/fr/suggest.html`), which embeds a
+  [Tally](https://tally.so) form. If the user's Vinted search already filters a
+  brand EcoChineur doesn't list, the popup prefills its Vinted ID
+  (`src/lib/suggestion-url.ts`). Tally emails each response to the maintainer.
+- **Contributors:** the GitHub issue form
+  (`.github/ISSUE_TEMPLATE/brand-suggestion.yml`), or a pull request following
+  the steps below.
+
+Triage a Tally response the same way as an issue: check the Vinted ID first
+(below), then either add the brand or record it under "Rejected candidates" in
+[`SOURCES.md`](./src/data/SOURCES.md). The prefilled ID comes from the user's
+own filter, so still confirm it matches the brand name they typed.
+
+#### Suggestion form
+
+Two Tally forms collect suggestions: FR [`LZlWVz`](https://tally.so/r/LZlWVz)
+and EN [`lbQdgV`](https://tally.so/r/lbQdgV). They were built with the Tally MCP
+server; to recreate one:
+
+| Field                    | Type                 | Notes                                                               |
+| ------------------------ | -------------------- | ------------------------------------------------------------------- |
+| `vinted_ids`             | Hidden field         | Filled from the page URL; comma-separated, up to 5 IDs              |
+| `vinted_host`            | Hidden field         | e.g. `www.vinted.fr`. IDs are only verified on vinted.fr            |
+| Brand name               | Short text, required |                                                                     |
+| Vinted brand ID          | Short text           | Default value `@vinted_ids`, so the prefill is visible and editable |
+| Category                 | Multiple choice      | The five categories from the table below                            |
+| Brand website            | URL                  |                                                                     |
+| Why should it be listed? | Long text, required  | Links to production sites, certifications, reports                  |
+| Email                    | Email, optional      | Only to follow up; say so in the field description                  |
+
+Then turn on email notifications, and put each form's ID (from its share link,
+`tally.so/r/<ID>`) in the `TALLY_FORM_ID` constant of `docs/suggest.html` and
+`docs/fr/suggest.html`. Without a valid ID, the page falls back to the GitHub
+issue form. Tally's `embed.js` forwards the page's own query string to the form,
+which is why the page strips unvalidated parameters from the address bar first.
+Publish the pages before releasing an extension version that links to them.
 
 #### First: does Vinted know the brand?
 
@@ -207,6 +242,7 @@ wool `46`.
 | `tests/url-merge.test.ts`      | URL merge/reset keeps existing Vinted filters |
 | `tests/brand-filter.test.ts`   | Category matching and counts                  |
 | `tests/vinted-domains.test.ts` | Which URLs count as a Vinted catalog page     |
+| `tests/suggestion-url.test.ts` | Suggest-page link and its brand ID prefill    |
 | `tests/storage.test.ts`        | Validation of stored preferences              |
 | `tests/i18n.test.ts`           | Language resolution and dictionary parity     |
 | `tests/data.test.ts`           | Integrity of the bundled JSON databases       |

@@ -7,8 +7,9 @@
 // --enable-unsafe-extension-debugging. That click is what grants `activeTab`,
 // so this test exercises the real permission model, not a mock.
 //
-// Vinted responses are stubbed: the extension only reads and rewrites the tab
-// URL, so the test never contacts Vinted.
+// Vinted and project-site responses are stubbed: the extension only reads and
+// rewrites the tab URL or opens the suggest page, so the test never contacts
+// either.
 
 import { spawn } from 'node:child_process';
 import { mkdtempSync, readFileSync, rmSync } from 'node:fs';
@@ -22,6 +23,7 @@ const START_URL =
   'https://www.vinted.fr/catalog?search_text=pull&price_to=30&brand_ids[]=53';
 const DE_URL = 'https://www.vinted.de/catalog/2050-kleidung?search_text=wolle';
 const ITEM_URL = 'https://www.vinted.fr/items/123-pull';
+const SUGGEST_PAGE_FR = 'https://ecochineur.chaurel.ch/fr/suggest.html';
 
 interface BrandEntry {
   vinted_id: number;
@@ -71,6 +73,9 @@ function matches(brand: BrandEntry, category: string): boolean {
 const frenchBrandIds = brands
   .filter((brand) => matches(brand, 'france'))
   .map((brand) => String(brand.vinted_id));
+// A catalog filtering one listed brand and one EcoChineur doesn't know.
+const UNLISTED_BRAND_ID = '53';
+const SUGGEST_FROM_URL = `https://www.vinted.fr/catalog?brand_ids[]=${frenchBrandIds[0]}&brand_ids[]=${UNLISTED_BRAND_ID}`;
 const expectedCounts = CATEGORIES.map(
   (category) =>
     `(${brands.filter((brand) => matches(brand, category)).length})`,
@@ -221,12 +226,14 @@ async function run(cdp: Cdp): Promise<void> {
       )
     ).targetInfos;
 
-  // Stub every Vinted response with an empty page.
-  const stubBody = Buffer.from(
-    '<!doctype html><title>Vinted stub</title>',
-  ).toString('base64');
+  // Stub every Vinted and project-site response with an empty page. Vinted is
+  // intercepted per tab; the site at browser level, since the popup opens it in
+  // a new tab (no sessionId then).
+  const stubBody = Buffer.from('<!doctype html><title>Stub</title>').toString(
+    'base64',
+  );
   cdp.on((message) => {
-    if (message.method === 'Fetch.requestPaused' && message.sessionId) {
+    if (message.method === 'Fetch.requestPaused') {
       const { requestId } = message.params as { requestId: string };
       void cdp.send(
         'Fetch.fulfillRequest',
@@ -239,6 +246,10 @@ async function run(cdp: Cdp): Promise<void> {
         message.sessionId,
       );
     }
+  });
+
+  await cdp.send('Fetch.enable', {
+    patterns: [{ urlPattern: 'https://ecochineur.chaurel.ch/*' }],
   });
 
   // 1. Manifest and extension loading.
@@ -516,18 +527,7 @@ async function run(cdp: Cdp): Promise<void> {
     searchResults.join(', '),
   );
 
-  // 12. Suggest link and network.
-  const link = await evaluate<{ href: string; target: string }>(
-    page,
-    `(({ href, target }) => ({ href, target }))(document.querySelector('footer a'))`,
-  );
-  check(
-    '"Suggest a brand" opens the GitHub issue form in a new tab',
-    link.href.startsWith(
-      'https://github.com/thomas-chauvet/ecochineur/issues/new?template=brand-suggestion.yml',
-    ) && link.target === '_blank',
-    link.href,
-  );
+  // 12. Network.
   const remoteResources = await evaluate<string[]>(
     page,
     `performance.getEntriesByType('resource').map((entry) => entry.name).filter((name) => !name.startsWith('chrome-extension://'))`,
@@ -537,6 +537,41 @@ async function run(cdp: Cdp): Promise<void> {
     remoteResources.length === 0,
     remoteResources.join(', '),
   );
+
+  // 13. Suggest a brand: prefilled with the filtered brand EcoChineur lacks.
+  await navigate(SUGGEST_FROM_URL);
+  page = await openPopup();
+  await evaluate(
+    page,
+    `(() => {
+      const select = document.getElementById('language-select');
+      select.value = 'fr';
+      select.dispatchEvent(new Event('change'));
+    })()`,
+  );
+  const before = new Set((await targets()).map((target) => target.targetId));
+  await click(page, 'suggest-link');
+  let suggestTab: TargetInfo | undefined;
+  await waitFor(async () => {
+    suggestTab = (await targets([{ type: 'tab' }])).find(
+      (target) =>
+        !before.has(target.targetId) && target.url.startsWith(SUGGEST_PAGE_FR),
+    );
+    return suggestTab !== undefined;
+  });
+  const suggestUrl = suggestTab ? new URL(suggestTab.url) : null;
+  check(
+    '"Suggest a brand" opens the suggest page with only the unlisted brand ID',
+    suggestUrl !== null &&
+      suggestUrl.searchParams.get('vinted_ids') === UNLISTED_BRAND_ID &&
+      suggestUrl.searchParams.get('vinted_host') === 'www.vinted.fr' &&
+      [...suggestUrl.searchParams.keys()].length === 2,
+    suggestTab?.url ?? 'no new tab',
+  );
+  if (suggestTab) {
+    await cdp.send('Target.closeTarget', { targetId: suggestTab.targetId });
+  }
+  popup = null;
 }
 
 async function main(): Promise<void> {

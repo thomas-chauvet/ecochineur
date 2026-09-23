@@ -27,5 +27,5 @@
   "no_matching_brands": "Aucune marque correspondante.",
   "eco_badge": "Éco",
   "suggest_brand": "Suggérer une marque",
-  "suggest_brand_hint": "Nécessite un compte GitHub."
+  "suggest_brand_hint": "Sans compte. Si vous filtrez déjà une marque sur Vinted, son identifiant est prérempli."
 }

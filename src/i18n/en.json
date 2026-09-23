@@ -27,5 +27,5 @@
   "no_matching_brands": "No matching brand.",
   "eco_badge": "Eco",
   "suggest_brand": "Suggest a brand",
-  "suggest_brand_hint": "Requires a GitHub account."
+  "suggest_brand_hint": "No account needed. If you already filter a brand on Vinted, its ID is prefilled."
 }

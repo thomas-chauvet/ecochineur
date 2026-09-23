@@ -45,8 +45,9 @@ reloads the tab with the new URL.
   path and the brands/materials you already picked are all kept.
 - Reset action that unchecks every option and removes only `brand_ids[]` and
   `material_ids[]` from the current URL.
-- **Suggest a brand** link to a GitHub issue form (requires a GitHub account for
-  now).
+- **Suggest a brand** link to a form on the project site (no account needed). If
+  the current Vinted search filters a brand EcoChineur doesn't list, its Vinted
+  ID is prefilled.
 - Searchable list of the listed brands, with badges and descriptions.
 - French and English UI (French for French browsers, English otherwise).
 - Works on all 26 Vinted country domains, on `/catalog` pages.
@@ -140,6 +141,7 @@ popup.html ─▶ popup.ts ──┬─▶ data/index.ts       typed brands + ma
    (UI)     (rendering,  ├─▶ lib/brand-filter.ts  category → brands → Vinted IDs
              events)     ├─▶ lib/url-merge.ts     merge / reset brand_ids[] & material_ids[]
                          ├─▶ lib/vinted-domains.ts is this a Vinted catalog URL?
+                         ├─▶ lib/suggestion-url.ts suggest-page link, prefilled with unlisted brand IDs
                          ├─▶ lib/storage.ts       chrome.storage.local + validation
                          └─▶ lib/i18n.ts          fr/en dictionaries
 ```
@@ -159,12 +161,12 @@ popup.html ─▶ popup.ts ──┬─▶ data/index.ts       typed brands + ma
 src/
   data/        brands.json, material-ids.json, index.ts (typed exports)
   i18n/        en.json, fr.json
-  lib/         brand-filter, i18n, storage, url-merge, vinted-domains
+  lib/         brand-filter, i18n, storage, suggestion-url, url-merge, vinted-domains
   popup/       popup.html, popup.ts, popup.css
   types/       shared types and BRAND_CATEGORIES
 tests/         unit tests + manual/popup-harness.html
 public/icons/  extension icons (copied as-is into dist/)
-docs/          GitHub Pages site (landing page + privacy policy)
+docs/          GitHub Pages site (landing page, brand suggestion form, privacy policy)
 .github/       CI, release and Pages workflows, brand suggestion issue form
 ```
 

@@ -182,13 +182,19 @@ search the user is viewing.
 - `activeTab`: When the user opens the popup and clicks Apply or Reset, the
   extension reads the active tab URL to check that it is a Vinted catalog page.
   It then navigates that tab to the same URL with brand/material filter
-  parameters added or removed. No other tab or site is accessed.
+  parameters added or removed. When the user clicks "Suggest a brand", it reads
+  the same URL once to prefill the suggestion page with the Vinted brand IDs the
+  user filters on that the extension does not list yet. No other tab or site is
+  accessed.
 
 **Remote code**: No. All JavaScript is bundled in the package.
 
 **Data usage**: tick none of the data types. Certify that user data is not sold,
 not used for purposes unrelated to the single purpose, and not used for
-creditworthiness or lending.
+creditworthiness or lending. The suggestion prefill does not change this: the
+extension sends nothing itself, it only opens a link carrying Vinted brand IDs,
+and the user decides whether to submit the form. Re-check this answer if the
+prefill ever carries more than brand IDs and the Vinted domain.
 
 ### Réponses en français
 
@@ -213,7 +219,10 @@ console has to be filled by hand.
 > ou « Réinitialiser », l'extension lit l'URL de l'onglet actif pour vérifier
 > qu'il s'agit d'une page catalogue Vinted, puis redirige ce même onglet vers la
 > même URL en ajoutant ou retirant les paramètres de filtres de marques et de
-> matières. Aucun autre onglet ni site n'est consulté.
+> matières. Lorsque l'utilisateur clique sur « Suggérer une marque », elle relit
+> cette URL pour préremplir la page de suggestion avec les identifiants de
+> marque Vinted filtrés que l'extension ne référence pas encore. Aucun autre
+> onglet ni site n'est consulté.
 
 **Code distant** : choisir « Non, je n'utilise pas de code distant », puis :
 
@@ -251,7 +260,9 @@ For a final check by hand before submitting, load `dist/` from a fresh
       popup) and removes only `brand_ids[]` and `material_ids[]` from the URL.
 - [ ] Outside a Vinted catalog (e.g. a Vinted item page), Apply shows the "Start
       a Vinted search first" message.
-- [ ] **Suggest a brand** opens the GitHub issue form.
+- [ ] **Suggest a brand** opens `ecochineur.chaurel.ch/fr/suggest.html` (or
+      `/suggest.html` in English) with the Tally form. On a catalog filtered by
+      a brand EcoChineur doesn't list, the form's Vinted ID field is prefilled.
 - [ ] DevTools → Network on the popup shows no requests made by the extension.
 
 ## Troubleshooting
