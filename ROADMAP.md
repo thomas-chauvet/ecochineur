@@ -31,12 +31,11 @@ Done:
 - [x] Work merged into `main` (PR #2).
 - [x] Chrome Web Store developer account created (2026-09-22).
 
-Remaining:
+- [x] Released `v0.1.0` and submitted to the Chrome Web Store, approved and
+      published on 2026-09-23:
+      <https://chromewebstore.google.com/detail/ecochineur/ieaiphjkoonnobndnggkieoehpoegcab>
 
-- [ ] **Release and submit**: `just release 0.1.0`, download the zip from the
-      GitHub Release, upload it in the Developer Console with the listing copy
-      and the `store/` assets. See
-      [RELEASING.md](./RELEASING.md#chrome-web-store-first-submission).
+Published. Everything below is for later versions.
 
 Nice to have for launch:
 

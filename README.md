@@ -29,7 +29,8 @@ popup works out which `brand_ids[]` and `material_ids[]` to add and merges them
 into the current Vinted URL. Your existing filters stay as they are. Then it
 reloads the tab with the new URL.
 
-> Status: pre-release (`0.0.x`), not yet on the Chrome Web Store. See
+> **[Install EcoChineur from the Chrome Web Store](https://chromewebstore.google.com/detail/ecochineur/ieaiphjkoonnobndnggkieoehpoegcab)**
+> (version 0.1.0, published 2026-09-23). What comes next is in
 > [ROADMAP.md](./ROADMAP.md).
 
 ## Features
@@ -53,6 +54,11 @@ reloads the tab with the new URL.
   extension itself. See [PRIVACY.md](./PRIVACY.md).
 
 ## Install
+
+### From the Chrome Web Store
+
+[EcoChineur on the Chrome Web Store](https://chromewebstore.google.com/detail/ecochineur/ieaiphjkoonnobndnggkieoehpoegcab).
+Works in Chrome and other Chromium browsers (Brave, Edge, Opera, Vivaldi).
 
 ### From source (developer mode)
 
