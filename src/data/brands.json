@@ -1,7 +1,43 @@
 {
-  "db_version": "1.1.0",
-  "last_updated": "2026-09-15",
+  "db_version": "1.2.0",
+  "last_updated": "2026-09-23",
   "brands": [
+    {
+      "id": "1083",
+      "name": "1083",
+      "vinted_id": 318321,
+      "category": "france-ofg",
+      "eco": true,
+      "certifications": ["Origine France Garantie", "GOTS"],
+      "description_fr": "Jeans en coton bio tissés et confectionnés en France, certifiés Origine France Garantie depuis 2015.",
+      "description_en": "Organic cotton jeans woven and sewn in France, certified Origine France Garantie since 2015.",
+      "website": "https://www.1083.fr"
+    },
+    {
+      "id": "comme-avant",
+      "name": "Comme Avant",
+      "vinted_id": 468047,
+      "category": "france-ofg",
+      "eco": true,
+      "certifications": ["Origine France Garantie", "GOTS"],
+      "description_fr": "Vêtements en coton bio et lin cousus dans son atelier des Pennes-Mirabeau, près de Marseille.",
+      "description_en": "Organic cotton and linen clothing sewn in its workshop in Pennes-Mirabeau, near Marseille.",
+      "website": "https://www.comme-avant.bio"
+    },
+    {
+      "id": "monnet",
+      "name": "Monnet",
+      "vinted_id": 216638,
+      "category": "france-ofg",
+      "eco": false,
+      "certifications": [
+        "Origine France Garantie",
+        "Entreprise du Patrimoine Vivant"
+      ],
+      "description_fr": "Chaussettes techniques et de ville tricotées à Montceau-les-Mines, certifiées Origine France Garantie.",
+      "description_en": "Technical and everyday socks knitted in Montceau-les-Mines, certified Origine France Garantie.",
+      "website": "https://www.monnet-sports.com"
+    },
     {
       "id": "saint-james",
       "name": "Saint James",
@@ -36,6 +72,193 @@
       "website": "https://www.leslipfrancais.fr"
     },
     {
+      "id": "atelier-tuffery",
+      "name": "Atelier Tuffery",
+      "vinted_id": 504132,
+      "category": "france",
+      "eco": false,
+      "certifications": [],
+      "description_fr": "Plus ancien fabricant de jeans français, en activité à Florac en Lozère depuis 1892.",
+      "description_en": "The oldest French jeans maker, working in Florac, Lozère since 1892.",
+      "website": "https://www.ateliertuffery.com"
+    },
+    {
+      "id": "kleman",
+      "name": "Kleman",
+      "vinted_id": 272814,
+      "category": "france",
+      "eco": false,
+      "certifications": [],
+      "description_fr": "Derbies et chaussures workwear fabriquées dans l'atelier familial de La Romagne.",
+      "description_en": "Derbies and workwear shoes made in the family workshop in La Romagne.",
+      "website": "https://kleman-france.com"
+    },
+    {
+      "id": "la-botte-gardiane",
+      "name": "La Botte Gardiane",
+      "vinted_id": 53019,
+      "category": "france",
+      "eco": false,
+      "certifications": ["Entreprise du Patrimoine Vivant"],
+      "description_fr": "Bottes camarguaises et sandales cousues dans son atelier du Gard depuis 1958.",
+      "description_en": "Camargue boots and sandals stitched in its Gard workshop since 1958.",
+      "website": "https://www.labottegardiane.com"
+    },
+    {
+      "id": "labonal",
+      "name": "Labonal",
+      "vinted_id": 285801,
+      "category": "france",
+      "eco": false,
+      "certifications": ["France Terre Textile"],
+      "description_fr": "Chaussettes tricotées à Dambach-la-Ville en Alsace depuis 1924.",
+      "description_en": "Socks knitted in Dambach-la-Ville, Alsace since 1924.",
+      "website": "https://www.labonal.fr"
+    },
+    {
+      "id": "k-jacques",
+      "name": "K.Jacques",
+      "vinted_id": 92086,
+      "category": "france",
+      "eco": false,
+      "certifications": [],
+      "description_fr": "Sandales tropéziennes fabriquées dans l'atelier familial de Saint-Tropez depuis 1933.",
+      "description_en": "Saint-Tropez sandals made in the family workshop there since 1933.",
+      "website": "https://www.kjacques.fr"
+    },
+    {
+      "id": "payote",
+      "name": "Payote",
+      "vinted_id": 407908,
+      "category": "france",
+      "eco": true,
+      "certifications": [],
+      "description_fr": "Espadrilles assemblées à Perpignan, semelles en caoutchouc recyclé et toiles en coton bio.",
+      "description_en": "Espadrilles assembled in Perpignan, with recycled rubber soles and organic cotton canvas.",
+      "website": "https://payote.fr"
+    },
+    {
+      "id": "la-gentle-factory",
+      "name": "La Gentle Factory",
+      "vinted_id": 334136,
+      "category": "france",
+      "eco": true,
+      "certifications": [],
+      "description_fr": "Basiques en coton bio et lin confectionnés dans des ateliers du nord de la France.",
+      "description_en": "Organic cotton and linen basics made in workshops in northern France.",
+      "website": "https://www.lagentlefactory.com"
+    },
+    {
+      "id": "bleuforet",
+      "name": "Bleuforêt",
+      "vinted_id": 208578,
+      "category": "france",
+      "eco": false,
+      "certifications": ["France Terre Textile"],
+      "description_fr": "Chaussettes et collants tricotés dans les Vosges, à Vagney.",
+      "description_en": "Socks and tights knitted in the Vosges, in Vagney.",
+      "website": "https://www.bleuforet.fr"
+    },
+    {
+      "id": "kiplay",
+      "name": "Kiplay",
+      "vinted_id": 276572,
+      "category": "france",
+      "eco": false,
+      "certifications": [],
+      "description_fr": "Vêtements de travail et vestes fabriqués dans ses ateliers normands depuis 1921.",
+      "description_en": "Workwear and jackets made in its Normandy workshops since 1921.",
+      "website": "https://www.kiplay.fr"
+    },
+    {
+      "id": "montlimart",
+      "name": "Montlimart",
+      "vinted_id": 681749,
+      "category": "france",
+      "eco": false,
+      "certifications": [],
+      "description_fr": "Vêtements masculins conçus et majoritairement fabriqués en France, en Vendée.",
+      "description_en": "Menswear designed and mostly manufactured in France, in the Vendée.",
+      "website": "https://www.montlimart.com"
+    },
+    {
+      "id": "bleu-de-chauffe",
+      "name": "Bleu de Chauffe",
+      "vinted_id": 276805,
+      "category": "france",
+      "eco": false,
+      "certifications": ["Entreprise du Patrimoine Vivant"],
+      "description_fr": "Sacs et maroquinerie en cuir, chaque pièce cousue et signée dans son atelier aveyronnais.",
+      "description_en": "Leather bags and goods, each piece stitched and signed in its Aveyron workshop.",
+      "website": "https://www.bleudechauffe.com"
+    },
+    {
+      "id": "bosabo",
+      "name": "Bosabo",
+      "vinted_id": 16449,
+      "category": "france",
+      "eco": false,
+      "certifications": [],
+      "description_fr": "Sabots et mules assemblés à la main dans son atelier français.",
+      "description_en": "Clogs and mules assembled by hand in its French workshop.",
+      "website": "https://www.bosabo.fr"
+    },
+    {
+      "id": "berthe-aux-grands-pieds",
+      "name": "Berthe aux Grands Pieds",
+      "vinted_id": 228384,
+      "category": "france",
+      "eco": false,
+      "certifications": [],
+      "description_fr": "Chaussures et bottines en cuir fabriquées en France.",
+      "description_en": "Leather shoes and ankle boots made in France.",
+      "website": "https://www.bertheauxgrandspieds.fr"
+    },
+    {
+      "id": "les-petites-jupes-de-prune",
+      "name": "Les Petites Jupes de Prune",
+      "vinted_id": 140088,
+      "category": "france",
+      "eco": false,
+      "certifications": [],
+      "description_fr": "Jupes et robes cousues en petites séries dans des ateliers français.",
+      "description_en": "Skirts and dresses sewn in small batches in French workshops.",
+      "website": "https://lespetitesjupesdeprune.com"
+    },
+    {
+      "id": "parisienne-et-alors",
+      "name": "Parisienne et Alors",
+      "vinted_id": 483892,
+      "category": "france",
+      "eco": false,
+      "certifications": [],
+      "description_fr": "Prêt-à-porter féminin confectionné en France.",
+      "description_en": "Women's ready-to-wear made in France.",
+      "website": "https://www.parisienneetalors.com"
+    },
+    {
+      "id": "les-jupons-de-louison",
+      "name": "Les Jupons de Louison",
+      "vinted_id": 1767479,
+      "category": "france",
+      "eco": false,
+      "certifications": [],
+      "description_fr": "Lingerie et jupons cousus en France en petites séries.",
+      "description_en": "Lingerie and petticoats sewn in France in small batches.",
+      "website": "https://lesjuponsdelouison.fr"
+    },
+    {
+      "id": "retour-de-plage",
+      "name": "Retour de Plage",
+      "vinted_id": 77934,
+      "category": "france",
+      "eco": false,
+      "certifications": [],
+      "description_fr": "Paréos et vêtements de plage confectionnés en France.",
+      "description_en": "Pareos and beachwear made in France.",
+      "website": "https://www.retourdeplage.com"
+    },
+    {
       "id": "john-smedley",
       "name": "John Smedley",
       "vinted_id": 200326,
@@ -64,42 +287,64 @@
       "category": "europe",
       "eco": false,
       "certifications": [],
-      "description_fr": "Chaussures de randonnée en cuir, fabriquées en Bavière et en Europe, ressemelables.",
-      "description_en": "Resoleable leather hiking boots made in Bavaria and elsewhere in Europe.",
+      "description_fr": "Chaussures de randonnée fabriquées en Allemagne et en Europe, ressemelables.",
+      "description_en": "Hiking boots made in Germany and Europe, resoleable.",
       "website": "https://www.meindl.de"
     },
     {
-      "id": "armor-lux",
-      "name": "Armor Lux",
-      "vinted_id": 1427,
-      "category": "mixed",
+      "id": "minuit-sur-terre",
+      "name": "Minuit sur Terre",
+      "vinted_id": 332493,
+      "category": "europe",
+      "eco": true,
+      "certifications": ["PETA Approved Vegan"],
+      "description_fr": "Chaussures véganes en matières végétales et recyclées, fabriquées dans la région de Porto.",
+      "description_en": "Vegan shoes in plant-based and recycled materials, made in the Porto region.",
+      "website": "https://minuitsurterre.com"
+    },
+    {
+      "id": "bobbies",
+      "name": "Bobbies",
+      "vinted_id": 4813,
+      "category": "europe",
       "eco": false,
+      "certifications": [],
+      "description_fr": "Chaussures et maroquinerie dessinées à Paris et fabriquées dans des ateliers d'Europe du Sud.",
+      "description_en": "Shoes and leather goods designed in Paris and made in southern European workshops.",
+      "website": "https://www.bobbies.com"
+    },
+    {
+      "id": "loom",
+      "name": "Loom",
+      "vinted_id": 286661,
+      "category": "france-europe",
+      "eco": true,
       "certifications": ["OEKO-TEX"],
-      "description_fr": "Marque bretonne de marinières et de maille, avec une partie de sa production à Quimper.",
-      "description_en": "Breton brand of striped shirts and knitwear, with part of its production in Quimper.",
-      "website": "https://www.armorlux.com"
+      "description_fr": "Vêtements conçus pour durer, confectionnés au Portugal, en France, en Espagne et en Italie.",
+      "description_en": "Clothes designed to last, made in Portugal, France, Spain and Italy.",
+      "website": "https://www.loom.fr"
     },
     {
-      "id": "faguo",
-      "name": "Faguo",
-      "vinted_id": 12595,
-      "category": "mixed",
+      "id": "asphalte",
+      "name": "Asphalte",
+      "vinted_id": 320931,
+      "category": "france-europe",
       "eco": true,
-      "certifications": ["B Corp"],
-      "description_fr": "Marque française engagée dans la compensation carbone et les matières recyclées.",
-      "description_en": "French brand committed to carbon offsetting and recycled materials.",
-      "website": "https://www.faguo-store.com"
+      "certifications": [],
+      "description_fr": "Vêtements produits en précommande pour éviter les invendus, fabriqués au Portugal, en Roumanie et en France.",
+      "description_en": "Clothing made to pre-order to avoid unsold stock, manufactured in Portugal, Romania and France.",
+      "website": "https://www.asphalte.com"
     },
     {
-      "id": "nudie-jeans",
-      "name": "Nudie Jeans",
-      "vinted_id": 95256,
-      "category": "mixed",
+      "id": "ubac",
+      "name": "Ubac",
+      "vinted_id": 1012510,
+      "category": "france-europe",
       "eco": true,
-      "certifications": ["Fair Wear"],
-      "description_fr": "Jeans en coton biologique, réparations gratuites à vie et reprise des jeans usagés.",
-      "description_en": "Organic cotton jeans, free repairs for life and take-back of worn jeans.",
-      "website": "https://www.nudiejeans.com"
+      "certifications": [],
+      "description_fr": "Baskets en laine recyclée filée et tissée dans le Tarn, assemblées au nord de Porto.",
+      "description_en": "Sneakers in recycled wool spun and woven in the Tarn, assembled north of Porto.",
+      "website": "https://ubac-store.com"
     },
     {
       "id": "veja",
@@ -108,8 +353,8 @@
       "category": "eco",
       "eco": true,
       "certifications": [],
-      "description_fr": "Baskets en coton biologique et caoutchouc d'Amazonie, fabriquées au Brésil.",
-      "description_en": "Sneakers in organic cotton and Amazonian rubber, made in Brazil.",
+      "description_fr": "Coton bio et caoutchouc sauvage, filières équitables, fabrication au Brésil.",
+      "description_en": "Organic cotton and wild rubber, fair trade sourcing, made in Brazil.",
       "website": "https://www.veja-store.com"
     },
     {
@@ -118,10 +363,32 @@
       "vinted_id": 90804,
       "category": "eco",
       "eco": true,
-      "certifications": ["B Corp", "Fair Trade Certified"],
-      "description_fr": "Vêtements outdoor en matières recyclées ou biologiques, avec un programme de réparation.",
-      "description_en": "Outdoor clothing in recycled or organic materials, with a repair program.",
+      "certifications": ["B Corp"],
+      "description_fr": "B Corp, couture certifiée Fair Trade et programme de réparation Worn Wear.",
+      "description_en": "B Corp, Fair Trade Certified sewing and the Worn Wear repair programme.",
       "website": "https://www.patagonia.com"
+    },
+    {
+      "id": "faguo",
+      "name": "Faguo",
+      "vinted_id": 12595,
+      "category": "eco",
+      "eco": true,
+      "certifications": ["B Corp"],
+      "description_fr": "B Corp française : matières recyclées et compensation carbone, production hors d'Europe.",
+      "description_en": "French B Corp: recycled materials and carbon offsetting, with production outside Europe.",
+      "website": "https://www.faguo-store.com"
+    },
+    {
+      "id": "nudie-jeans",
+      "name": "Nudie Jeans",
+      "vinted_id": 95256,
+      "category": "eco",
+      "eco": true,
+      "certifications": ["Fair Wear Foundation"],
+      "description_fr": "Coton bio, réparations gratuites à vie et membre de la Fair Wear Foundation.",
+      "description_en": "Organic cotton, free lifetime repairs and a Fair Wear Foundation member.",
+      "website": "https://www.nudiejeans.com"
     }
   ]
 }

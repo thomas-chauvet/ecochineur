@@ -35,8 +35,10 @@ reloads the tab with the new URL.
 
 ## Features
 
-- Brand filters by category: French, European, mixed, eco-conscious. `eco` is
-  cumulative, so an eco-friendly French brand shows up under both.
+- Brand filters by category: French, Origine France Garantie, European,
+  French-European, eco-conscious. Two are cumulative: `france` also matches the
+  stricter `france-ofg` tier, and `eco` matches any brand flagged `eco: true`,
+  so an eco-friendly French brand shows up under both.
 - Natural material filters (linen, cotton, wool, silk, cashmere, alpaca, mohair,
   merino), usable with or without brand filters.
 - Conservative URL merge: search text, price, sort order, condition, category
@@ -52,6 +54,22 @@ reloads the tab with the new URL.
   warning.
 - No tracking, analytics, telemetry, backend, or network calls made by the
   extension itself. See [PRIVACY.md](./PRIVACY.md).
+
+## Limitations
+
+**Only brands Vinted already knows can be filtered.** Filtering works by adding
+Vinted's own `brand_ids[]` parameter to the search URL, so a brand needs an
+identifier in Vinted's brand list to be targetable. Vinted creates that entry
+only once members list items from the brand, which means small, young or
+direct-to-consumer labels usually have none — and cannot be included however
+well they fit the criteria. Of 239 clothing makers with exclusively French
+production checked in September 2026, only 25 had a Vinted brand entry. The same
+applies to materials and `material_ids[]`.
+
+**Filtering is per brand, not per product line.** A brand that manufactures some
+ranges in France and others elsewhere cannot be expressed: listing it would
+vouch for the imported lines too. Such brands are deliberately left out, with
+the reasoning recorded in [`src/data/SOURCES.md`](./src/data/SOURCES.md).
 
 ## Install
 

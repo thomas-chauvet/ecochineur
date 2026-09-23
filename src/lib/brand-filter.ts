@@ -1,14 +1,20 @@
 import { BRAND_CATEGORIES, type Brand, type BrandCategory } from '../types';
 
 /**
- * Origin categories (`france`, `europe`, `mixed`) match on `brand.category`.
- * `eco` is cumulative: it matches `category: 'eco'` and any brand with
- * `eco: true`, whatever its origin.
+ * Two categories are cumulative, each subsuming a stricter subset:
+ * `france` also matches `france-ofg`, and `eco` also matches any brand with
+ * `eco: true` whatever its origin. The rest match on `brand.category` alone.
  */
 export function brandMatches(brand: Brand, category: BrandCategory): boolean {
-  return category === 'eco'
-    ? brand.category === 'eco' || brand.eco
-    : brand.category === category;
+  if (category === 'eco') {
+    return brand.category === 'eco' || brand.eco;
+  }
+
+  if (category === 'france') {
+    return brand.category === 'france' || brand.category === 'france-ofg';
+  }
+
+  return brand.category === category;
 }
 
 export function getMatchingBrands(

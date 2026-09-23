@@ -3,6 +3,18 @@ description: Propose a brand to add to the EcoChineur database.
 title: 'Brand suggestion: '
 labels: ['data', 'brand-suggestion']
 body:
+  - type: markdown
+    attributes:
+      value: |
+        **Before you start:** a brand can only be added if Vinted already lists
+        it as a brand. Filtering works by adding Vinted's `brand_ids[]` to the
+        search URL, so without a Vinted brand ID there is nothing to filter on.
+        Search the brand in a Vinted catalog's **Brand** filter first.
+
+        For Origine France Garantie candidates, the certified-company directory
+        is at <https://www.originefrancegarantie.fr/>. Note it lists legal
+        entities rather than brand names (1083 appears as `L'EQUIPE 1083`), and
+        certifies product ranges rather than whole companies.
   - type: input
     id: name
     attributes:
@@ -15,15 +27,18 @@ body:
       label: Vinted brand ID
       description:
         Select the brand in a Vinted catalog filter and copy the number after
-        `brand_ids[]=` in the URL. Leave empty if unknown.
+        `brand_ids[]=` in the URL. If the brand does not appear in Vinted's
+        brand filter at all, it cannot be added yet — say so here.
   - type: dropdown
     id: category
     attributes:
       label: Category
       options:
-        - france — 100% French production
+        - france-ofg — French production certified Origine France Garantie
+        - france — French production
         - europe — 100% European production outside France
-        - mixed — serious ethical efforts, production not exclusively European
+        - france-europe — France plus other European countries, nothing outside
+          Europe
         - eco — eco-conscious, without a European production anchor
     validations:
       required: true

@@ -120,11 +120,11 @@ update the justifications and the privacy policies at the same time.
 > in natural materials on Vinted.
 >
 > Open a Vinted search, click the EcoChineur icon, choose categories (French
-> brands, European brands, mixed brands, eco-conscious brands) and/or materials
-> (linen, cotton, wool, silk, cashmere, alpaca, mohair, merino), then click
-> "Apply filters". EcoChineur adds the matching Vinted filters to your current
-> search. Your search text, price, sort order, condition and the brands you
-> already picked stay as they are.
+> brands, Origine France Garantie, European brands, French-European brands,
+> eco-conscious brands) and/or materials (linen, cotton, wool, silk, cashmere,
+> alpaca, mohair, merino), then click "Apply filters". EcoChineur adds the
+> matching Vinted filters to your current search. Your search text, price, sort
+> order, condition and the brands you already picked stay as they are.
 >
 > Private by design:
 >

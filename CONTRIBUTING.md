@@ -62,6 +62,26 @@ form (`.github/ISSUE_TEMPLATE/brand-suggestion.yml`), which the popup links to.
 For now this requires a GitHub account (the popup says so). A suggestion channel
 that doesn't need an account is on the [roadmap](./ROADMAP.md).
 
+#### First: does Vinted know the brand?
+
+A brand can only be filtered if Vinted already has it in its own brand list. The
+extension works by appending Vinted's `brand_ids[]` parameter to the search URL,
+so a brand with no Vinted identifier cannot be targeted at all — there is
+nothing to put in the URL.
+
+Vinted creates a brand entry only once members actually list items from that
+brand. A small, young or purely direct-to-consumer label therefore often has no
+entry, however well it fits our criteria. **This is the single biggest limit on
+the list**, and it is not something we can work around: of 239 clothing makers
+with exclusively French production checked in September 2026, only 25 had a
+Vinted brand entry.
+
+So check the ID first, before spending time researching a brand's origin. If
+there is no entry, record the brand under "Rejected candidates" in
+[`SOURCES.md`](./src/data/SOURCES.md) so nobody researches it twice, and move
+on. It is worth re-checking later: an entry can appear once the brand starts
+being resold.
+
 1. Add an entry to `src/data/brands.json`:
 
    ```json
@@ -82,12 +102,43 @@ that doesn't need an account is on the [roadmap](./ROADMAP.md).
    for the category and links to the evidence.
 3. Bump `last_updated` in `brands.json`.
 
-| Category | Meaning                                                         |
-| -------- | --------------------------------------------------------------- |
-| `france` | 100% French production                                          |
-| `europe` | 100% European production outside France (EU, UK, CH, NO…)       |
-| `mixed`  | Serious ethical efforts, production not exclusively European    |
-| `eco`    | Eco-conscious brand without a strong European production anchor |
+| Category        | Meaning                                                                             |
+| --------------- | ----------------------------------------------------------------------------------- |
+| `france-ofg`    | French production certified Origine France Garantie. Strictest tier                 |
+| `france`        | French production. Cumulative: selecting it also matches `france-ofg`               |
+| `europe`        | 100% European production outside France (EU, UK, CH, NO…)                           |
+| `france-europe` | Production split across France and other European countries, nothing outside Europe |
+| `eco`           | Eco-conscious brand without a strong European production anchor                     |
+
+A brand is `france-ofg` exactly when its `certifications` include
+`Origine France Garantie`; a test enforces this. `certifications` entries must
+come from the `CERTIFICATIONS` list in `src/types/index.ts`.
+
+#### Origine France Garantie
+
+[Origine France Garantie](https://www.originefrancegarantie.fr/) is France's
+only official manufacturing-origin label, and the directory there is the place
+to look for candidates. A product is certified when it takes on its essential
+characteristics in France **and** at least 50% of its unit cost price is French.
+An independent body re-audits the company every year, which is what makes the
+label worth a filter of its own: unlike a self-declared "fabriqué en France", a
+third party has checked it.
+
+Search the certified companies here:
+<https://www.originefrancegarantie.fr/annuaire-des-produits-certifies/categorie/confection-textile-accessoires>
+(the plain `/annuaire` page is a client-side app and returns nothing to a
+script).
+
+Two traps make the directory harder to use than it looks:
+
+- **It certifies product ranges, not companies.** Around 700 companies hold the
+  label across roughly 2,700 ranges, and a company is listed if any one range
+  qualifies. Aigle and Eram appear on it while making much of their output
+  abroad. Use `france-ofg` only when a brand's whole relevant range is certified
+  — 1083 states that 100% of its jeans are.
+- **It lists legal entities, not consumer brands.** You have to map them:
+  `L'EQUIPE 1083` is 1083, `SI-CREATIVE – COMME AVANT` is Comme Avant,
+  `BROUSSAUD TEXTILES` is Maison Broussaud, `MFC ERAM` is Eram.
 
 `eco: true` is a cumulative tag: a `france` brand with `eco: true` matches both
 the French and the eco-conscious filters. Only list certifications you can link
@@ -101,6 +152,23 @@ to.
    `brand_ids%5B%5D=`).
 4. Verify: open `https://www.vinted.fr/catalog?brand_ids[]=<id>` and check that
    the active filter chip shows the expected brand name.
+
+To check many brands at once, open `https://www.vinted.fr/catalog`, then run
+this from the browser console **on that page** — the endpoint refuses requests
+from outside the vinted.fr origin, but answers normally from within it:
+
+```js
+const u = new URL('/api/v2/brands', location.origin);
+u.searchParams.set('keyword', 'Saint James'); // the parameter is `keyword`
+const { brands } = await (await fetch(u)).json();
+brands.map((b) => `${b.id} ${b.title} ${b.pretty_item_count}`);
+```
+
+Results are ranked by popularity, not by relevance, so **match the title
+exactly** rather than taking the first hit: searching `Loom` returns _Fruit of
+the Loom_ first. Compare after stripping accents, case and punctuation.
+`item_count` also tells you whether anyone actually sells the brand. Any ID
+found this way still deserves the chip check in step 4.
 
 Community datasets can help find candidate IDs, but they are snapshots and can
 be stale, so always verify on live Vinted:

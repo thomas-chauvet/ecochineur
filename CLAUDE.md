@@ -54,6 +54,18 @@ docs/           # GitHub Pages site, EN + docs/fr/, served at ecochineur.chaurel
 - `src/data/*.json` entries must have a strictly positive, unique `vinted_id`
   (enforced by `tests/data.test.ts`). Every brand needs a row in
   `src/data/SOURCES.md`.
+- A brand can only be listed if Vinted already has it in its brand list:
+  filtering works by appending `brand_ids[]`, so no Vinted ID means nothing to
+  filter on. Vinted creates an entry only once members list the brand, so most
+  small labels have none. Check the ID before researching a brand's origin.
+- Filtering is per brand, not per product line. A brand making some ranges in
+  France and others elsewhere (Eram, Aigle, Armor Lux) is left out rather than
+  vouched for; record the reasoning in `SOURCES.md`.
+- `category: 'france-ofg'` must match `certifications` containing
+  `Origine France Garantie`, and certifications come from the `CERTIFICATIONS`
+  vocabulary in `src/types/index.ts` (both enforced by `tests/data.test.ts`).
+  Origine France Garantie certifies product ranges and registers legal entities,
+  not brands — see `src/data/SOURCES.md` before using its directory.
 - URL merging must preserve existing Vinted filters (search, price, sorting,
   condition, category path, existing brand/material IDs).
 - Permissions are `storage` + `activeTab` only. Don't add `host_permissions`:
@@ -74,7 +86,12 @@ docs/           # GitHub Pages site, EN + docs/fr/, served at ecochineur.chaurel
 
 - TypeScript is pinned to `~6.0`: typescript-eslint doesn't support TS 7 yet.
 - "Reset" clears both the stored selections and the URL filters.
-- Vinted's internal API returns 403 to scripts; verify IDs by loading
+- Vinted's internal API refuses external requests, but answers from inside the
+  vinted.fr page origin: `/api/v2/brands?keyword=<name>` returns `id`, `title`
+  and `item_count`. The parameter is `keyword` — `search`, `q` and `search_text`
+  are silently ignored and return the popular-brands list instead. Results rank
+  by popularity, so match the title exactly (`Loom` returns _Fruit of the Loom_
+  first). Confirm any ID by loading
   `https://www.vinted.fr/catalog?brand_ids[]=<id>` and reading the filter chip.
 
 ## Docs

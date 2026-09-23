@@ -1,7 +1,11 @@
 import { describe, expect, it } from 'vitest';
 
 import { brands, materials } from '../src/data';
-import { BRAND_CATEGORIES } from '../src/types';
+import {
+  BRAND_CATEGORIES,
+  CERTIFICATIONS,
+  OFG_CERTIFICATION,
+} from '../src/types';
 
 function duplicates(values: Array<string | number>): Array<string | number> {
   return values.filter((value, index) => values.indexOf(value) !== index);
@@ -18,6 +22,9 @@ describe('brands.json', () => {
       expect(BRAND_CATEGORIES).toContain(brand.category);
       expect(typeof brand.eco).toBe('boolean');
       expect(Array.isArray(brand.certifications)).toBe(true);
+      brand.certifications.forEach((certification) => {
+        expect(CERTIFICATIONS).toContain(certification);
+      });
       expect(brand.description_fr.trim()).not.toBe('');
       expect(brand.description_en.trim()).not.toBe('');
       expect(brand.website).toMatch(/^https:\/\//);
@@ -27,6 +34,19 @@ describe('brands.json', () => {
   it('has unique ids and Vinted IDs', () => {
     expect(duplicates(brands.map((brand) => brand.id))).toEqual([]);
     expect(duplicates(brands.map((brand) => brand.vinted_id))).toEqual([]);
+  });
+
+  // The category and the label are two records of the same fact, so they can
+  // drift apart. Tie them together rather than trusting the maintainer.
+  it('marks a brand france-ofg exactly when it holds the OFG label', () => {
+    const byCategory = brands
+      .filter((brand) => brand.category === 'france-ofg')
+      .map((brand) => brand.id);
+    const byCertification = brands
+      .filter((brand) => brand.certifications.includes(OFG_CERTIFICATION))
+      .map((brand) => brand.id);
+
+    expect(byCategory).toEqual(byCertification);
   });
 });
 

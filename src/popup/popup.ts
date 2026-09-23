@@ -25,8 +25,9 @@ import './popup.css';
 
 const CATEGORY_ICONS: Record<BrandCategory, string> = {
   france: '🇫🇷',
+  'france-ofg': '🏅',
   europe: '🇪🇺',
-  mixed: '🌍',
+  'france-europe': '🇫🇷🇪🇺',
   eco: '♻️',
 };
 

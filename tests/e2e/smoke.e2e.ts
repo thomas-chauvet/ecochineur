@@ -50,18 +50,30 @@ const manifest = readJson<{
   host_permissions?: string[];
 }>('dist/manifest.json');
 
+// This file runs under plain `node`, so it reads the JSON rather than importing
+// src/. That means the matching rules below mirror `src/lib/brand-filter.ts`
+// and the order mirrors `BRAND_CATEGORIES`: keep all three in step.
+const CATEGORIES = [
+  'france',
+  'france-ofg',
+  'europe',
+  'france-europe',
+  'eco',
+] as const;
+
+function matches(brand: BrandEntry, category: string): boolean {
+  if (category === 'eco') return brand.category === 'eco' || brand.eco;
+  if (category === 'france')
+    return brand.category === 'france' || brand.category === 'france-ofg';
+  return brand.category === category;
+}
+
 const frenchBrandIds = brands
-  .filter((brand) => brand.category === 'france')
+  .filter((brand) => matches(brand, 'france'))
   .map((brand) => String(brand.vinted_id));
-const expectedCounts = ['france', 'europe', 'mixed', 'eco'].map(
+const expectedCounts = CATEGORIES.map(
   (category) =>
-    `(${
-      brands.filter((brand) =>
-        category === 'eco'
-          ? brand.category === 'eco' || brand.eco
-          : brand.category === category,
-      ).length
-    })`,
+    `(${brands.filter((brand) => matches(brand, category)).length})`,
 );
 const materialIndex = (id: string) =>
   materials.findIndex((material) => material.id === id);
