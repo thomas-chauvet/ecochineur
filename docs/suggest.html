@@ -8,6 +8,18 @@
       name="description"
       content="Suggérez une marque pour EcoChineur, le filtre de marques éthiques pour Vinted. Sans compte."
     />
+    <script>
+      // v0.2.0's English popup links here (this page used to be English). A
+      // visit from outside the site on a non-French browser gets the English
+      // page; the popup defaults to the browser language. Same-origin visits
+      // (language switch, /fr/ redirect) keep French.
+      if (
+        !document.referrer.startsWith(location.origin + '/') &&
+        !/^fr\b/i.test(navigator.language)
+      ) {
+        location.replace('en/suggest.html' + location.search + location.hash);
+      }
+    </script>
     <link rel="icon" href="assets/icon.svg" />
     <link rel="stylesheet" href="styles.css" />
     <link
