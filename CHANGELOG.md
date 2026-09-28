@@ -5,6 +5,27 @@ All notable changes to EcoChineur are documented here.
 This file is generated automatically from Conventional Commits by
 [git-cliff](https://git-cliff.org).
 
+## [0.3.0] - 2026-09-28
+
+### Features
+
+- _(docs)_ Make French the default language and paginate the brand list
+- _(data)_ Add kids natural-fiber brand filter
+
+### Bug Fixes
+
+- _(test)_ Add kids-natural-fibers to the e2e category list
+
+### Documentation
+
+- _(release)_ Update the French store description categories
+- _(release)_ Drop keyword lists from the store descriptions
+- _(data)_ Drop duplicated columns from SOURCES.md
+
+### Miscellaneous
+
+- _(git)_ Add commitizen workflow and commit/branch naming rules
+
 ## [0.2.0] - 2026-09-23
 
 ### Features
