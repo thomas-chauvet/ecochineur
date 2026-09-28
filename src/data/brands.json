@@ -419,8 +419,8 @@
       "category": "eco",
       "eco": true,
       "certifications": ["GOTS"],
-      "description_fr": "Vêtements en coton biologique pour toute la famille, fabriqués à 96% en Europe (France et Portugal), certifiés GOTS.",
-      "description_en": "Organic cotton clothing for the whole family, 96% made in Europe (France and Portugal), GOTS certified.",
+      "description_fr": "Vêtements en coton biologique pour toute la famille, fabriqués à 96% en Europe, principalement en France et au Portugal, certifiés GOTS.",
+      "description_en": "Organic cotton clothing for the whole family, 96% made in Europe, mainly in France and Portugal, GOTS certified.",
       "website": "https://emoi-emoi.com"
     },
     {
@@ -441,8 +441,8 @@
       "category": "kids-natural-fibers",
       "eco": true,
       "certifications": ["GOTS"],
-      "description_fr": "Marque de bio-vêtements pour enfants de la chaîne dm-drogerie markt, coton et laine bio certifiés GOTS depuis 1986.",
-      "description_en": "Children's organic-cotton and organic-wool clothing house brand of the dm-drogerie markt chain, GOTS certified since 1986.",
+      "description_fr": "Marque de vêtements bio pour enfants de la chaîne dm-drogerie markt depuis 1986, en coton et laine bio majoritairement certifiés GOTS.",
+      "description_en": "Children's clothing house brand of the dm-drogerie markt chain since 1986, in organic cotton and wool, mostly GOTS certified.",
       "website": "https://www.dm.de/marken/alana"
     },
     {
@@ -463,8 +463,8 @@
       "category": "kids-natural-fibers",
       "eco": true,
       "certifications": ["GOTS"],
-      "description_fr": "Sous-vêtements en laine, soie et coton bio tricotés dans le Bade-Wurtemberg, certifiés GOTS depuis 1994.",
-      "description_en": "Wool-silk-cotton underwear knitted in Baden-Württemberg, GOTS certified since 1994.",
+      "description_fr": "Sous-vêtements en laine, soie et coton bio tricotés dans le Bade-Wurtemberg, certifiés GOTS.",
+      "description_en": "Wool-silk-cotton underwear knitted in Baden-Württemberg, GOTS certified.",
       "website": "https://www.cosilana.de"
     },
     {
@@ -474,8 +474,8 @@
       "category": "kids-natural-fibers",
       "eco": true,
       "certifications": ["GOTS"],
-      "description_fr": "Tricots en laine mérinos biologique tricotés et cousus en interne en Allemagne depuis 1969, certifiés GOTS.",
-      "description_en": "Organic merino wool knitwear knitted and sewn in-house in Germany since 1969, GOTS certified.",
+      "description_fr": "Tricots en laine mérinos biologique tricotés et cousus en interne en Allemagne, certifiés GOTS.",
+      "description_en": "Organic merino wool knitwear knitted and sewn in-house in Germany, GOTS certified.",
       "website": "https://disana.de"
     },
     {
