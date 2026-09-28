@@ -4,8 +4,8 @@ _Last updated: 2026-09-23_
 
 EcoChineur is private by design. This policy covers the EcoChineur browser
 extension. The public copy (French, the site's default language) is at
-<https://ecochineur.chaurel.ch/privacy.html>
-(English: <https://ecochineur.chaurel.ch/en/privacy.html>).
+<https://ecochineur.chaurel.ch/privacy.html> (English:
+<https://ecochineur.chaurel.ch/en/privacy.html>).
 
 ## No collection
 

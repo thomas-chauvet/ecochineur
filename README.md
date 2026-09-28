@@ -184,7 +184,8 @@ docs/          GitHub Pages site (landing page, brand suggestion form, privacy p
   what still needs checking.
 - [CHANGELOG.md](./CHANGELOG.md): generated from Conventional Commits.
 
-Website: <https://ecochineur.chaurel.ch> (default language French; English: `/en/`).
+Website: <https://ecochineur.chaurel.ch> (default language French; English:
+`/en/`).
 
 ## Releasing
 

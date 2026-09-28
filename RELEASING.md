@@ -264,8 +264,9 @@ For a final check by hand before submitting, load `dist/` from a fresh
 - [ ] Outside a Vinted catalog (e.g. a Vinted item page), Apply shows the "Start
       a Vinted search first" message.
 - [ ] **Suggest a brand** opens `ecochineur.chaurel.ch/suggest.html` (or
-      `/en/suggest.html` in English) with the Tally form. On a catalog filtered by
-      a brand EcoChineur doesn't list, the form's Vinted ID field is prefilled.
+      `/en/suggest.html` in English) with the Tally form. On a catalog filtered
+      by a brand EcoChineur doesn't list, the form's Vinted ID field is
+      prefilled.
 - [ ] DevTools → Network on the popup shows no requests made by the extension.
 
 ## Troubleshooting
