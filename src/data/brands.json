@@ -1,6 +1,6 @@
 {
-  "db_version": "1.2.0",
-  "last_updated": "2026-09-23",
+  "db_version": "1.3.0",
+  "last_updated": "2026-09-28",
   "brands": [
     {
       "id": "1083",
@@ -389,6 +389,259 @@
       "description_fr": "Coton bio, réparations gratuites à vie et membre de la Fair Wear Foundation.",
       "description_en": "Organic cotton, free lifetime repairs and a Fair Wear Foundation member.",
       "website": "https://www.nudiejeans.com"
+    },
+    {
+      "id": "living-crafts",
+      "name": "Living Crafts",
+      "vinted_id": 245292,
+      "category": "eco",
+      "eco": true,
+      "certifications": ["GOTS"],
+      "description_fr": "Vêtements en coton biologique pour toute la famille, certifiés GOTS, conçus en Bavière.",
+      "description_en": "Organic cotton clothing for the whole family, GOTS certified, designed in Bavaria.",
+      "website": "https://www.livingcrafts.de"
+    },
+    {
+      "id": "hessnatur",
+      "name": "Hessnatur",
+      "vinted_id": 15064559,
+      "category": "eco",
+      "eco": true,
+      "certifications": ["B Corp"],
+      "description_fr": "Pionnier allemand de la mode en fibres naturelles depuis 1976, certifié B Corp.",
+      "description_en": "German pioneer of natural-fibre fashion since 1976, B Corp certified.",
+      "website": "https://www.hessnatur.com"
+    },
+    {
+      "id": "emoi-emoi",
+      "name": "Émoi Émoi",
+      "vinted_id": 295360,
+      "category": "eco",
+      "eco": true,
+      "certifications": ["GOTS"],
+      "description_fr": "Vêtements en coton biologique pour toute la famille, fabriqués à 96% en Europe (France et Portugal), certifiés GOTS.",
+      "description_en": "Organic cotton clothing for the whole family, 96% made in Europe (France and Portugal), GOTS certified.",
+      "website": "https://emoi-emoi.com"
+    },
+    {
+      "id": "grodo",
+      "name": "Grodo",
+      "vinted_id": 1190835,
+      "category": "europe",
+      "eco": true,
+      "certifications": ["GOTS"],
+      "description_fr": "Chaussettes et collants en coton et laine biologiques fabriqués en Allemagne, Slovénie et Croatie depuis 1982.",
+      "description_en": "Socks and tights in organic cotton and wool made in Germany, Slovenia and Croatia since 1982.",
+      "website": "https://www.groedo.de"
+    },
+    {
+      "id": "alana",
+      "name": "Alana",
+      "vinted_id": 264946,
+      "category": "kids-natural-fibers",
+      "eco": true,
+      "certifications": ["GOTS"],
+      "description_fr": "Marque de bio-vêtements pour enfants de la chaîne dm-drogerie markt, coton et laine bio certifiés GOTS depuis 1986.",
+      "description_en": "Children's organic-cotton and organic-wool clothing house brand of the dm-drogerie markt chain, GOTS certified since 1986.",
+      "website": "https://www.dm.de/marken/alana"
+    },
+    {
+      "id": "alkena",
+      "name": "Alkena",
+      "vinted_id": 1084431,
+      "category": "kids-natural-fibers",
+      "eco": true,
+      "certifications": ["GOTS"],
+      "description_fr": "Sous-vêtements et pièces en soie biologique certifiée GOTS, produits depuis 1978.",
+      "description_en": "Organic silk underwear and basics certified GOTS, produced since 1978.",
+      "website": "https://alkena.de"
+    },
+    {
+      "id": "cosilana",
+      "name": "Cosilana",
+      "vinted_id": 441320,
+      "category": "kids-natural-fibers",
+      "eco": true,
+      "certifications": ["GOTS"],
+      "description_fr": "Sous-vêtements en laine, soie et coton bio tricotés dans le Bade-Wurtemberg, certifiés GOTS depuis 1994.",
+      "description_en": "Wool-silk-cotton underwear knitted in Baden-Württemberg, GOTS certified since 1994.",
+      "website": "https://www.cosilana.de"
+    },
+    {
+      "id": "disana",
+      "name": "Disana",
+      "vinted_id": 329114,
+      "category": "kids-natural-fibers",
+      "eco": true,
+      "certifications": ["GOTS"],
+      "description_fr": "Tricots en laine mérinos biologique tricotés et cousus en interne en Allemagne depuis 1969, certifiés GOTS.",
+      "description_en": "Organic merino wool knitwear knitted and sewn in-house in Germany since 1969, GOTS certified.",
+      "website": "https://disana.de"
+    },
+    {
+      "id": "engel-natur",
+      "name": "Engel",
+      "vinted_id": 379755,
+      "category": "kids-natural-fibers",
+      "eco": true,
+      "certifications": ["GOTS"],
+      "description_fr": "Vêtements en laine et soie biologiques fabriqués en Souabe depuis 1982, certifiés GOTS.",
+      "description_en": "Organic wool and silk garments made in Swabia since 1982, GOTS certified.",
+      "website": "https://www.engel-natur.de"
+    },
+    {
+      "id": "iobio",
+      "name": "iobio",
+      "vinted_id": 276406,
+      "category": "kids-natural-fibers",
+      "eco": true,
+      "certifications": ["GOTS", "OEKO-TEX"],
+      "description_fr": "Ligne de vêtements pour bébés en coton, laine et soie bio fabriqués en Hongrie par Popolini, certifiés GOTS et OEKO-TEX.",
+      "description_en": "Baby clothing line in organic cotton, wool and silk made in Hungary by Popolini, GOTS and OEKO-TEX certified.",
+      "website": "https://popolini.com/en/what-is-iobio"
+    },
+    {
+      "id": "popolini",
+      "name": "popolini",
+      "vinted_id": 15441969,
+      "category": "kids-natural-fibers",
+      "eco": true,
+      "certifications": ["GOTS", "OEKO-TEX"],
+      "description_fr": "Couches lavables et vêtements bio pour bébés fabriqués dans son propre atelier hongrois depuis 1991, certifiés GOTS et OEKO-TEX.",
+      "description_en": "Cloth nappies and organic baby clothing made in its own Hungarian factory since 1991, GOTS and OEKO-TEX certified.",
+      "website": "https://popolini.com"
+    },
+    {
+      "id": "lilano",
+      "name": "Lilano",
+      "vinted_id": 838228,
+      "category": "kids-natural-fibers",
+      "eco": true,
+      "certifications": [],
+      "description_fr": "Vêtements pour bébés en laine, soie et coton biologiques fabriqués dans le Jura souabe depuis 2012.",
+      "description_en": "Baby clothing in organic wool, silk and cotton made in the Swabian Alb since 2012.",
+      "website": "https://lilano-mode.de"
+    },
+    {
+      "id": "loud-and-proud",
+      "name": "Loud + Proud",
+      "vinted_id": 329936,
+      "category": "kids-natural-fibers",
+      "eco": true,
+      "certifications": ["GOTS"],
+      "description_fr": "Vêtements pour enfants en coton biologique fabriqués exclusivement en Europe, certifiés GOTS depuis 2008.",
+      "description_en": "Children's organic cotton clothing manufactured exclusively in Europe, GOTS certified since 2008.",
+      "website": "https://www.loud-proud.com"
+    },
+    {
+      "id": "matona",
+      "name": "Matona",
+      "vinted_id": 2812147,
+      "category": "kids-natural-fibers",
+      "eco": true,
+      "certifications": ["GOTS"],
+      "description_fr": "Vêtements pour enfants en coton et lin biologiques conçus en Autriche, fabriqués dans de petits ateliers certifiés GOTS au Portugal.",
+      "description_en": "Children's clothing in organic cotton and linen designed in Austria, made in small GOTS-certified workshops in Portugal.",
+      "website": "https://matona.at"
+    },
+    {
+      "id": "nostebarn",
+      "name": "Nostebarn",
+      "vinted_id": 825640,
+      "category": "kids-natural-fibers",
+      "eco": true,
+      "certifications": [],
+      "description_fr": "Vêtements pour enfants en laine et soie non traitées, marque écologique norvégienne depuis 1983.",
+      "description_en": "Children's clothing in untreated wool and silk, Norwegian ecological brand since 1983.",
+      "website": "https://nostebarn.no"
+    },
+    {
+      "id": "kite-clothing",
+      "name": "Kite",
+      "vinted_id": 321972,
+      "category": "kids-natural-fibers",
+      "eco": true,
+      "certifications": ["GOTS"],
+      "description_fr": "Vêtements pour bébés et enfants en coton biologique certifié GOTS, conçus à Poole (Dorset) depuis 2007.",
+      "description_en": "Babies' and children's organic cotton clothing certified GOTS, designed in Poole, Dorset since 2007.",
+      "website": "https://kite-clothing.co.uk"
+    },
+    {
+      "id": "frugi",
+      "name": "Frugi",
+      "vinted_id": 291990,
+      "category": "kids-natural-fibers",
+      "eco": true,
+      "certifications": ["GOTS"],
+      "description_fr": "Vêtements pour enfants en coton biologique certifié GOTS, marque britannique de référence conçue en Cornouailles depuis 2004.",
+      "description_en": "The UK's leading GOTS-certified organic cotton childrenswear brand, designed in Cornwall since 2004.",
+      "website": "https://welovefrugi.com"
+    },
+    {
+      "id": "poudre-organic",
+      "name": "Poudre Organic",
+      "vinted_id": 269840,
+      "category": "kids-natural-fibers",
+      "eco": true,
+      "certifications": ["GOTS", "OEKO-TEX"],
+      "description_fr": "Vêtements pour enfants en coton biologique fabriqués dans un atelier au Portugal, certifiés GOTS et OEKO-TEX depuis 2015.",
+      "description_en": "Children's organic cotton clothing made in a workshop in Portugal, GOTS and OEKO-TEX certified since 2015.",
+      "website": "https://poudreorganic.fr"
+    },
+    {
+      "id": "silly-silas",
+      "name": "Silly Silas",
+      "vinted_id": 2415245,
+      "category": "kids-natural-fibers",
+      "eco": true,
+      "certifications": ["GOTS", "OEKO-TEX"],
+      "description_fr": "Collants à bretelles en coton biologique et laine mérinos, conçus en Suède et fabriqués dans des ateliers tchèques, certifiés GOTS et OEKO-TEX.",
+      "description_en": "Organic cotton and merino wool tights with braces, designed in Sweden and made in Czech workshops, GOTS and OEKO-TEX certified.",
+      "website": "https://sillysilas.com"
+    },
+    {
+      "id": "pickapooh",
+      "name": "PickaPooh",
+      "vinted_id": 414769,
+      "category": "kids-natural-fibers",
+      "eco": true,
+      "certifications": ["GOTS"],
+      "description_fr": "Bonnets et accessoires pour enfants en fibres naturelles conçus et fabriqués à Hambourg depuis 1991.",
+      "description_en": "Children's hats and accessories in natural fibres designed and made in Hamburg since 1991.",
+      "website": "https://www.pickapooh.de"
+    },
+    {
+      "id": "play-up",
+      "name": "Play Up",
+      "vinted_id": 375060,
+      "category": "kids-natural-fibers",
+      "eco": true,
+      "certifications": [],
+      "description_fr": "Vêtements pour enfants en coton biologique et fibres recyclées, conçus et fabriqués au Portugal.",
+      "description_en": "Children's clothing in organic cotton and recycled fibres, designed and made in Portugal.",
+      "website": "https://www.playupstore.com"
+    },
+    {
+      "id": "manymonths",
+      "name": "manymonths",
+      "vinted_id": 286853,
+      "category": "kids-natural-fibers",
+      "eco": true,
+      "certifications": [],
+      "description_fr": "Vêtements évolutifs pour bébés en laine mérinos, marque finlandaise fabriquée dans une usine certifiée GOTS en Chine.",
+      "description_en": "Grow-with-me baby clothing in merino wool, Finnish brand made in a GOTS-certified factory in China.",
+      "website": "https://manymonths.com"
+    },
+    {
+      "id": "apolina",
+      "name": "Apolina",
+      "vinted_id": 757252,
+      "category": "kids-natural-fibers",
+      "eco": true,
+      "certifications": [],
+      "description_fr": "Vêtements pour enfants en coton bio et laine mérinos brodés à la main, conçus à Londres et confectionnés dans un atelier familial en Inde.",
+      "description_en": "Hand-embroidered children's clothing in organic cotton and merino wool, designed in London and made in a family-run factory in India.",
+      "website": "https://apolina-kids.com"
     }
   ]
 }

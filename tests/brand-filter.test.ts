@@ -89,6 +89,7 @@ describe('countByCategory', () => {
       europe: 1,
       'france-europe': 2,
       eco: 4,
+      'kids-natural-fibers': 0,
     });
   });
 });

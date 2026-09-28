@@ -30,6 +30,7 @@ const CATEGORY_ICONS: Record<BrandCategory, string> = {
   europe: '🇪🇺',
   'france-europe': '🇫🇷🇪🇺',
   eco: '♻️',
+  'kids-natural-fibers': '🧸',
 };
 
 const counts = countByCategory(brands);

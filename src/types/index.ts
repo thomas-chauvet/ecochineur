@@ -4,6 +4,7 @@ export const BRAND_CATEGORIES = [
   'europe',
   'france-europe',
   'eco',
+  'kids-natural-fibers',
 ] as const;
 
 export type BrandCategory = (typeof BRAND_CATEGORIES)[number];
