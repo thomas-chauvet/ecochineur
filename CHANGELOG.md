@@ -5,6 +5,13 @@ All notable changes to EcoChineur are documented here.
 This file is generated automatically from Conventional Commits by
 [git-cliff](https://git-cliff.org).
 
+## [0.3.1] - 2026-09-28
+
+### Bug Fixes
+
+- _(data)_ Correct certification dates and origin wording
+- _(docs)_ Redirect the old French suggest URL
+
 ## [0.3.0] - 2026-09-28
 
 ### Features
