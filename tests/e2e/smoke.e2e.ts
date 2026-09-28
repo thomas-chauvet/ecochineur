@@ -61,6 +61,7 @@ const CATEGORIES = [
   'europe',
   'france-europe',
   'eco',
+  'kids-natural-fibers',
 ] as const;
 
 function matches(brand: BrandEntry, category: string): boolean {
