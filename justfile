@@ -40,6 +40,10 @@ check:
 audit:
     npm audit
 
+# Interactive Conventional Commits message via commitizen (https://commitizen-tools.github.io/commitizen/)
+commit:
+    uvx --from commitizen cz commit
+
 # Zip dist/ into release/ for local testing of the packaged artifact
 package: check
     #!/usr/bin/env bash
