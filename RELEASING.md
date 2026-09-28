@@ -55,7 +55,7 @@ To test the packaged zip without releasing: `just package` writes
 - `docs/CNAME` holds the custom domain;
 - the Infomaniak DNS zone for `chaurel.ch` has a `CNAME` record `ecochineur` →
   `thomas-chauvet.github.io.`;
-- English pages are at the root, French pages in `docs/fr/`.
+- French pages (default language) are at the root, English pages in `docs/en/`.
 
 HTTPS is live since 2026-09-15: Let's Encrypt certificate for
 `ecochineur.chaurel.ch`, **Enforce HTTPS** on, and `http://` redirects to
@@ -263,8 +263,8 @@ For a final check by hand before submitting, load `dist/` from a fresh
       popup) and removes only `brand_ids[]` and `material_ids[]` from the URL.
 - [ ] Outside a Vinted catalog (e.g. a Vinted item page), Apply shows the "Start
       a Vinted search first" message.
-- [ ] **Suggest a brand** opens `ecochineur.chaurel.ch/fr/suggest.html` (or
-      `/suggest.html` in English) with the Tally form. On a catalog filtered by
+- [ ] **Suggest a brand** opens `ecochineur.chaurel.ch/suggest.html` (or
+      `/en/suggest.html` in English) with the Tally form. On a catalog filtered by
       a brand EcoChineur doesn't list, the form's Vinted ID field is prefilled.
 - [ ] DevTools → Network on the popup shows no requests made by the extension.
 

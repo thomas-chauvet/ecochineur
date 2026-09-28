@@ -43,11 +43,11 @@ accurate. Common types: `feat`, `fix`, `docs`, `refactor`, `perf`, `test`,
 - Build DOM with the `h()` helper and `textContent`. Never use `innerHTML`.
 - Never add network calls, remote code, analytics or new permissions without
   updating [PRIVACY.md](./PRIVACY.md), `docs/privacy.html`,
-  `docs/fr/privacy.html` and the permission justifications in
+  `docs/en/privacy.html` and the permission justifications in
   [RELEASING.md](./RELEASING.md).
 - Code, comments, filenames and developer docs are in English. French is used
   only for user-facing strings (`src/i18n/fr.json`, `description_fr`, `name_fr`,
-  `docs/fr/`).
+  and the default-language site under `docs/`).
 - `src/i18n/fr.json` and `src/i18n/en.json` must have the same keys. TypeScript
   and `tests/i18n.test.ts` both enforce this.
 
@@ -60,7 +60,7 @@ repair program, or a documented environmental approach.
 ### Where suggestions come from
 
 - **Users (no account):** the popup's **Suggest a brand** link opens
-  `docs/suggest.html` (or `docs/fr/suggest.html`), which embeds a
+  `docs/suggest.html` (or `docs/en/suggest.html`), which embeds a
   [Tally](https://tally.so) form. If the user's Vinted search already filters a
   brand EcoChineur doesn't list, the popup prefills its Vinted ID
   (`src/lib/suggestion-url.ts`). Tally emails each response to the maintainer.
@@ -92,7 +92,7 @@ server; to recreate one:
 
 Then turn on email notifications, and put each form's ID (from its share link,
 `tally.so/r/<ID>`) in the `TALLY_FORM_ID` constant of `docs/suggest.html` and
-`docs/fr/suggest.html`. Without a valid ID, the page falls back to the GitHub
+`docs/en/suggest.html`. Without a valid ID, the page falls back to the GitHub
 issue form. Tally's `embed.js` forwards the page's own query string to the form,
 which is why the page strips unvalidated parameters from the address bar first.
 Publish the pages before releasing an extension version that links to them.

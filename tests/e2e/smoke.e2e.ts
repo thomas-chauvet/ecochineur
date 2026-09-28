@@ -23,7 +23,7 @@ const START_URL =
   'https://www.vinted.fr/catalog?search_text=pull&price_to=30&brand_ids[]=53';
 const DE_URL = 'https://www.vinted.de/catalog/2050-kleidung?search_text=wolle';
 const ITEM_URL = 'https://www.vinted.fr/items/123-pull';
-const SUGGEST_PAGE_FR = 'https://ecochineur.chaurel.ch/fr/suggest.html';
+const SUGGEST_PAGE_FR = 'https://ecochineur.chaurel.ch/suggest.html';
 
 interface BrandEntry {
   vinted_id: number;

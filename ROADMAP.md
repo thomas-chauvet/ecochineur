@@ -40,7 +40,8 @@ Published. Everything below is for later versions.
 Nice to have for launch:
 
 - [x] **Brand suggestions without a GitHub account:** the popup opens
-      `ecochineur.chaurel.ch/[fr/]suggest.html`, which embeds a Tally form, and
+      `ecochineur.chaurel.ch/suggest.html` (`/en/suggest.html` in English),
+      which embeds a Tally form, and
       prefills the Vinted IDs of filtered brands EcoChineur doesn't list. The
       extension still only opens a link. Tally forms: FR `LZlWVz`, EN `lbQdgV`
       (CONTRIBUTING.md, "Suggestion form").

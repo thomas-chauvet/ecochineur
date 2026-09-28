@@ -1,0 +1,378 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>EcoChineur - Privacy-first ethical Vinted filter</title>
+    <meta
+      name="description"
+      content="EcoChineur is a privacy-by-design Chrome extension for filtering Vinted by ethical brands and natural materials, with no data collection."
+    />
+    <meta property="og:title" content="EcoChineur" />
+    <meta
+      property="og:description"
+      content="Filter Vinted by ethical brands and natural materials. No data collection."
+    />
+    <meta property="og:type" content="website" />
+    <link rel="icon" href="../assets/icon.svg" />
+    <link rel="stylesheet" href="../styles.css" />
+    <link
+      rel="alternate"
+      hreflang="en"
+      href="https://ecochineur.chaurel.ch/en/"
+    />
+    <link rel="alternate" hreflang="fr" href="https://ecochineur.chaurel.ch/" />
+    <link
+      rel="alternate"
+      hreflang="x-default"
+      href="https://ecochineur.chaurel.ch/"
+    />
+  </head>
+  <body>
+    <header class="site-header">
+      <nav class="nav" aria-label="Main navigation">
+        <a class="brand" href="#top">
+          <img src="../assets/icon.svg" alt="" />
+          <span>EcoChineur</span>
+        </a>
+        <div class="nav-links">
+          <a href="#how-it-works">How it works</a>
+          <a href="#brands">Brands</a>
+          <a href="#privacy">Privacy</a>
+          <a href="#data">Data</a>
+          <a href="privacy.html">Policy</a>
+          <a href="https://github.com/thomas-chauvet/ecochineur">GitHub</a>
+          <a href="../index.html" lang="fr" hreflang="fr">FR</a>
+        </div>
+      </nav>
+    </header>
+
+    <main id="top">
+      <section class="hero">
+        <div class="hero-inner">
+          <div class="hero-content">
+            <p class="eyebrow">Chrome extension - available now</p>
+            <h1>EcoChineur</h1>
+            <p class="hero-copy">
+              Filter Vinted by more responsible brands and natural materials,
+              without data collection, tracking or a backend.
+            </p>
+            <div class="hero-actions">
+              <a
+                class="button primary"
+                href="https://chromewebstore.google.com/detail/ecochineur/ieaiphjkoonnobndnggkieoehpoegcab"
+              >
+                Add to Chrome
+              </a>
+              <a
+                class="button secondary"
+                href="https://github.com/thomas-chauvet/ecochineur"
+              >
+                View source code
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <aside class="status-strip" aria-label="Release status">
+        <div class="section-inner">
+          <span>On the Chrome Web Store</span>
+          <span>No data collection</span>
+          <span>All 26 Vinted countries</span>
+        </div>
+      </aside>
+
+      <section class="section" id="how-it-works">
+        <div class="section-inner">
+          <h2>A simple filter that respects your Vinted search</h2>
+          <p class="section-lead">
+            EcoChineur adds the filters you choose to the Vinted search you are
+            viewing. Your search text, price, sort order, condition and the
+            brands and materials you already picked stay as they are.
+          </p>
+          <div class="grid">
+            <article class="card">
+              <h3>Curated brands</h3>
+              <p>
+                French, Origine France Garantie, European, French-European and
+                eco-conscious brands. A brand is listed only with a documented
+                reason and a verified Vinted identifier.
+              </p>
+            </article>
+            <article class="card">
+              <h3>Natural materials</h3>
+              <p>
+                Linen, cotton, wool, silk, cashmere, alpaca, mohair or merino,
+                with or without brand filters.
+              </p>
+            </article>
+            <article class="card">
+              <h3>Conservative merge</h3>
+              <p>
+                <code>brand_ids[]</code> and <code>material_ids[]</code> are
+                added without removing anything already selected. Reset unchecks
+                your choices and removes only those two filters.
+              </p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="brands">
+        <div class="section-inner">
+          <h2>How a brand earns its place</h2>
+          <p class="section-lead">
+            Every listed brand has a documented reason and a Vinted identifier
+            checked against the live site. Brands are grouped into five
+            categories, two of which are cumulative.
+          </p>
+          <div class="grid">
+            <article class="card">
+              <h3>🇫🇷 French brands</h3>
+              <p>
+                Production in France. Selecting this also returns the stricter
+                Origine France Garantie brands below.
+              </p>
+            </article>
+            <article class="card">
+              <h3>🏅 Origine France Garantie</h3>
+              <p>
+                French production certified by an independent auditor. A strict
+                subset of French brands.
+              </p>
+            </article>
+            <article class="card">
+              <h3>🇪🇺 European brands</h3>
+              <p>Production in Europe, outside France.</p>
+            </article>
+            <article class="card">
+              <h3>🇫🇷🇪🇺 French-European brands</h3>
+              <p>
+                Production split between France and other European countries,
+                with nothing made outside Europe.
+              </p>
+            </article>
+            <article class="card">
+              <h3>♻️ Eco-conscious brands</h3>
+              <p>
+                An environmental or social commitment is the main reason to list
+                them, wherever they manufacture. This filter also returns any
+                brand in the categories above that carries an eco commitment.
+              </p>
+            </article>
+          </div>
+
+          <h3>What Origine France Garantie means</h3>
+          <p>
+            <a href="https://www.originefrancegarantie.fr/"
+              >Origine France Garantie</a
+            >
+            is the only official French manufacturing-origin label. It is
+            awarded to a company for a limited period by an independent
+            certifying body that re-audits it every year. A product qualifies on
+            two conditions: it takes on its essential characteristics in France,
+            and at least 50% of its unit cost price is French. Around 700
+            companies and 2,700 product ranges are certified.
+          </p>
+          <p>
+            That third-party audit is why the label gets its own filter here.
+            "Made in France" on a label is a claim a brand makes about itself;
+            Origine France Garantie is a claim someone else has checked.
+          </p>
+          <p>
+            One caveat shapes how EcoChineur uses it: the label certifies
+            <strong>product ranges, not whole companies</strong>. A company
+            appears on the official list if any one of its ranges qualifies,
+            even when the rest of its production happens elsewhere. A brand is
+            only placed in this category when its entire relevant range is
+            certified, which is why some well-known certified companies are
+            deliberately absent.
+          </p>
+
+          <h3>Why a brand you love may be missing</h3>
+          <p>
+            EcoChineur filters your search by adding Vinted's own
+            <code>brand_ids[]</code> parameter to the URL. This means it can
+            only ever offer brands that already exist in Vinted's brand list —
+            and Vinted creates an entry for a brand only once people actually
+            list items from it.
+          </p>
+          <p>
+            An excellent, genuinely ethical label that nobody has resold yet
+            simply has no identifier to filter on, so EcoChineur cannot include
+            it however much it deserves a place. This is the single biggest
+            limit on the list. When we checked 239 clothing makers with
+            exclusively French production, only 25 had a Vinted brand entry.
+          </p>
+          <p>
+            If a brand you know is missing and does have a Vinted page,
+            <a href="suggest.html">suggest it</a>.
+          </p>
+        </div>
+      </section>
+
+      <section class="section privacy-band" id="privacy">
+        <div class="section-inner">
+          <h2>Private by design</h2>
+          <p class="section-lead">
+            EcoChineur collects no data and does not use, sell or share user
+            data for any purpose.
+          </p>
+          <div class="grid">
+            <article class="card">
+              <h3>No backend</h3>
+              <p>
+                No server, no remote code, and no network calls made by the
+                extension itself. All data is bundled.
+              </p>
+            </article>
+            <article class="card">
+              <h3>Minimal permissions</h3>
+              <p>
+                Only <code>storage</code> and <code>activeTab</code>: the
+                extension sees the current tab only after you click its icon.
+              </p>
+            </article>
+            <article class="card">
+              <h3>Local preferences</h3>
+              <p>
+                Your choices and language stay in
+                <code>chrome.storage.local</code> on your device.
+              </p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="section alt" id="data">
+        <div class="section-inner">
+          <h2>Referenced data</h2>
+          <p class="section-lead">
+            The database grows through reviewed contributions.
+            <a href="suggest.html">Suggest a brand</a>
+            (no account needed).
+          </p>
+          <div class="data-list">
+            <section>
+              <h3>Brands</h3>
+              <div class="pill-list" id="brands-pills">
+                <span class="pill">1083</span>
+                <span class="pill">Asphalte</span>
+                <span class="pill">Atelier Tuffery</span>
+                <span class="pill">Berthe aux Grands Pieds</span>
+                <span class="pill">Birkenstock</span>
+                <span class="pill">Bleu de Chauffe</span>
+                <span class="pill">Bleuforêt</span>
+                <span class="pill">Bobbies</span>
+                <span class="pill">Bosabo</span>
+                <span class="pill">Comme Avant</span>
+                <span class="pill">Faguo</span>
+                <span class="pill" hidden>John Smedley</span>
+                <span class="pill" hidden>K.Jacques</span>
+                <span class="pill" hidden>Kiplay</span>
+                <span class="pill" hidden>Kleman</span>
+                <span class="pill" hidden>La Botte Gardiane</span>
+                <span class="pill" hidden>La Gentle Factory</span>
+                <span class="pill" hidden>Labonal</span>
+                <span class="pill" hidden>Le Minor</span>
+                <span class="pill" hidden>Le Slip Français</span>
+                <span class="pill" hidden>Les Jupons de Louison</span>
+                <span class="pill" hidden>Les Petites Jupes de Prune</span>
+                <span class="pill" hidden>Loom</span>
+                <span class="pill" hidden>Meindl</span>
+                <span class="pill" hidden>Minuit sur Terre</span>
+                <span class="pill" hidden>Monnet</span>
+                <span class="pill" hidden>Montlimart</span>
+                <span class="pill" hidden>Nudie Jeans</span>
+                <span class="pill" hidden>Parisienne et Alors</span>
+                <span class="pill" hidden>Patagonia</span>
+                <span class="pill" hidden>Payote</span>
+                <span class="pill" hidden>Retour de Plage</span>
+                <span class="pill" hidden>Saint James</span>
+                <span class="pill" hidden>Ubac</span>
+                <span class="pill" hidden>Veja</span>
+              </div>
+              <button
+                type="button"
+                class="pill-toggle"
+                id="brands-toggle"
+                aria-expanded="false"
+                aria-controls="brands-pills"
+                data-label-more="Show more (+23)"
+                data-label-less="Show less"
+              >
+                Show more (+23)
+              </button>
+            </section>
+            <section>
+              <h3>Materials</h3>
+              <div class="pill-list">
+                <span class="pill">Alpaca</span>
+                <span class="pill">Cashmere</span>
+                <span class="pill">Cotton</span>
+                <span class="pill">Linen</span>
+                <span class="pill">Merino</span>
+                <span class="pill">Mohair</span>
+                <span class="pill">Silk</span>
+                <span class="pill">Wool</span>
+              </div>
+            </section>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="installation">
+        <div class="section-inner">
+          <h2>Install from source</h2>
+          <p class="section-lead">
+            Until the Chrome Web Store release, you can build the extension
+            yourself (Node.js 22.22 or later).
+          </p>
+          <ol class="steps">
+            <li>Clone the GitHub repository.</li>
+            <li>
+              Run <code>npm install</code>, then <code>npm run build</code>.
+            </li>
+            <li>
+              Open <code>chrome://extensions</code> and enable Developer mode.
+            </li>
+            <li>
+              Click "Load unpacked" and select the <code>dist/</code> directory.
+            </li>
+            <li>
+              Open a Vinted catalog search, then click the EcoChineur icon.
+            </li>
+          </ol>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="footer-inner">
+        <span>EcoChineur - not affiliated with Vinted</span>
+        <div class="footer-links">
+          <a href="privacy.html">Privacy</a>
+          <a href="https://github.com/thomas-chauvet/ecochineur">GitHub</a>
+        </div>
+      </div>
+    </footer>
+
+    <script>
+      const brandsToggle = document.getElementById('brands-toggle');
+      const brandsPills = document
+        .getElementById('brands-pills')
+        .querySelectorAll('.pill');
+      brandsToggle.addEventListener('click', () => {
+        const expanded = brandsToggle.getAttribute('aria-expanded') === 'true';
+        brandsPills.forEach((pill, index) => {
+          if (index >= 11) pill.hidden = expanded;
+        });
+        brandsToggle.setAttribute('aria-expanded', String(!expanded));
+        brandsToggle.textContent = expanded
+          ? brandsToggle.dataset.labelMore
+          : brandsToggle.dataset.labelLess;
+      });
+    </script>
+  </body>
+</html>

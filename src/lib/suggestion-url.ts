@@ -5,8 +5,8 @@ import type { Language } from '../types';
  * form service can change without a new extension release.
  */
 export const SUGGEST_PAGE: Readonly<Record<Language, string>> = {
-  fr: 'https://ecochineur.chaurel.ch/fr/suggest.html',
-  en: 'https://ecochineur.chaurel.ch/suggest.html',
+  fr: 'https://ecochineur.chaurel.ch/suggest.html',
+  en: 'https://ecochineur.chaurel.ch/en/suggest.html',
 };
 
 /** Keeps the link short; nobody filters more than a handful of brands. */

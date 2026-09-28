@@ -275,6 +275,24 @@ h1 {
   padding: 7px 11px;
 }
 
+.pill-toggle {
+  background: none;
+  border: 1px solid #c8dac7;
+  border-radius: 999px;
+  color: #1f6f58;
+  cursor: pointer;
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 700;
+  margin-top: 12px;
+  padding: 7px 11px;
+}
+
+.pill-toggle:hover {
+  background: #e7efe6;
+  color: #174d3f;
+}
+
 .privacy-band {
   background: #244d3a;
   color: #fff9ec;

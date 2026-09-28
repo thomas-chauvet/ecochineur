@@ -44,7 +44,7 @@ tests/
   manual/popup-harness.html   # loads the real popup.html with mocked chrome APIs
 version.ts      # version from `git describe` (Node, build time only)
 public/icons/   # extension icons
-docs/           # GitHub Pages site, EN + docs/fr/, served at ecochineur.chaurel.ch
+docs/           # GitHub Pages site, FR at root (default) + docs/en/, served at ecochineur.chaurel.ch
 ```
 
 ## Constraints
@@ -70,16 +70,17 @@ docs/           # GitHub Pages site, EN + docs/fr/, served at ecochineur.chaurel
   condition, category path, existing brand/material IDs).
 - Permissions are `storage` + `activeTab` only. Don't add `host_permissions`:
   that triggers an install-time warning. Any permission change must also update
-  PRIVACY.md, docs/privacy.html, docs/fr/privacy.html and RELEASING.md.
+  PRIVACY.md, docs/privacy.html, docs/en/privacy.html and RELEASING.md.
 - The popup only acts on `https://www.vinted.*/catalog[/…]`
   (`vinted-domains.ts`).
-- "Suggest a brand" opens `docs/[fr/]suggest.html` (Tally form embed) and
-  forwards only unlisted `brand_ids[]` + the Vinted host. Forwarding anything
-  more from the tab URL is a privacy change (same docs as a permission change).
+- "Suggest a brand" opens `docs/suggest.html` (`docs/en/suggest.html` for
+  English) (Tally form embed) and forwards only unlisted `brand_ids[]` + the
+  Vinted host. Forwarding anything more from the tab URL is a privacy change
+  (same docs as a permission change).
 - Build DOM with the `h()` helper + `textContent`, never `innerHTML`.
 - `fr.json` defines the i18n keys, and `en.json` is type-checked against it.
 - Code, comments and docs are in English; French only in UI strings, brand
-  descriptions and `docs/fr/`.
+  descriptions and `docs/` (the default-language site at its root).
 - The extension version comes from the git tag (`version.ts`); the
   `package.json` version is a placeholder.
 - Commits follow Conventional Commits (commitlint `commit-msg` hook);
@@ -101,7 +102,7 @@ docs/           # GitHub Pages site, EN + docs/fr/, served at ecochineur.chaurel
 
 README.md (overview, architecture) · CONTRIBUTING.md (workflow, commits, data) ·
 RELEASING.md (versioning, store submission, smoke test) · ROADMAP.md (next
-steps) · PRIVACY.md (mirrored in docs/privacy.html + docs/fr/privacy.html)
+steps) · PRIVACY.md (mirrored in docs/privacy.html + docs/en/privacy.html)
 
 ## Testing
 
